@@ -7,8 +7,8 @@ package org.classsix.ofms.domin;
  */
 
 import org.classsix.ofms.domin.common.BaseEntity;
-import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
