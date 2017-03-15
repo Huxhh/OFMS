@@ -1,5 +1,7 @@
 package org.classsix.ofms.domin.common;
 
+
+import javax.persistence.*;
 /**
  * Created by Jiang on 2017/3/15.
  *
