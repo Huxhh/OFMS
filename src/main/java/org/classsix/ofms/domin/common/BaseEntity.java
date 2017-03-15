@@ -1,4 +1,4 @@
-package org.classsix.ofms.repertory.common;
+package org.classsix.ofms.domin.common;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

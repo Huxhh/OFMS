@@ -1,4 +1,4 @@
-package org.classsix.ofms.repertory;
+package org.classsix.ofms.domin;
 
 /**
  * Created by Jiang on 2017/3/15.
@@ -6,9 +6,9 @@ package org.classsix.ofms.repertory;
  * @author Jiang
  */
 
-import org.classsix.ofms.repertory.common.BaseEntity;
+import org.classsix.ofms.domin.common.BaseEntity;
+import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 

@@ -1,12 +1,10 @@
-package org.classsix.ofms.repertory.common;
+package org.classsix.ofms.domin.common;
 
 /**
  * Created by Jiang on 2017/3/15.
  *
  * @author Jiang
  */
-
-import javax.persistence.*;
 
 /**
  * 用户类

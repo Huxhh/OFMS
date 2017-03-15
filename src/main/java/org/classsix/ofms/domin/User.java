@@ -1,11 +1,8 @@
-package org.classsix.ofms.repertory;
+package org.classsix.ofms.domin;
 
-import org.classsix.ofms.repertory.common.BasePerson;
+import org.classsix.ofms.domin.common.BasePerson;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Jiang on 2017/3/15.

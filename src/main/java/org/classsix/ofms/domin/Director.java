@@ -1,8 +1,7 @@
-package org.classsix.ofms.repertory;
+package org.classsix.ofms.domin;
 
-import org.classsix.ofms.repertory.common.BaseEntity;
-import org.classsix.ofms.repertory.common.BasePerson;
 
+import org.classsix.ofms.domin.common.BasePerson;
 import javax.persistence.*;
 
 /**

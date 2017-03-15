@@ -1,4 +1,4 @@
-package org.classsix.ofms.repertory;
+package org.classsix.ofms.domin;
 
 /**
  * Created by Jiang on 2017/3/15.
@@ -6,11 +6,8 @@ package org.classsix.ofms.repertory;
  * @author Jiang
  */
 
-import org.classsix.ofms.repertory.common.BaseEntity;
-import org.classsix.ofms.repertory.common.BasePerson;
-
+import org.classsix.ofms.domin.common.BasePerson;
 import javax.persistence.*;
-
 /**
  * 演员表，别问我为什么不用actor 难道我还要创个actress
  */
