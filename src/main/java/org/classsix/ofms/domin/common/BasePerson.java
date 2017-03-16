@@ -32,7 +32,7 @@ public class BasePerson extends BaseEntity{
 
     /**出生日期*/
     @Column(name = "BIRTH_DATE")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
 
     /** 出生地 */
