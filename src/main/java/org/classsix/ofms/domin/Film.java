@@ -10,7 +10,8 @@ import org.classsix.ofms.domin.common.BaseEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
 
 /**
  * 电影类
@@ -61,7 +62,6 @@ public class Film extends BaseEntity {
 
     /**上映日期*/
     @Column(name = "OUT_DATE")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date outDate;
 
 

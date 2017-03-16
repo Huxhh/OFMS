@@ -4,7 +4,8 @@ package org.classsix.ofms.domin.common;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
 /**
  * Created by Jiang on 2017/3/15.
  *
@@ -32,7 +33,6 @@ public class BasePerson extends BaseEntity{
 
     /**出生日期*/
     @Column(name = "BIRTH_DATE")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date birthDate;
 
     /** 出生地 */
