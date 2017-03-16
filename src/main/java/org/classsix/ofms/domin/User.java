@@ -9,6 +9,8 @@ import javax.persistence.*;
  *
  * @author Jiang
  */
+@Entity
+@Table(name = "USER")
 public class User extends BasePerson{
     private static final long serialVersionUID = 5783613723738241740L;
     /** 用户主键 */

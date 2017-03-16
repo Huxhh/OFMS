@@ -22,6 +22,14 @@ public class Performer extends BasePerson {
     private Integer id;
 
 
+    /** 星座*/
+    @Column(name = "CONSTELLATION", length = 20)
+    private String constellation;
+
+
+
+
+
 
 
 

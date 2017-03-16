@@ -33,16 +33,30 @@ public class Film extends BaseEntity {
 
 
     /** 评分*/
-    @Column(name = "RANK", length = 2,nullable = false)
+    @Column(name = "RANK", length = 2)
     private Double rank;
 
 
-    /** 类型*/
-    @Column(name = "TYPE", length = 2,nullable = false)
-    private Integer type;
+    /** 类型,每个类型用逗号隔开*/
+    @Column(name = "TYPE", length = 100)
+    private String type;
+
+
+    /** 语言*/
+    @Column(name = "LANGUAGE", length = 20)
+    private String language;
+
+    /** 片长*/
+    @Column(name = "LENGTH", length = 4)
+    private Integer length;
+
+
+    /** 电影截图,每个截图用逗号隔开*/
+    @Column(name = "PIC", length = 255)
+    private String pic;
 
     /** 地区*/
-    @Column(name = "AREA", length = 2,nullable = false)
+    @Column(name = "AREA", length = 2)
     private Integer area;
 
     /**上映日期*/
@@ -75,12 +89,36 @@ public class Film extends BaseEntity {
         this.rank = rank;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public Integer getLength() {
+        return length;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
     }
 
     public Integer getArea() {
