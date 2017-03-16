@@ -56,12 +56,12 @@ public class Film extends BaseEntity {
     private String pic;
 
     /** 地区*/
-    @Column(name = "AREA", length = 2)
-    private Integer area;
+    @Column(name = "AREA", length = 5)
+    private String area;
 
     /**上映日期*/
     @Column(name = "OUT_DATE")
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date outDate;
 
 
@@ -121,11 +121,11 @@ public class Film extends BaseEntity {
         this.length = length;
     }
 
-    public Integer getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
