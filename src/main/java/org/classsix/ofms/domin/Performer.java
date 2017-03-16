@@ -22,10 +22,6 @@ public class Performer extends BasePerson {
     private Integer id;
 
 
-    /** 主演电影外键 */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_FILM_ID")
-    private Film film;
 
 
 
