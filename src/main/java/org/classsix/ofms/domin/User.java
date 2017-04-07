@@ -1,8 +1,10 @@
 package org.classsix.ofms.domin;
 
 import org.classsix.ofms.domin.common.BasePerson;
+import org.classsix.ofms.domin.validgroup.UserGroup;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Jiang on 2017/3/15.
@@ -21,6 +23,7 @@ public class User extends BasePerson{
 
     /** 账号 */
     @Column(name = "USER_NAME", length = 50, nullable = false)
+    @NotNull(groups = {UserGroup.login.class})
     private String userName;
 
     /** 手机号码 */
@@ -29,6 +32,7 @@ public class User extends BasePerson{
 
     /** 密码 */
     @Column(name = "PASSWORD", length = 20, nullable = false)
+    @NotNull(groups = {UserGroup.login.class})
     private String password;
 
     public Integer getId() {
