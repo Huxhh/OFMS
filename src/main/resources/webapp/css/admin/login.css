@@ -1,0 +1,75 @@
+
+* {
+	padding: 0;
+	border: 0;
+	margin: 0;
+	outline: 0;
+}
+body {
+	font-size: 16px;
+	font-family: PingFangSC-Light,'helvetica neue','hiragino sans gb',tahoma,'microsoft yahei ui','microsoft yahei',simsun,sans-serif;
+}
+/*head start*/
+#head {
+	height: 120px;
+	background: #336699;
+}
+#head img {
+	width: 30%;
+	line-height: 120px;
+	margin: 3% 0 0 10px;
+}
+/*head end*/
+/*content start*/
+#content {
+	width: 400px;
+	padding: 50px 0 0;
+	margin: 0 auto;
+	text-align: center;
+}
+#content .title {
+	display: block;
+}
+#content .title,
+#content .title span {
+	font-size: 40px;
+}
+#content .title span {
+	color: #6699ff;
+}
+#content label {
+	display: block;
+	border-bottom: 1px solid #f5f5f5;
+	margin: 40px 20px;
+	font-size: 20px;
+}
+#content label i {
+	color: #6699ff;
+}
+#content label input {
+	display: inline-block;
+	width: 90%;
+}
+#content .remember {
+	padding: 0 29px;
+	font-size: 13px;
+	text-align: left;
+}
+#content .remember span {
+	margin-left: 10px;
+}
+#content input[type=button] {
+	display: block;
+	width: 60%;
+	background: #6699ff;
+	margin: 0 auto;
+	cursor: pointer;
+	color: #fff;
+	padding: 10px 0;
+	margin-top: 40px;
+	font-size: 18px;
+}
+#content input[type=button]:hover {
+	background: #336699;
+}
+/*content end*/
