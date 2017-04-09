@@ -6,16 +6,16 @@
 	<link rel="stylesheet" href="../css/font/iconfont.css" />
 	<link rel="stylesheet" href="../css/index.css" />
 </head>
-<body>
+<body ng-controller="index">
 	<div id="head">
-		<img src="../img/logo.png" alt="logo" />
+		<a href="" ui-sref="home"><img src="../img/logo.png" alt="logo" /></a>
 		<span class="search">
 			<input type="text" placeholder="请输入关键字" />
 			<i class="iconfont icon-sousuo-sousuo"></i>
 			<ul>
-				<li><a href="javascript:;">登录</a></li>
+				<li><a href="javascript:;" ng-click="sign = true">登录</a></li>
 				<li class="cut">|</li>
-				<li><a href="javascript:;">注册</a></li>	
+				<li><a href="javascript:;" ng-click="sign = true">注册</a></li>	
 			</ul>
 		</span>
 	</div>
@@ -28,6 +28,42 @@
 	<div id="foot">
 		<p>Copyright © 2017 课程设计OFMS</p>
 	</div>
+	<div id="sign" ng-show="sign">
+		<div class="bg" ng-click="sign = false"></div>
+		<div class="signbox">
+			<div class="in">
+				<span class="title">登录</span>
+				<label for="name">
+					<i class="iconfont icon-renyuan"></i>
+					<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+				</label>
+				<label for="password">
+					<i class="iconfont icon-suo"></i>
+					<input type="password" placeholder=" 请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+				</label>
+				<div class="another">
+					<a href="">注册</a>
+					<a href="">忘记密码</a>
+				</div>
+				<input type="button" value="登录" ng-click="signin()" />
+			</div>
+			<!-- <div class="up">
+				<span class="title">注册</span>
+				<label for="name">
+					<i class="iconfont icon-renyuan"></i>
+					<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+				</label>
+				<label for="password">
+					<i class="iconfont icon-suo"></i>
+					<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+				</label>
+				<div class="another">
+					<a href="">登录</a>
+				</div>
+				<input type="button" value="注册" ng-click="signup()" />
+			</div> -->
+		</div>
+	</div>
 </body>
 <script src="../js/lib/angular/angular.min.js"></script>
 <script src="../js/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -35,6 +71,7 @@
 <script src="../js/router.js"></script>
 <script src="../js/service.js"></script>
 <script src="../js/filter.js"></script>
+<script src="../js/controller/index.js"></script>
 <script src="../js/controller/home.js"></script>
 <script src="../js/controller/search.js"></script>
 <script src="../js/controller/overview.js"></script>
