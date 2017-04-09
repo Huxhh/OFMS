@@ -1,3 +1,4 @@
+var app = angular.module('app', ['ui.router']);
 app.factory('request', ['$http', function ($http){
 	var r = {};
 	function popup(value) {
@@ -25,4 +26,13 @@ app.factory('request', ['$http', function ($http){
 		})
 	}
 	return r;
+}]);
+app.controller('login', ['$scope', function ($scope) {
+
+}]);
+app.directive('loginDirective', ['request', function (request) {
+	return {
+		restrict: 'AE',
+		link: function () {}
+	}
 }]);

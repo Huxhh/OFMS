@@ -13,9 +13,9 @@
 			<input type="text" placeholder="请输入关键字" />
 			<i class="iconfont icon-sousuo-sousuo"></i>
 			<ul>
-				<li><a href="javascript:;" ng-click="sign = true">登录</a></li>
+				<li><a href="javascript:;" ng-click="sign = true; trans = 'innow'">登录</a></li>
 				<li class="cut">|</li>
-				<li><a href="javascript:;" ng-click="sign = true">注册</a></li>	
+				<li><a href="javascript:;" ng-click="sign = true; trans = 'upnow'">注册</a></li>	
 			</ul>
 		</span>
 	</div>
@@ -31,37 +31,39 @@
 	<div id="sign" ng-show="sign">
 		<div class="bg" ng-click="sign = false"></div>
 		<div class="signbox">
-			<div class="in">
-				<span class="title">登录</span>
-				<label for="name">
-					<i class="iconfont icon-renyuan"></i>
-					<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
-				</label>
-				<label for="password">
-					<i class="iconfont icon-suo"></i>
-					<input type="password" placeholder=" 请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
-				</label>
-				<div class="another">
-					<a href="">注册</a>
-					<a href="">忘记密码</a>
+			<div ng-class="trans">
+				<div class="in inup">
+					<span class="title">登录</span>
+					<label for="name">
+						<i class="iconfont icon-renyuan"></i>
+						<input type="text" placeholder="请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+					</label>
+					<label for="password">
+						<i class="iconfont icon-suo"></i>
+						<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+					</label>
+					<div class="another">
+						<a href="" ng-click="trans = 'upnow'">注册</a>
+						<a href="">忘记密码</a>
+					</div>
+					<input type="button" value="登录" ng-click="signin()" />
 				</div>
-				<input type="button" value="登录" ng-click="signin()" />
+				<div class="up inup">
+					<span class="title">注册</span>
+					<label for="name">
+						<i class="iconfont icon-renyuan"></i>
+						<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+					</label>
+					<label for="password">
+						<i class="iconfont icon-suo"></i>
+						<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+					</label>
+					<div class="another">
+						<a href="" ng-click="trans = 'innow'">登录</a>
+					</div>
+					<input type="button" value="注册" ng-click="signup()" />
+				</div>
 			</div>
-			<!-- <div class="up">
-				<span class="title">注册</span>
-				<label for="name">
-					<i class="iconfont icon-renyuan"></i>
-					<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
-				</label>
-				<label for="password">
-					<i class="iconfont icon-suo"></i>
-					<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
-				</label>
-				<div class="another">
-					<a href="">登录</a>
-				</div>
-				<input type="button" value="注册" ng-click="signup()" />
-			</div> -->
 		</div>
 	</div>
 </body>

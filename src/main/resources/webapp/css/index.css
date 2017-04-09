@@ -206,7 +206,9 @@ head .search li {
   margin: 40px 20px; }
 
 #sign label input {
-  font-size: 14px; }
+  font-size: 14px;
+  opacity: 0.8;
+  padding-left: 10px; }
 
 #sign label i {
   color: #6699ff;
@@ -238,6 +240,40 @@ head .search li {
 
 #sign input[type=button]:hover {
   background: #336699; }
+
+#sign .signbox > div {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 2s ease 0s;
+  transform-origin: 50% 0px 0px; }
+
+#sign .inup {
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+#sign .in {
+  background: #fff;
+  transition: 2s ease 0s;
+  transform-origin: bottom; }
+
+#sign .up {
+  transform-origin: top;
+  transform: rotateX(-60deg);
+  background: #fff;
+  transition: 2s ease 0s; }
+
+#sign .innow .up {
+  transform: rotateX(-90deg); }
+
+#sign .innow .in {
+  transform: rotateX(0deg); }
+
+#sign .upnow .up {
+  transform: rotateX(0deg); }
+
+#sign .upnow .in {
+  transform: rotateX(90deg); }
 
 #home {
   margin-top: 20px;
