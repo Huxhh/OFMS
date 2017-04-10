@@ -30,6 +30,21 @@ ul, li {
   justify-content: center;
   min-height: 500px; }
 
+@keyframs showindex {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+@-webkit-keyframes showindex {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+#index > div {
+  animation: showindex 2s;
+  -webkit-animation: showindex 2s; }
+
 .list {
   -webkit-flex-wrap: wrap;
   -moz-flex-wrap: wrap;
@@ -87,7 +102,8 @@ ul, li {
   -ms-flex-pack: justify;
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
-  justify-content: space-between; }
+  justify-content: space-between;
+  transition: display 1s; }
 
 #head img {
   width: 120px;
@@ -104,7 +120,12 @@ ul, li {
   height: 26px;
   padding: 2px 10px;
   vertical-align: middle;
-  float: left; }
+  float: left;
+  background: #999;
+  transition: background 1s; }
+
+#head .search input:focus {
+  background: #fff; }
 
 #head .search i {
   width: 34px;
@@ -236,7 +257,8 @@ head .search li {
   color: #fff;
   padding: 10px 0;
   margin-top: 40px;
-  font-size: 18px; }
+  font-size: 18px;
+  transition: background 0.5s; }
 
 #sign input[type=button]:hover {
   background: #336699; }
@@ -361,11 +383,16 @@ head .search li {
   border: 1px solid #f2f2f2;
   padding: 1%; }
 
+#user .right > div {
+  animation: showindex 2s;
+  -webkit-animation: showindex 2s; }
+
 #user .left li a {
   color: #333;
   font-size: 14px;
   margin-left: 5px;
-  color: #fff; }
+  color: #fff;
+  display: inline-block; }
 
 #user .left .title {
   font-size: 18px;
@@ -380,7 +407,8 @@ head .search li {
 #user .left ul li {
   line-height: 32px;
   padding-left: 5px;
-  border-radius: 4px; }
+  border-radius: 4px;
+  transition: 0.5s ease 0s; }
 
 #user .left ul li:hover,
 #user .left ul li.active {

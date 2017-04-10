@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="admin">
 <head>
 	<meta charset="UTF-8">
 	<title>后台管理</title>
 	<link rel="stylesheet" href="../../css/admin/index.css" />
 </head>
 <body>
-	admin
+	<div id="left">
+		<ul>
+			<li class="active"><a href="" ui-sref="film">电影管理</a></li>
+		</ul>
+	</div>
+	<div id="right" ui-view="index"></div>
 </body>
+<script src="../../js/lib/angular/angular.min.js"></script>
+<script src="../../js/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../../js/admin/app.js"></script>
+<script src="../../js/service.js"></script>
+<script src="../../js/admin/router.js"></script>
+<script src="../../js/admin/controller/film.js"></script>
 </html>
