@@ -2,14 +2,13 @@ package org.classsix.ofms.domin;
 
 import org.hibernate.annotations.JoinColumnOrFormula;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by huxh on 2017/4/7.
  */
+@Entity
+@Table(name = "BUYFILM")
 public class BuyFilm {
 
     @Id

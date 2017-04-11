@@ -11,15 +11,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by huxh on 2017/3/10.
  */
 @RestController
 public class TestController {
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
     @ApiOperation(value = "测试",notes = "use for test")
     @RequestMapping(value = "/",method = RequestMethod.GET)
     String home() {
-        return "Hello World!";
+        stringRedisTemplate.opsForValue().set("jiang","123",11, TimeUnit.MINUTES);
+        return stringRedisTemplate.opsForValue().get("jiang");
     }
 
     @ApiOperation(value = "测试2",notes = "use for test2")
