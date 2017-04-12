@@ -14,7 +14,7 @@ public class MovieItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_MOVIE_ID")
-    private long id;
+    private Long id;
 
     @Column(name = "URL",length = 150,nullable = true)
     private String url;
