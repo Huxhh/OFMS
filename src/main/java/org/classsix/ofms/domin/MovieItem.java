@@ -66,7 +66,7 @@ public class MovieItem implements Serializable {
     private long voteCount;
 
     @Column(name = "STAR",length = 100,nullable = true)
-    private String star;
+    private String star ;
 
     @Column(name = "BUY_COUNT", nullable = true)
     private Long buyCount;
