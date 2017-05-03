@@ -20,7 +20,7 @@ public class BuyFilm {
     private Integer uid;
 
     @Column(name = "FILM_ID")
-    private Integer fid;
+    private Long fid;
 
     public Integer getId() {
         return id;
@@ -38,18 +38,18 @@ public class BuyFilm {
         this.uid = uid;
     }
 
-    public Integer getFid() {
+    public Long getFid() {
         return fid;
     }
 
-    public void setFid(Integer fid) {
+    public void setFid(Long fid) {
         this.fid = fid;
     }
 
     public BuyFilm() {
     }
 
-    public BuyFilm(Integer uid, Integer fid) {
+    public BuyFilm(Integer uid, Long fid) {
         this.uid = uid;
         this.fid = fid;
     }
