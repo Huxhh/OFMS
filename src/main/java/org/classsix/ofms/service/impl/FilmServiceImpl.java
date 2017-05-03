@@ -1,14 +1,16 @@
 package org.classsix.ofms.service.impl;
 
-import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.BuyFilm;
 import org.classsix.ofms.domin.Film;
+import org.classsix.ofms.domin.FilmScore;
 import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.repository.BuyFilmRepository;
 import org.classsix.ofms.repository.FilmRepository;
 import org.classsix.ofms.repository.MovieRepository;
-import org.classsix.ofms.service.BuyFilmService;
+import org.classsix.ofms.repository.ScoreFilmRepository;
+import org.classsix.ofms.service.FilmService;
 import org.classsix.ofms.status.BuyFilmStatus;
+import org.springframework.beans.factory.NamedBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class BuyFilmServiceImpl implements BuyFilmService {
+public class FilmServiceImpl implements FilmService {
 
     @Autowired
     BuyFilmRepository buyFilmRepository;
@@ -32,7 +34,10 @@ public class BuyFilmServiceImpl implements BuyFilmService {
     @Autowired
     MovieRepository movieRepository;
 
-    public BuyFilmStatus buyFilm(int uid, long fid) {
+    @Autowired
+    ScoreFilmRepository scoreFilmRepository;
+
+    public BuyFilmStatus buyFilm(int uid, long fid) throws Exception {
         BuyFilmStatus buyFilmStatus = BuyFilmStatus.ERROR;
         BuyFilm buyFilm = new BuyFilm();
         buyFilm.setUid(uid);
@@ -46,12 +51,12 @@ public class BuyFilmServiceImpl implements BuyFilmService {
             movieRepository.save(movieItem);
             buyFilmStatus = BuyFilmStatus.SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e.getMessage(), e);
         }
         return buyFilmStatus;
     }
 
-    public List<Film> showAllPaidFilms(int uid) {
+    public List<Film> showAllPaidFilms(int uid) throws Exception {
         List<Film> films = new ArrayList<>();
         List<BuyFilm> buyFilms;
         try {
@@ -62,9 +67,29 @@ public class BuyFilmServiceImpl implements BuyFilmService {
                 films.add(film);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception(e.getMessage(), e);
         }
         return films;
+    }
+
+    public BuyFilmStatus scoreFilm(int uid, long fid, float score) throws Exception {
+        BuyFilmStatus buyFilmStatus = BuyFilmStatus.SUCCESS;
+        try {
+            MovieItem movieItem = movieRepository.findById(fid);
+            FilmScore filmScore = new FilmScore();
+            filmScore.setUid(uid);
+            filmScore.setFid(fid);
+            filmScore.setScore(score);
+            scoreFilmRepository.save(filmScore);
+            long votecount = movieItem.getVoteCount();
+            votecount++;
+            movieItem.setVoteCount(votecount);
+            movieRepository.save(movieItem);
+        } catch (Exception e) {
+            buyFilmStatus = BuyFilmStatus.SCOREFILM_ERROR;
+            throw new Exception(e.getMessage(),e);
+        }
+        return buyFilmStatus;
     }
 
 }

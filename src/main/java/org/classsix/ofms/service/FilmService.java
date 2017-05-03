@@ -13,12 +13,14 @@ import java.util.List;
  */
 @Service
 @Transactional
-public interface BuyFilmService {
+public interface FilmService {
 
 
-    BuyFilmStatus buyFilm(int uid, long fid);
+    BuyFilmStatus buyFilm(int uid, long fid) throws Exception;
 
-    List<Film> showAllPaidFilms(int uid);
+    List<Film> showAllPaidFilms(int uid) throws Exception;
+
+    BuyFilmStatus scoreFilm(int uid, long fid, float score) throws Exception;
 
 
 }
