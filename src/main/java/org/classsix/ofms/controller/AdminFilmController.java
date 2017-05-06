@@ -1,17 +1,17 @@
 package org.classsix.ofms.controller;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiOperation;
-import org.classsix.ofms.domin.MovieItem;
-import org.classsix.ofms.service.AdminFilmService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.*;
+        import io.swagger.annotations.ApiImplicitParam;
+        import io.swagger.annotations.ApiOperation;
+        import org.classsix.ofms.domin.MovieItem;
+        import org.classsix.ofms.service.AdminFilmService;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.data.domain.Pageable;
+        import org.springframework.data.domain.Sort;
+        import org.springframework.data.web.PageableDefault;
+        import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
+        import java.util.List;
+        import java.util.Map;
 
 /**
  * Created by clxy on 2017/5/1.
