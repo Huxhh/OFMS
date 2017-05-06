@@ -71,6 +71,16 @@ public class MovieItem implements Serializable {
     @Column(name = "STAR",length = 100,nullable = true)
     private String star ;
 
+    @Column(name = "BUY_COUNT", nullable = true)
+    private Long buyCount;
+
+    public long getBuyCount() {
+        return buyCount;
+    }
+
+    public void setBuyCount(long buyCount) {
+        this.buyCount = buyCount;
+    }
 
     public long getId() {
         return id;
