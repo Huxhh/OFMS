@@ -6,6 +6,7 @@ import org.classsix.ofms.repository.BuyFilmRepository;
 import org.classsix.ofms.repository.FilmRepository;
 import org.classsix.ofms.service.BuyFilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by huxh on 2017/4/7.
  */
+@Service
 public class BuyFilmServiceImpl implements BuyFilmService {
 
     @Autowired
