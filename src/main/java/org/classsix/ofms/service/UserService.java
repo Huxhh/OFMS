@@ -8,7 +8,7 @@ import org.classsix.ofms.status.UserStatus;
  * 面向运气，面向心情，面向Bug。
  */
 public interface UserService {
-    UserStatus confirmLogin(String userName, String password);
+    User confirmLogin(String userName, String password) throws Exception;
     UserStatus addUser(User user);
     String findUser(String userName, String tel) throws Exception;
 }
