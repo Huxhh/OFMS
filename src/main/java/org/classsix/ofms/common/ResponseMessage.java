@@ -50,6 +50,18 @@ public class ResponseMessage {
         return body;
     }
 
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public void setBody(Object body) {
+        this.body = body;
+    }
+
     public static class Builder {
         private int code = 0;
         private String msg = "请求成功！";

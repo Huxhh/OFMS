@@ -11,6 +11,9 @@ import java.io.Serializable;
 public class MovieItem implements Serializable {
     private static final long serialVersionUID = -5796252919139756166L;
 
+    public MovieItem() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PK_MOVIE_ID")
@@ -222,4 +225,30 @@ public class MovieItem implements Serializable {
     public void setStar(String star) {
         this.star = star;
     }
+
+    @Override
+    public String toString() {
+        return "MovieItem{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", name='" + name + '\'' +
+                ", year='" + year + '\'' +
+                ", image='" + image + '\'' +
+                ", director='" + director + '\'' +
+                ", writer='" + writer + '\'' +
+                ", actor='" + actor + '\'' +
+                ", kind='" + kind + '\'' +
+                ", country='" + country + '\'' +
+                ", language='" + language + '\'' +
+                ", date='" + date + '\'' +
+                ", length='" + length + '\'' +
+                ", otherName='" + otherName + '\'' +
+                ", imbd='" + imbd + '\'' +
+                ", score=" + score +
+                ", voteCount=" + voteCount +
+                ", star='" + star + '\'' +
+                '}';
+    }
+
+
 }

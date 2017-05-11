@@ -40,17 +40,15 @@ public class SearchFilmController {
     Map<String,Object> searchFilmByName(String name, @PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable){
         Map<String,Object> resultMap = new HashMap<String, Object>();
         Page<MovieItem> resultList;
-        int status;
+
         try{
 
             resultList = searchFilmService.searchFilm(name,pageable);
-            status = 1;
-            resultMap.put("status",status);
+            resultMap.put("status",1);
             resultMap.put("movie",resultList);
         }
         catch (Exception e){
-            status = 0;
-            resultMap.put("status",status);
+            resultMap.put("status",0);
         }
 
         return resultMap;
