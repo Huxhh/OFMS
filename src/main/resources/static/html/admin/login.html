@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../../css/admin/login.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/font/iconfont.css">
+</head>
+<body ng-controller="login" login-directive>
+	<div id="head">
+		<img src="../../img/admin/logo.png" alt="logo" />
+	</div>
+	<div id="content">
+		<span class="title">Welcome <span>Back!</span></span>
+		<label for="name">
+			<i class="iconfont icon-renyuan"></i>
+			<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+		</label>
+		<label for="password">
+			<i class="iconfont icon-suo"></i>
+			<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+		</label>
+		<!-- <input type="text" > -->
+		<div class="remember">
+			<input type="checkbox" /><span>记住密码</span>
+		</div>
+		<input type="button" value="登录" ng-click="login()" />
+	</div>
+</body>
+<script type="text/javascript" src="../../js/lib/angular/angular.min.js"></script>
+<script type="text/javascript" src="../../js/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="../../js/admin/login.js"></script>
+</html>

@@ -1,0 +1,45 @@
+<div id="overview" overview overview-directive>
+	<div class="cloumn1">
+		<img src="{{filmOverview.image}}" alt="pic" />
+	</div>
+	<div class="cloumn2">
+		<p>片名:{{filmOverview.name}}</p>
+		<p ng-show="filmOverview.othername">别名:{{filmOverview.otherName}}</p>
+		<p ng-show="filmOverview.country">
+		地区:{{filmOverview.country}}</p>
+		<p ng-show="filmOverview.language">
+		语言:{{filmOverview.language}}</p>
+		<p ng-show="filmOverview.director">
+		导演:{{filmOverview.director}}</p>
+		<p ng-show="filmOverview.writer">
+		编剧:{{filmOverview.writer}}</p>
+		<p ng-show="filmOverview.kind">
+		类型:{{filmOverview.kind}}</p>
+		<p ng-show="filmOverview.date">
+		年代:{{filmOverview.date}}</p>
+		<p ng-show="filmOverview.actor">
+		演员:{{filmOverview.actor}}</p>
+		<p ng-show="filmOverview.length">
+		时长:{{filmOverview.length}}</p>
+		<p ng-show="filmOverview.buycount">
+		已购:{{filmOverview.buycount}}</p>
+	</div>
+	<div class="cloumn3">
+	    <p>
+	    	<span>评分</span>{{filmOverview.score}}
+	    </p>
+	    <p class="vote">
+			<span>评分人数</span>{{filmOverview.voteCount}}
+	    </p>
+		<div class="rating rating-{{5 - $index}}" ng-repeat="item in filmOverview.star track by $index">
+		  <span>
+		      <i class="star-1">★</i>
+		      <i class="star-2">★</i>
+		      <i class="star-3">★</i>
+		      <i class="star-4">★</i>
+		      <i class="star-5">★</i>
+		  </span>
+	      <span>{{item}}</span>
+	    </div>
+	</div>
+</div>

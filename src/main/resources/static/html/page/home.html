@@ -1,0 +1,101 @@
+<div id="home" ng-controller="home" home-directive>
+	<div class="content">
+		<div class="left">
+			<div class="hot">
+				<div class="title">
+					<span>热门电影</span>
+					<span ng-click="random_change(1)">
+						<i class="iconfont icon-qiehuan"></i>
+						换一批
+					</span>
+				</div>
+				<div class="list">
+					<div ng-repeat="item in hotList" ng-click="choose_one(item.id)">
+						<img src="{{item.image}}" alt="暂无图片" />
+						<span>
+							<span class="score">评分: {{item.score}}</span>
+							<span class="name" title="{{item.name}}}">{{item.name}}</span>
+						</span>
+						<div class="about">
+							<p>片名:{{item.name}}</p>
+							<p ng-show="item.othername">别名:{{item.otherName}}</p>
+							<p ng-show="item.country">
+							地区:{{item.country}}</p>
+							<p ng-show="item.language">语言:{{item.language}}</p>
+							<p ng-show="item.director">导演:{{item.director}}</p>
+							<p ng-show="item.writer">
+							编剧:{{item.writer}}</p>
+							<p ng-show="item.kind">
+							类型:{{item.kind}}</p>
+							<p ng-show="item.date">
+							年代:{{item.date}}</p>
+							<p ng-show="item.actor">
+							演员:{{item.actor}}</p>
+							<p ng-show="item.length">
+							时长:{{item.length}}</p>
+							<p>评分:{{item.score}}</p>
+							<p ng-show="item.buycount">已购:{{item.buycount}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="recommond">
+				<div class="title">
+					<span>猜你喜欢</span>
+					<span ng-click="random_change(2)">
+						<i class="iconfont icon-qiehuan"></i>
+						换一批
+					</span>
+				</div>
+				<div class="list">
+					<div ng-repeat="item in recommondList" ng-click="choose_one(item.id)">
+						<img src="{{item.image}}" alt="暂无图片" />
+						<span>
+							<span class="score">评分: {{item.score}}</span>
+							<span class="name" title="{{item.name}}}">{{item.name}}</span>
+						</span>
+						<div class="about">
+							<p>片名:{{item.name}}</p>
+							<p ng-show="item.othername">别名:{{item.otherName}}</p>
+							<p ng-show="item.country">
+							地区:{{item.country}}</p>
+							<p ng-show="item.language">语言:{{item.language}}</p>
+							<p ng-show="item.director">导演:{{item.director}}</p>
+							<p ng-show="item.writer">
+							编剧:{{item.writer}}</p>
+							<p ng-show="item.kind">
+							类型:{{item.kind}}</p>
+							<p ng-show="item.date">
+							年代:{{item.date}}</p>
+							<p ng-show="item.actor">
+							演员:{{item.actor}}</p>
+							<p ng-show="item.length">
+							时长:{{item.length}}</p>
+							<p>评分:{{item.score}}</p>
+							<p ng-show="item.buycount">已购:{{item.buycount}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="new">
+				<span class="title">最新电影</span>
+				<div class="table" ng-repeat="item in newList" ng-click="choose_one(item.id)">
+					<span title="{{item.name}}">{{item.name | catFilmName}}</span>
+					<span>
+						{{item.date | catFilmDate}}
+						<span ng-hide="item.date">{{item.year}}</span>
+					</span>
+				</div>
+				<div class="page">
+					<div>
+			            <span ng-click="prev()">&lt;</span>
+			            <span ng-class="{true: 'active'}[isActive == num]" ng-repeat="num in page_num track by $index" ng-click="get_new(num)">{{num + 1}}</span>
+			            <span ng-click="next()">&gt;</span>
+			        </div>
+				</div>
+			</div>		
+		</div>
+	</div>
+</div>

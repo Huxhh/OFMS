@@ -1,0 +1,43 @@
+<div id="search" ng-controller="search" search-directive>
+	<div class="list_search" ng-repeat="item in filmList">
+		<div>
+			<img src="{{item.image}}" alt="暂无图片" />
+		</div>
+		<div class="about">
+			<p>片名:{{item.name}}</p>
+			<p ng-show="item.othername">
+			别名:{{item.otherName}}</p>
+			<p ng-show="item.country">
+			地区:{{item.country}}</p>
+			<p ng-show="item.language">
+			语言:{{item.language}}</p>
+			<p ng-show="item.director">
+			导演:{{item.director}}</p>
+			<p ng-show="item.writer">
+			编剧:{{item.writer}}</p>
+			<p ng-show="item.kind">
+			类型:{{item.kind}}</p>
+			<p ng-show="item.date">
+			年代:{{item.date}}</p>
+			<p ng-show="item.actor">
+			演员:{{item.actor}}</p>
+			<p ng-show="item.length">
+			时长:{{item.length}}</p>
+			<p ng-show="item.buycount">
+			已购:{{item.buycount}}</p>
+		</div>
+		<div>
+			
+			<p><span>评分:</span>{{item.score}}</p>
+			<a href="" class="overview" ng-click="choose_one(item.id)">详情</a>
+		</div>
+	</div>
+	<div class="page">
+		<div>
+            <span ng-click="prev()">&lt;</span>
+            <span ng-class="{true: 'active'}[isActive == num]" ng-repeat="num in page_num track by $index" ng-click="search_film(num)">{{num + 1}}</span>
+            <span ng-click="next()">&gt;</span>
+        </div>
+        <p>共计{{searchPage}}页</p>
+	</div>
+</div>
