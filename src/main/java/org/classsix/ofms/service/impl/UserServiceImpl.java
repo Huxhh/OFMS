@@ -8,6 +8,7 @@ import org.classsix.ofms.status.UserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.Objects;
 
 /**
@@ -20,20 +21,9 @@ public class UserServiceImpl implements UserService{
     UserRepository userRepository;
 
     @Override
-    public UserStatus confirmLogin(String userName, String password){
-        UserStatus userStatus = UserStatus.ERROR;
-        try {
-            User user = userRepository.findByUserName(userName);
-            if (user == null || !Objects.equals(user.getPassword(), password)){
-                userStatus = UserStatus.ERROR;
-            }else {
-                userStatus = UserStatus.SUCCESS;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return userStatus;
-
+    public User confirmLogin(String userName, String password) throws Exception{
+        User user = userRepository.findByUserName(userName);
+        return user;
     }
 
     @Override
@@ -56,4 +46,6 @@ public class UserServiceImpl implements UserService{
             return "";
         return user1.getPassword();
     }
+
+
 }

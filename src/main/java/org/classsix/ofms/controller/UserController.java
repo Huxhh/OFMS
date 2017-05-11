@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.User;
 import org.classsix.ofms.service.UserService;
@@ -34,8 +35,17 @@ public class UserController {
             @ApiImplicitParam(name = "map", value = "{'userName' : 'fengshenai', 'password' : 'xiaohua'}", required = true, dataType = "Json")
     })
     @RequestMapping("/usr/login")
-    public ResponseMessage userLogin(@RequestBody Map map){
-        UserStatus status = userService.confirmLogin((String) map.get("userName"),(String) map.get("password"));
+    public ResponseMessage userLogin(@RequestBody Map map,HttpServletRequest request){
+        UserStatus status = UserStatus.ERROR;
+        try {
+            User u = userService.confirmLogin((String) map.get("userName"),(String) map.get("password"));
+            if (u == null)
+                return new ResponseMessage(status);
+            request.getSession().setAttribute("user",u);
+            status = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return new ResponseMessage(status);
     }
 
@@ -70,6 +80,9 @@ public class UserController {
         }
         return new ResponseMessage(userStatus);
     }
+
+
+
 
 
 
