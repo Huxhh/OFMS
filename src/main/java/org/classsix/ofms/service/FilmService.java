@@ -2,6 +2,7 @@ package org.classsix.ofms.service;
 
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.Film;
+import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.status.BuyFilmStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,8 @@ public interface FilmService {
     List<Film> showAllPaidFilms(int uid) throws Exception;
 
     BuyFilmStatus scoreFilm(int uid, long fid, float score) throws Exception;
+
+    MovieItem getFilmById(long fid) throws Exception;
 
 
 }

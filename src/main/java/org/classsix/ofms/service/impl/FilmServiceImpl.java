@@ -92,4 +92,14 @@ public class FilmServiceImpl implements FilmService {
         return buyFilmStatus;
     }
 
+    public MovieItem getFilmById(long fid) throws Exception {
+        MovieItem movieItem;
+        try {
+            movieItem = movieRepository.findById(fid);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage(),e);
+        }
+        return movieItem;
+    }
+
 }

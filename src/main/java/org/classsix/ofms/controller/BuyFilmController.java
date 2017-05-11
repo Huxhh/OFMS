@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.BuyFilm;
 import org.classsix.ofms.domin.Film;
+import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.service.FilmService;
 import org.classsix.ofms.status.BuyFilmStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,21 @@ public class BuyFilmController {
             }
         }
 
+    }
+
+    @RequestMapping(value = "/film/{fid}", method = RequestMethod.GET)
+    public ResponseMessage getFilmById(@PathVariable("fid") long fid) {
+        MovieItem movieItem;
+        if(0 == fid) {
+            return new ResponseMessage(BuyFilmStatus.ARGUMENTS_ERROR, "get film by id arguments error");
+        } else {
+            try {
+                movieItem = filmService.getFilmById(fid);
+                return new ResponseMessage(BuyFilmStatus.SUCCESS, movieItem);
+            } catch (Exception e) {
+                return new ResponseMessage(BuyFilmStatus.GETFILMBYID_ERROR);
+            }
+        }
     }
 
 }
