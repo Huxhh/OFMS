@@ -52,9 +52,20 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					scope.searchByName();
 				}
 			}
-			scope.register = function () {
-				if (scope.user.UserPswd && scope.user.UserName) {
-					req
+			scope.signup = function () {
+				// if (scope.user.UserPswd && scope.user.UserName) {
+				// 	request.post('/usr/regist', )
+				// }
+			}
+			scope.signin = function () {
+				if(scope.user.UserName && scope.user.UserPswd) {
+					request.post('/usr/login', {
+						userName : scope.user.UserName,
+						password : scope.user.UserPswd
+					}, function (res) {
+						// if (res)
+						console.log(res)
+					})
 				}
 			}
 		}

@@ -1,11 +1,32 @@
 <div id="myfilm">
 	<div class="listinfo">
-		<div>
-			<img src="../img/test.jpg" alt="name" />
-			<span>
-				information
-			</span>
-			<span>已评价</span>
+		<div ng-repeat="item in userAbout">
+			<div class="cloumn1">
+				<img src="{{item.image}}" alt="暂无图片" />
+			</div>
+			<div class="cloumn2">
+				<p>片名:{{item.name}}</p>
+				<p ng-show="item.othername">别名:{{item.otherName}}</p>
+				<p ng-show="item.country">
+				地区:{{item.country}}</p>
+				<p ng-show="item.language">
+				语言:{{item.language}}</p>
+				<p ng-show="item.director">
+				导演:{{item.director}}</p>
+				<p ng-show="item.writer">
+				编剧:{{item.writer}}</p>
+				<p ng-show="item.kind">
+				类型:{{item.kind}}</p>
+				<p ng-show="item.date">
+				年代:{{item.date}}</p>
+				<p ng-show="item.actor">
+				演员:{{item.actor}}</p>
+				<p ng-show="item.length">
+				时长:{{item.length}}</p>
+				<p ng-show="item.buycount">
+				已购:{{item.buycount}}</p>
+			</div>
+			<div>已评分</div>
 		</div>
 	</div>
 </div>

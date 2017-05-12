@@ -536,12 +536,14 @@ head .search li {
   -moz-justify-content: space-between;
   justify-content: space-between; }
 
-#search .list_search > div:first-child {
-  width: 15%; }
+#search .list_search > div:first-child,
+#search .list_search > div:last-child {
+  width: 15%;
+  text-align: center; }
 
 #search .list_search > div.about {
-  padding: 0 1%;
-  width: 76%; }
+  padding: 0 5%;
+  width: 60%; }
 
 #search .list_search > div.about p {
   font-size: 14px;
@@ -655,6 +657,7 @@ head .search li {
   font-weight: normal; }
 
 #user {
+  margin-top: 30px;
   width: 90%;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;

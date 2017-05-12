@@ -5,11 +5,15 @@ app.directive('userDirective', ['request', function (request) {
 	return {
 		restrict: 'AE',
 		link: function (scope, ele, attrs) {
-			request.get('url', function (res) {
-				if (res.status == 0) {
-					scope.userAbout = res.message;
+			scope.$emit('classify_change', false);
+			request.post('/user/showallpaidfilm', {
+				uid: '1'
+			}, function (res) {
+				if (res.code == 0) {
+					scope.userAbout = res.body;
+					console.log(scope.userAbout)
 				} else {
-					request.pop_up(res.message);
+					request.pop_up(res.msg);
 				}
 			})
 		}

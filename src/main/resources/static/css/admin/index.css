@@ -1,4 +1,4 @@
-#film .list > div, #film .list .opereate {
+.page, #film .list > div, #film .list .opereate {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-flex;
@@ -21,6 +21,49 @@ a {
 
 ul, li {
   list-style-type: none; }
+
+.page {
+  width: 100%;
+  margin: 30px 0;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center; }
+
+.page span {
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  border-left: 1px solid #e4e4e4;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  float: left;
+  cursor: pointer; }
+
+.page span:first-child,
+.page span:last-child {
+  border: 1px solid #e4e4e4; }
+
+.page span:first-child {
+  border-top-left-radius: 20%;
+  border-bottom-left-radius: 20%;
+  border-right: 0; }
+
+.page span:last-child {
+  border-top-right-radius: 20%;
+  border-bottom-right-radius: 20%; }
+
+.page span:hover,
+.page span:active {
+  background: #e4e4e4; }
+
+.page span.active {
+  color: #fff;
+  background: #666;
+  border: 1px solid #666; }
 
 #left {
   background: #2a303e;
@@ -58,6 +101,9 @@ ul, li {
 
 #film .list > div div {
   width: 20%; }
+
+#film .list > div .page {
+  width: auto; }
 
 #film .list img {
   width: 100%; }
