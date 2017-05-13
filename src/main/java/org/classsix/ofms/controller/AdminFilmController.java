@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
 /**
  * Created by clxy on 2017/5/1.
@@ -34,15 +35,15 @@ public class AdminFilmController {
 
     @RequestMapping(value = "/admin/",method = RequestMethod.DELETE)
     @ApiOperation(value = "删除电影",notes = "电影的Model里至少要有ID字段")
-    ResponseMessage deleteFilm(List<MovieItem> movieItems){
+    ResponseMessage deleteFilm(ArrayList<MovieItem> movieItems){
         return adminFilmService.deleteAll(movieItems);
     }
 
 
     @ApiImplicitParam(name = "movieItems", value = "要修改的电影", required = true,dataType = "MovieItem")
-    @ApiOperation(value = "删除电影",notes = "电影的Model里至少要有ID字段")
+    @ApiOperation(value = "修改电影",notes = "电影的Model里至少要有ID字段")
     @RequestMapping(value = "/admin/",method = RequestMethod.PUT)
-    ResponseMessage editFilm(@ModelAttribute List<MovieItem> movieItems){
+    ResponseMessage editFilm(ArrayList<MovieItem> movieItems){
         return adminFilmService.saveAll(movieItems);
     }
 
