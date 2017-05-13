@@ -22,6 +22,9 @@ public interface MovieRepository extends JpaRepository<MovieItem,Long> {
     @Query("select m from MovieItem m order by m.buyCount DESC")
     Page<MovieItem> orderByBuyCount(Pageable pageable);
 
+    @Query("select m from MovieItem m order by m.year DESC")
+    Page<MovieItem> orderByTime(Pageable pageable);
+
 
 
 

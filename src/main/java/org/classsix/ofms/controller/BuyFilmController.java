@@ -10,6 +10,10 @@ import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.service.FilmService;
 import org.classsix.ofms.status.BuyFilmStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,6 +52,13 @@ public class BuyFilmController {
             }
         }
 
+    }
+
+    @RequestMapping(value = "/recentFilm/{page}/{size}" , method = RequestMethod.GET)
+    public ResponseMessage getRecentFilm(@PathVariable("page") int page, @PathVariable("size") int size) {
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "date");
+        Page<MovieItem> movieItemPage = filmService.getFilmByTime(pageable);
+        return new ResponseMessage(BuyFilmStatus.SUCCESS, movieItemPage);
     }
 
     @RequestMapping(value = "/user/showallpaidfilm" , method = RequestMethod.POST)
