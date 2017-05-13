@@ -5,8 +5,8 @@
 	<title>后台管理</title>
 	<link rel="stylesheet" href="../../css/admin/index.css" />
 </head>
-<body>
-	<div id="left">
+<body ng-class="{true: 'add_film'}[addFilmOverflowFlag]" ng-controller="indexController">
+	<div id="left" ng-class="{true: 'add_film'}[addFilmOverflowFlag]">
 		<ul>
 			<li class="active"><a href="" ui-sref="film">电影管理</a></li>
 		</ul>
@@ -18,5 +18,6 @@
 <script src="../../js/admin/app.js"></script>
 <script src="../../js/service.js"></script>
 <script src="../../js/admin/router.js"></script>
+<script src="../../js/admin/controller/index.js"></script>
 <script src="../../js/admin/controller/film.js"></script>
 </html>

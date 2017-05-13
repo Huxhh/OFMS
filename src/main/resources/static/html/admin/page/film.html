@@ -1,42 +1,89 @@
 <div id="film" ng-controller="film" film-directive>
+	<div class="searchAadd">
+		<input type="button" value="添加电影" ng-click="add_film()" />
+		<div></div>
+	</div>	
 	<div class="list">
-		<div ng-repeat="item in filmList">
+		<div ng-repeat="item in filmList" class="listinfo">
 			<div>
-			<img src="{{item.image}}" alt="暂无图片" />
+				<img src="{{item.image}}" alt="暂无图片" />
+				<input ng-hide="editAble[$index]" type="text" placeholder="图片链接" class="image" ng-model="item.image"	/>
+			</div>
+			<div class="about" ng-class="{false: 'isEdit'}[editAble[$index]]">
+				<div>
+					<span>片名:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.name">
+				</div>
+				<div>
+					<span>别名</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.otherName">
+				</div>
+				<div>
+					<span>地区:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.country">
+				</div>
+				<div>
+					<span>语言:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.language">
+				</div>
+				<div>
+					<span>导演:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.director">
+				</div>
+				<div>
+					<span>编剧:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.writer">
+				</div>
+				<div>
+					<span>类型:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.kind">
+				</div>
+				<div>
+					<span>年代:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.date">
+				</div>
+				<div>
+					<span>演员:</span>
+					<textarea ng-readonly="editAble[$index]" ng-model="item.actor"></textarea>
+				</div>
+				<div>
+					<span>时长:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.length">
+				</div>
+				<div>
+					<span>已购:</span>
+					<input type="text" ng-readonly="editAble[$index]" ng-model="item.buyCount">
+				</div>
+			</div>
+			<div>
+				<div class="opereate" ng-show="editAble[$index]">
+					<input type="button" value="修改" ng-click="change_film($index)"	class="change" />
+					<input type="button" value="删除" ng-click="delete_film(item.id, $index)" class="delete" />
+				</div>
+				<div  class="opereate" ng-show="!editAble[$index]">
+					<input type="button" value="确定" ng-click="submit($index)" class="submit" />
+					<input type="button" value="取消" ng-click="change_film($index, true)" class="cancle" />
+				</div>
+			</div>
 		</div>
-		<div class="about">
-			<p>片名:{{item.name}}</p>
-			<p ng-show="item.othername">
-			别名:{{item.otherName}}</p>
-			<p ng-show="item.country">
-			地区:{{item.country}}</p>
-			<p ng-show="item.language">
-			语言:{{item.language}}</p>
-			<p ng-show="item.director">
-			导演:{{item.director}}</p>
-			<p ng-show="item.writer">
-			编剧:{{item.writer}}</p>
-			<p ng-show="item.kind">
-			类型:{{item.kind}}</p>
-			<p ng-show="item.date">
-			年代:{{item.date}}</p>
-			<p ng-show="item.actor">
-			演员:{{item.actor}}</p>
-			<p ng-show="item.length">
-			时长:{{item.length}}</p>
-			<p ng-show="item.buycount">
-			已购:{{item.buycount}}</p>
+		<div class="page">
+			<div>
+	            <span ng-click="prev()">&lt;</span>
+	            <span ng-class="{true: 'active'}[isActive == num]" ng-repeat="num in page_num track by $index" ng-click="admin_film(num)">{{num + 1}}</span>
+	            <span ng-click="next()">&gt;</span>
+	        </div>
+	        <p>共计{{filmPage}}页
 		</div>
-		<div class="opereate">
-				修改
+		<div ng-if="addFilmFlag" class="add_film">
+			<div>
+				<input type="text" placeholder="请输入{{addFilmKeyZh[$index]}}{{item}}" ng-repeat="item in addFilmKey" ng-model="addFilm[item]">
+				<input type="date" placeholder="年代" ng-model="addFilm.date" />
+				<!-- <input type="file" placeholder="请上传图片" ng-model="addFilm.image" /> -->
+				<div class="add_opearte">
+					<input type="button" value="确定" ng-click="add_submit()" class="submit" />
+					<input type="button" value="取消" ng-click="add_cancle()" class="cancle" />
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="page">
-		<div>
-            <span ng-click="prev()">&lt;</span>
-            <span ng-class="{true: 'active'}[isActive == num]" ng-repeat="num in page_num track by $index" ng-click="admin_film(num)">{{num + 1}}</span>
-            <span ng-click="next()">&gt;</span>
-        </div>
-        <p>共计{{filmPage}}页</p>
 	</div>
 </div>

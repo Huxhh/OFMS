@@ -32,9 +32,9 @@ app.directive('searchDirective', ['request', '$state', function (request, $state
 				}
 				scope.$emit('classify_change', classify_show);
 				request.get(url, function (res) {
-					if (res.status == 1) {
-						scope.filmList = res.movie.content;
-						scope.searchPage = res.movie.totalPages;
+					if (res.code == 0) {
+						scope.filmList = res.body.content;
+						scope.searchPage = res.body.totalPages;
 						final_page = Math.min(scope.searchPage, max_page);
                         if (reset) {
                         	scope.page_num = [];
@@ -43,7 +43,7 @@ app.directive('searchDirective', ['request', '$state', function (request, $state
                             }
                         }
 					} else {
-						request.pop_up(res.message);
+						request.pop_up(res.msg);
 					}
 				})
 			}

@@ -20,26 +20,62 @@ app.factory('request', ['$http', function ($http){
 		})
 	}
 	//get请求
-	r.get = function (url, callback) {
+	r.get = function (url, callback1, callback2) {
 		$http({
 			url: url,
 			method: 'GET'
 		}).then(function (res) {
-			callback(res.data)
+			callback1(res.data)
 		}, function () {
+			if (callback2) {
+				callback2();
+			}
 			r.pop_up(url + ' get failed');
 		})
 	}
 	//post请求
-	r.post = function (url, data, callback) {
+	r.post = function (url, data, callback1, callback2) {
 		$http({
 			url: url,
 			data: data,
 			method: 'POST'
 		}).then(function (res) {
-			callback(res.data)
+			callback1(res.data)
 		}, function () {
+			if (callback2) {
+				callback2();
+			}
 			r.pop_up(url + ' post ailed');
+		})
+	}
+	//put请求
+	r.put = function (url, data, callback1, callback2) {
+		$http({
+			url: url,
+			data: data,
+			method: 'PUT'
+		}).then(function (res) {
+			callback1(res.data)
+		}, function () {
+			if (callback2) {
+				callback2();
+			}
+			r.pop_up(url + ' put ailed');
+		})
+	}
+	//delete请求
+	r.delete = function (url, data, callback1, callback2) {
+		$http({
+			url: url,
+			data: data,
+			method: 'delete'
+		}).then(function (res) {
+			callback1(res.data)
+		}, function () {
+			if (callback2) {
+				callback2();
+			}
+			r.pop_up(url + ' delete ailed');
 		})
 	}
 	// r.make_page()

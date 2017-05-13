@@ -32,7 +32,7 @@ public class AdminFilmController {
         return adminFilmService.getAllFilm(pageable);
     }
 
-    @RequestMapping(value = "/admin/",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/delete",method = RequestMethod.POST)
     @ApiOperation(value = "删除电影",notes = "电影的Model里至少要有ID字段")
     ResponseMessage deleteFilm(@RequestBody ArrayList<MovieItem> movieItems){
         return adminFilmService.deleteAll(movieItems);

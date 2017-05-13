@@ -1,4 +1,5 @@
-.page, #film .list > div, #film .list .opereate {
+body, .page, .popup,
+#sign, #film .list > div, #film .list .about > div, #film .list > div.page, #film .list .opereate, #film .add_film > div, #film .add_opearte {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-flex;
@@ -14,7 +15,15 @@
 body {
   font-size: 16px;
   background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; }
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between; }
+
+body.add_film {
+  overflow-y: hidden; }
 
 a {
   text-decoration: none; }
@@ -65,13 +74,75 @@ ul, li {
   background: #666;
   border: 1px solid #666; }
 
-#left {
-  background: #2a303e;
-  width: 20%;
-  position: fixed;
+.popup,
+#sign {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center; }
+
+#sign .bg,
+.popup .bg_pop {
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
+  right: 0;
+  background: #000;
+  opacity: 0.5; }
+
+.popup > div:last-child {
+  text-align: center;
+  position: relative;
+  width: 25%;
+  height: 25%;
+  padding: 1%;
+  border-radius: 3%;
+  background: #fff; }
+
+.popup > div:last-child span {
+  float: right;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 100%;
+  background: red;
+  color: #fff; }
+
+.popup > div:last-child p {
+  margin-top: 10%; }
+
+.popup > div:last-child input[type=button] {
+  display: block;
+  background: #6699ff;
+  margin: 0 auto;
+  width: 50%;
+  cursor: pointer;
+  color: #fff;
+  padding: 5px 0;
+  margin-top: 20%;
+  font-size: 18px;
+  transition: background 0.5s; }
+
+.popup > div:last-child input[type=button]:hover {
+  background: #336699; }
+
+#left {
+  background: #2a303e;
+  width: 18%;
   padding-top: 5%; }
 
 #left ul li:hover,
@@ -88,22 +159,62 @@ ul, li {
   padding: 3% 3% 3% 6%; }
 
 #right {
-  padding: 2% 2% 2% 22%; }
+  padding: 2%;
+  width: 82%;
+  min-height: 800px; }
+
+#film .searchAadd input {
+  background: #green;
+  color: #fff;
+  padding: 3px 5px; }
 
 #film .list > div {
   border: 1px solid #f2f2f2;
-  padding: 2%;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
-  -moz-justify-content: space-between;
-  justify-content: space-between; }
+  padding: 2%; }
 
-#film .list > div div {
+#film .list .listinfo > div:first-child {
   width: 20%; }
 
-#film .list > div .page {
-  width: auto; }
+#film .list .page p {
+  line-height: 32px;
+  font-size: 14px;
+  margin-left: 10px; }
+
+#film .list > div .about {
+  width: 56%;
+  padding: 0 2%;
+  font-size: 14px; }
+
+#film .list .about > div {
+  margin-bottom: 10px; }
+
+#film .list > div .about input,
+#film .list .image,
+#film .list > div .about textarea {
+  display: inline-block;
+  border: 1px solid #fff;
+  padding: 2px;
+  width: 92%;
+  font-size: 14px;
+  resize: none; }
+
+#film .list > div .about span {
+  display: inline-block;
+  width: 8%;
+  padding: 2px; }
+
+#film .list > div .isEdit input,
+#film .list .image,
+#film .list > div .isEdit textarea {
+  border: 1px solid #336699; }
+
+#film .list > div.page {
+  width: auto;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center; }
 
 #film .list img {
   width: 100%; }
@@ -114,5 +225,80 @@ ul, li {
   -webkit-align-items: center;
   -moz-align-items: center;
   align-items: center; }
+
+#film .list .opereate input[type=button] {
+  background: #2196f3;
+  color: #fff;
+  padding: 3px 10px;
+  margin-right: 10px;
+  cursor: pointer; }
+
+#film .list .opereate input.delete {
+  background: #f44336; }
+
+#film .list .opereate input.cancle {
+  background: #4caf50; }
+
+#film .list .opereate input.submit {
+  background: #ff9800; }
+
+#film .list .add_film {
+  border: 0px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(1, 1, 1, 0.5);
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center; }
+
+#film .add_film > div {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 30%;
+  padding: 2%;
+  background: #fff; }
+
+#film .add_opearte {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between; }
+
+#film .add_film input {
+  color: #000;
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #336699;
+  margin: 1% 0%; }
+
+#film .add_film input.submit {
+  background: #336699;
+  color: #fff; }
+
+#film .add_film input.cancle {
+  background: red;
+  margin-left: 10px;
+  color: #fff; }
 
 /*# sourceMappingURL=index.css.map */
