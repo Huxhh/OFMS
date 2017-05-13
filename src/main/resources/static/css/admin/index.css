@@ -275,7 +275,8 @@ ul, li {
   flex-direction: column;
   width: 30%;
   padding: 2%;
-  background: #fff; }
+  background: #fff;
+  box-shadow: 0 0 8px 0 #fff; }
 
 #film .add_opearte {
   -webkit-box-pack: justify;
@@ -292,13 +293,30 @@ ul, li {
   border: 1px solid #336699;
   margin: 1% 0%; }
 
+#film .add_opearte {
+  padding: 5px; }
+
+#film .add_opearte input {
+  cursor: pointer;
+  border-radius: 4px; }
+
 #film .add_film input.submit {
-  background: #336699;
+  background: #2196F3;
   color: #fff; }
 
+#film .add_film input.submit:hover {
+  background: #336699;
+  transition: 1s linear;
+  border: 1px solid #fff; }
+
 #film .add_film input.cancle {
-  background: red;
+  background: #f44336;
   margin-left: 10px;
   color: #fff; }
+
+#film .add_film input.cancle:hover {
+  background: red;
+  transition: 1s linear;
+  border: 1px solid #fff; }
 
 /*# sourceMappingURL=index.css.map */

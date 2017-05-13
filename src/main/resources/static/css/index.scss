@@ -483,7 +483,7 @@ head .search li {
 	display: block;
 	padding: 4px 1%;
 }
-#home .title span:last-child {
+#home .hot .title span:last-child {
 	display: inline-block;
 	font-size: 10px;
 	font-weight: normal;
@@ -493,7 +493,7 @@ head .search li {
 	border: 1px solid #ccd0d7;
 	border-radius: 4px;
 }
-#home .title span:last-child:hover {
+#home .hot .title span:last-child:hover {
 	background: #f2f2f2;
 }
 #home .left {
@@ -524,6 +524,105 @@ head .search li {
 #home .right .page {
 	margin: 15px 0;
 }
+#home .scroller_film {
+	@extend %flexbox;
+	@include justify-content(space-between);
+}
+
+#home .listfavor {
+	flex-wrap: nowrap;
+	// @include align-items(center);
+	display: block;
+	// @include justify-content(space-around);
+	width: 90%;
+	height: 275px;
+    overflow: hidden;
+	white-space: nowrap;
+}
+#home #listfavor {
+    position: relative;
+	left: 0px;
+}
+#home #listfavor>div {
+	width: 18%;
+	height: 260px;
+	background: #f2f2f2;
+	margin: 1%;
+	cursor: pointer;
+	position: relative;
+	overflow: auto;
+}
+#home #listfavor>div:hover .about {
+	display: block;
+}
+#home #listfavor img {
+	width: 100%;
+	height: 70%;
+}
+#home #listfavor span {
+	display: block;
+}
+#home #listfavor div>span {
+	padding: 8px;
+}
+#home #listfavor .name {
+	font-size: 13px;
+	height: 34px;
+    overflow: hidden;
+}
+#home #listfavor .score {
+	font-size: 10px;
+	color: #ff8900;
+}
+#home #listfavor .about {
+	animation: showindex 1s;
+	-webkit-animation: showindex 1s;
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	color: #fff;
+	padding: 4%;
+	overflow: auto;
+	width: 92%;
+	// height: 96%;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+#home #listfavor>div:nth-child(odd) .about {
+	background: rgba(51, 102, 153, 0.9);
+}
+#home #listfavor>div:nth-child(even) .about {
+	background: rgba(33, 150, 143, 0.9);
+}
+#home #listfavor .about p {
+	font-size: 12px;
+	padding: 2px 0;
+}
+#home #scroller_film.move_left {
+	left: -260px !important;
+	transition: 2s linear;
+}
+#home #listfavor>div {
+	width: 187px;
+	display: inline-block;
+}
+#home .scrollerLeft,
+#home .scrollerRight {
+	width: 5%;
+	background: #fff;
+	text-align: center;
+	@extend %flexbox;
+	@include align-items(center);
+}
+#home .scrollerLeft i,
+#home .scrollerRight i {
+	width: 100%;
+	font-size: 30px;
+}
+
 // home end
 // search start
 #search {
