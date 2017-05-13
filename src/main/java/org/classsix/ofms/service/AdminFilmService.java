@@ -11,13 +11,14 @@ import java.util.List;
 public interface AdminFilmService {
     ResponseMessage getAllFilm(Pageable pageable);
 
-    ResponseMessage saveAll(List<MovieItem> movieItems);
+    ResponseMessage editAll(List<MovieItem> movieItems);
 
     ResponseMessage deleteAll(List<MovieItem> movieItems);
 
     ResponseMessage searchFilm(String name, Pageable pageable);
 
     ResponseMessage searchFilmByKind(String kind, Pageable pageable);
+
 
 
 }
