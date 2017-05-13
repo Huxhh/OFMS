@@ -102,4 +102,17 @@ public class FilmServiceImpl implements FilmService {
         return movieItem;
     }
 
+    public void addData() {
+        for(int i = 0;i < 1000;i++) {
+            int uid = (int) (Math.random() * 10) + 1;
+            long fid = (long) (Math.random() * 10000) + 1;
+            float score = (float)((Math.random() * 5) % 5 + 1);
+            FilmScore filmScore = new FilmScore();
+            filmScore.setUid(uid);
+            filmScore.setFid(fid);
+            filmScore.setScore(score);
+            scoreFilmRepository.save(filmScore);
+        }
+    }
+
 }

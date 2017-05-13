@@ -25,5 +25,7 @@ public interface FilmService {
 
     MovieItem getFilmById(long fid) throws Exception;
 
+    void addData();
+
 
 }

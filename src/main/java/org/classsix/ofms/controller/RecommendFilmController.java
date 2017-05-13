@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by huxh on 2017/5/3.
  */
@@ -36,5 +39,18 @@ public class RecommendFilmController {
         Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "buyCount");
         Page<MovieItem> movieItems = recommendFilmService.recommendByBuyCount(pageable);
         return new ResponseMessage(RecommendFilmStatus.SUCCESS, movieItems);
+    }
+
+    @RequestMapping(value = "/recommend/favor/{uid}", method = RequestMethod.GET)
+    public ResponseMessage recommendByFavor(@PathVariable("uid") int uid) {
+        RecommendFilmStatus filmStatus = RecommendFilmStatus.SUCCESS;
+        List<MovieItem> movieItems = new ArrayList<>();
+        try {
+            movieItems = recommendFilmService.recommendByFavor(uid);
+        } catch (Exception e) {
+            filmStatus = RecommendFilmStatus.ERROR;
+            e.printStackTrace();
+        }
+        return new ResponseMessage(filmStatus, movieItems);
     }
 }

@@ -103,4 +103,10 @@ public class BuyFilmController {
         }
     }
 
+    @RequestMapping(value = "/addData", method = RequestMethod.GET)
+    public ResponseMessage addData() {
+        filmService.addData();
+        return new ResponseMessage(BuyFilmStatus.SUCCESS);
+    }
+
 }
