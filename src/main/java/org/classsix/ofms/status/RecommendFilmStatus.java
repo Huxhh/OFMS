@@ -6,7 +6,7 @@ import org.classsix.ofms.status.inter.StatusBase;
  * Created by huxh on 2017/5/3.
  */
 public enum RecommendFilmStatus implements StatusBase {
-    SUCCESS(0);
+    SUCCESS(0), ERROR(1), CALC_SIMILARITY_ERROR(2);
 
     private int status;
 
