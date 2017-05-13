@@ -12,6 +12,8 @@ import org.classsix.ofms.service.FilmService;
 import org.classsix.ofms.status.BuyFilmStatus;
 import org.springframework.beans.factory.NamedBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -100,6 +102,12 @@ public class FilmServiceImpl implements FilmService {
             throw new Exception(e.getMessage(),e);
         }
         return movieItem;
+    }
+
+    public Page<MovieItem> getFilmByTime(Pageable pageable) {
+        Page<MovieItem> movieItems = null;
+        movieItems = movieRepository.orderByTime(pageable);
+        return movieItems;
     }
 
     public void addData() {

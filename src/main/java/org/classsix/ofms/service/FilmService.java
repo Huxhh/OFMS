@@ -4,6 +4,8 @@ import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.Film;
 import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.status.BuyFilmStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,8 @@ public interface FilmService {
     BuyFilmStatus scoreFilm(int uid, long fid, float score) throws Exception;
 
     MovieItem getFilmById(long fid) throws Exception;
+
+    Page<MovieItem> getFilmByTime(Pageable pageable);
 
     void addData();
 
