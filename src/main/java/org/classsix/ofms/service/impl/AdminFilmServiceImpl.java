@@ -11,9 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by clxy on 2017/5/1.
@@ -45,7 +43,7 @@ public class AdminFilmServiceImpl implements AdminFilmService{
 
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public ResponseMessage saveAll(List<MovieItem> movieItems) {
+    public ResponseMessage editAll(List<MovieItem> movieItems) {
 
 
         try{
@@ -63,9 +61,8 @@ public class AdminFilmServiceImpl implements AdminFilmService{
     @Override
     @Transactional(rollbackFor=Exception.class)
     public ResponseMessage deleteAll(List<MovieItem> movieItems) {
-        Map<String,Object> resultMap = new HashMap<String,Object>();
         try {
-           movieRepository.delete(movieItems);
+            movieRepository.delete(movieItems);
             return new ResponseMessage(0,null,null);
        }
        catch (Exception e){
