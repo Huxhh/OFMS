@@ -57,14 +57,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Page<MovieItem> findUserFilm(Integer userId,Pageable pageable) throws Exception{
-//        return movieRepository.findUserFilm(userId,pageable);
-        return null;
+        return userRepository.findUserFilm(userId,pageable);
     }
 
     @Override
     public Page<MovieItem> findUserFilmJudged(Integer userId,Pageable pageable) throws Exception{
-//        return movieRepository.findUserFilmJudged(userId,pageable);
-        return null;
+        return userRepository.findUserFilmJudged(userId,pageable);
     }
 
 
