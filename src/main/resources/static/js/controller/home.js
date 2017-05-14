@@ -13,6 +13,7 @@ app.controller('home', ['$scope', function ($scope) {
     //轮播flag
     $scope.scrollerFlag = true;
     $scope.scrollerIndex = 0;
+    $scope.autoRunFlag = true;
 }]);
 app.directive('homeDirective', ['request', '$state', function (request, $state) {
 	return {
@@ -22,6 +23,8 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
 			scope.$emit('classify_change', true);
 			//directive作用域内全局变量
 			var ran;//随机数
+			var goal;//轮播
+			var scroller, scrollerWidth;
 			//directive函数
 			function get_page(url, type, callback) {
 				if (!url) {
@@ -55,6 +58,9 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
 					function (res) {
 						if (res.code == 0) {
 							scope.recommondList = res.body;
+							scrollerWidth = document.getElementById('listfavor').clientWidth;
+				            scroller = angular.element(document.getElementById('listfavor'));
+				    		goal = Math.floor(scrollerWidth / 4);//用于轮播
 						} else {
 							request.pop_up(res.msg);
 					}
@@ -114,28 +120,31 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
                 }
                 if (scope.isActive != 0) {
                     scope.isActive--;
+                } else {
+                	return false;
                 }
                 scope.get_new(scope.isActive, 32);
             }
             scope.next = function () {
-                if ((scope.page != (scope.page_num[final_page - 1]) + 1) &&
+                if ((scope.newPage != (scope.page_num[final_page - 1]) + 1) &&
                  	(scope.isActive == scope.page_num[final_page - 1])) {
                     for (var i = 0; i < scope.page_num.length; ++i) {
                         scope.page_num[i]++;
                     }
                 }
-                if (scope.isActive != (scope.page - 1)) {
+                if (scope.isActive != (scope.newPage - 1)) {
                     scope.isActive++;
+                } else {
+                	return false;
                 }
                 scope.get_new(scope.isActive, 32);
             }
             //轮播器
-            var scroller = angular.element(document.getElementById('listfavor'));
             var left = 0;
             var tmp;
             function move_left() {
 				setTimeout(function () {
-					if (left != -200) {
+					if (left != -goal) {
 						left--;
             			scroller.css({'left': left + 'px'})
             			move_left();
@@ -143,7 +152,6 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
 						tmp = scope.recommondList[0];
 						scope.recommondList = scope.recommondList.slice(1)
 		        		scope.recommondList = scope.recommondList.concat(tmp);
-	            		console.log(scope.recommondList)
 	            		scope.scrollerFlag = true;
 					}
 				}, 1);
@@ -170,13 +178,25 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             scope.right = function () {
             	if (scope.scrollerFlag) {
             		scope.scrollerFlag = false;
-            		left = -200;
+            		left = -goal;
+					scroller.css({'left': left + 'px'})
 					tmp = scope.recommondList[9];
 					scope.recommondList = scope.recommondList.slice(0, 9)
 	        		scope.recommondList = [tmp].concat(scope.recommondList);
-					scroller.css({'left': '-200px'})
             		move_right();
             	}
+            }
+            setInterval(function () {
+            	if (scope.scrollerFlag) {
+	            	if (scope.autoRunFlag) {
+		            	scope.left();
+		            	scope.$apply();
+	            	}
+            	}
+            }, 8000);
+            window.onresize = function () {
+	    		goal = Math.floor(scrollerWidth / 4);//用于轮播
+        		console.log(goal)
             }
 		}
 	}

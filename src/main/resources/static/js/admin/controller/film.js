@@ -49,16 +49,34 @@ app.controller('film', ['$scope', function ($scope) {
     for (i in $scope.addFilm) {
         $scope.sendFilm[i] = $scope.addFilm[i];
     }
+    //search
+    $scope.searchKey = null;
+    $scope.ifSearch = false;
 }]);
 app.directive('filmDirective', ['request', function (request) {
 	return {
 		restrict: 'AE',
 		link: function (scope, ele, attrs) {
 			var max_page = 10, final_page;
-			scope.admin_film = function(go_page, reset) {
+            var type, geturl;
+            //search
+            sessionStorage.setItem('searchBy', 'name');
+            scope.searchBy = function (value) {
+                sessionStorage.setItem('searchBy', value);
+            }
+            //get film
+			scope.admin_film = function(go_page, reset, search) {
                 page = go_page || 0;
                 sessionStorage.setItem('filmPage', page);
-				request.get('/admin/?page=' + page, function (res) {
+                if (search) {
+                    scope.ifSearch = true;
+                    type = sessionStorage.getItem('searchBy');
+                    geturl = '/admin/search/' + type + '?' + type + '=' + scope.searchKey + '&page=' + page;
+                } else {
+                    scope.ifSearch = false;
+                    geturl = '/admin/?page=' + page;
+                }
+				request.get(geturl, function (res) {
 					if (res.code == 0) {
 						scope.filmList = res.body.content;
 						scope.filmPage = res.body.totalPages;
@@ -78,7 +96,7 @@ app.directive('filmDirective', ['request', function (request) {
 					}
 				})
 			}
-			scope.prev = function () {
+			scope.prev = function (search) {
                 if ((0 != scope.page_num[0]) && (scope.isActive == scope.page_num[0])) {
                     for (var i = 0; i < scope.page_num.length; ++i) {
                         scope.page_num[i]--;
@@ -86,20 +104,24 @@ app.directive('filmDirective', ['request', function (request) {
                 }
                 if (scope.isActive != 0) {
                     scope.isActive--;
+                } else {
+                    return false;
                 }
-                scope.admin_film(scope.isActive);
+                scope.admin_film(scope.isActive, false, search);
             }
-            scope.next = function () {
-                if ((scope.page != (scope.page_num[final_page - 1]) + 1) &&
+            scope.next = function (search) {
+                if ((scope.filmPage != (scope.page_num[final_page - 1]) + 1) &&
                  	(scope.isActive == scope.page_num[final_page - 1])) {
                     for (var i = 0; i < scope.page_num.length; ++i) {
                         scope.page_num[i]++;
                     }
                 }
-                if (scope.isActive != (scope.page - 1)) {
+                if (scope.isActive != (scope.filmPage - 1)) {
                     scope.isActive++;
+                } else {
+                    return false;
                 }
-                scope.admin_film(scope.isActive);
+                scope.admin_film(scope.isActive, false, search);
             }
             scope.admin_film(0, true);
             scope.change_film = function (index, cancle) {
@@ -157,29 +179,22 @@ app.directive('filmDirective', ['request', function (request) {
                 }
                 request.post('/admin/', [scope.addFilm], function (res) {
                     if (res.code == 0) {
-                        console.log(res);
-                        for (i in scope.addFilm) {
-                            scope.addFilm = null;
-                        }
-                        scope.addFilm['id'] = 0;
-                        scope.addFilm['score'] = 0;
-                        scope.addFilm['buyCount'] = 0;
-                        scope.addFilm['voteCount'] = 0;
+                        scope.add_cancle();
                     } else {
                         request.pop_up(res.msg);
                     }
                 })
             }
             scope.add_cancle = function () {
+                scope.$emit('addFilmOverflow', false);
                 scope.addFilmFlag = false;
                 for (i in scope.addFilm) {
-                    scope.addFilm = null;
+                    scope.addFilm[i] = null;
                 }
                 scope.addFilm['id'] = 0;
                 scope.addFilm['score'] = 0;
                 scope.addFilm['buyCount'] = 0;
                 scope.addFilm['voteCount'] = 0;
-                scope.$emit('addFilmOverflow', false);
             }
 		}
 	}

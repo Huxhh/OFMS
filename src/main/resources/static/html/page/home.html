@@ -42,6 +42,12 @@
 			<div class="recommond">
 				<div class="title">
 					<span>猜你喜欢</span>
+					<span>
+						<label for="autorun">
+							<span>{{autoRunFlag ? '关闭' : '开启'}}自动轮播</span>
+							<input type="checkbox" ng-model="autoRunFlag" name="autorun" id="autorun" />
+						</label>
+					</span>
 				</div>
 				<div class="scroller_film">
 					<div class="scrollerLeft" ng-click="left()">
