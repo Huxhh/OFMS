@@ -129,12 +129,13 @@ public class UserController {
     @RequestMapping("/usr/filmjudged")
     public ResponseMessage userFilmJudged(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
         UserStatus userStatus = UserStatus.ERROR;
-        Page<MovieItem> list = null;
+        Page<MovieItem> list;
         try{
             User user = (User)request.getSession().getAttribute("user");
             list = userService.findUserFilmJudged(user.getId(),pageable);
         }catch (Exception e){
             e.printStackTrace();
+            list = null;
         }
         return new ResponseMessage(userStatus,list);
     }
