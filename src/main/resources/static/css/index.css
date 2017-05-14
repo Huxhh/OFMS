@@ -1,6 +1,6 @@
 #index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
-#sign, #sign .another, #home .content, #home .right .table, #home .scroller_film, #home .scrollerLeft,
-#home .scrollerRight, #search .list_search, #overview, #overview .cloumn3 .rating, #overview .cloumn3 > p, #user {
+#sign, .popup > div.comfirm, #sign .another, #home .content, #home .right .table, #home .scroller_film, #home .scrollerLeft,
+#home .scrollerRight, #search .list_search, #overview, #overview .cloumn3 .rating, #overview .cloumn3 > p, #overview .buy, #user {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-flex;
@@ -236,6 +236,11 @@ head .search li {
   color: #fff;
   margin: 0 10px; }
 
+#head .show_name {
+  color: #fff;
+  line-height: 30px;
+  margin-left: 10px; }
+
 #classify {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
@@ -297,7 +302,7 @@ head .search li {
 
 .popup,
 #sign {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -361,10 +366,29 @@ head .search li {
 .popup > div:last-child input[type=button]:hover {
   background: #336699; }
 
+.popup > div.comfirm input[type=button] {
+  width: 40%;
+  padding: 4px 0;
+  font-size: 15px; }
+
+.popup > div.comfirm {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+  height: auto; }
+
+.popup > div.comfirm input[type=button].cancle {
+  background: #ff5722; }
+
+.popup > div.comfirm input[type=button].cancle:hover {
+  background: #ab310a; }
+
 #sign .signbox {
   position: relative;
   width: 26%;
-  height: 46%;
+  height: 320px;
   background: #fff;
   padding: 2%;
   box-shadow: 0px 0px 1px 1px #f5f5f5;
@@ -403,6 +427,7 @@ head .search li {
 #sign .another a {
   color: #336699; }
 
+#sign input[type=submit],
 #sign input[type=button] {
   display: block;
   width: 60%;
@@ -415,6 +440,16 @@ head .search li {
   font-size: 18px;
   transition: background 0.5s; }
 
+#sign input[type=submit] {
+  display: inline-block;
+  padding: 2px 0;
+  font-size: 14px;
+  width: 30%;
+  position: relative;
+  left: 7%;
+  margin-top: 0px; }
+
+#sign input[type=submit]:hover,
 #sign input[type=button]:hover {
   background: #336699; }
 
@@ -522,6 +557,14 @@ head .search li {
 
 #home .right .page {
   margin: 15px 0; }
+
+#home .right .page span {
+  background: #fff;
+  border: 0px; }
+
+#home .right .page span.active,
+#home .right .page span:hover {
+  color: #ff8900; }
 
 #home .scroller_film {
   -webkit-box-pack: justify;
@@ -758,6 +801,32 @@ head .search li {
 #overview .cloumn3 > p.vote {
   font-size: 14px;
   font-weight: normal; }
+
+#overview .buy {
+  margin-top: 40px;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between; }
+
+#overview .buy input {
+  padding: 6px 15px;
+  color: #fff;
+  cursor: pointer;
+  background: #ff5722;
+  transition: 1s linear; }
+
+#overview .buy input:hover {
+  background: #a70707;
+  transition: 0.5s linear; }
+
+#overview .buy input:last-child {
+  background: #2196f3; }
+
+#overview .buy input:last-child:hover {
+  background: #336699;
+  transition: 0.5s linear; }
 
 #user {
   margin-top: 30px;

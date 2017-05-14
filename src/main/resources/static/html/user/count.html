@@ -1,3 +1,9 @@
-<div id="mycount">
-	count
+<div id="mycount" user-count-directive>
+	<div>
+		<span>剩余金额: {{count}}</span>
+		<label for="recharge">
+			<input type="text" placeholder="请输入充值金额" />
+			<input type="submit" value="充值" />
+		</label>
+	</div>
 </div>

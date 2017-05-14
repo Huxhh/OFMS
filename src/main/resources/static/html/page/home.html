@@ -45,7 +45,7 @@
 					<span>
 						<label for="autorun">
 							<span>{{autoRunFlag ? '关闭' : '开启'}}自动轮播</span>
-							<input type="checkbox" ng-model="autoRunFlag" name="autorun" id="autorun" />
+							<input type="checkbox" ng-model="autoRunFlag" name="autorun" id="autorun" ng-change="autoRun()" />
 						</label>
 					</span>
 				</div>

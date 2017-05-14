@@ -21,6 +21,19 @@ app.directive('overviewDirective', ['request', function (request) {
 					request.pop_up(res.message);
 				}
 			})
+			scope.buy = function () {
+				request.comfirm(function () {
+					request.post('/user/buyfilm', {
+						uid: '1',
+						fid: scope.filmOverview.id.toString()
+					}, function (res) {
+						request.pop_up(res.msg);
+					})
+				})
+			}
+			scope.save = function () {
+				// request.comfirm('/user/')
+			}
 		}
 	}
 }])

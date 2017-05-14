@@ -15,8 +15,14 @@ app.controller('index', ['$scope', function ($scope) {
 	//user
 	$scope.user = {
 		UserName: null,
-		UserPswd: null
+		UserPswd: null,
+		Email: null,
+		Verify: null
 	}
+	$scope.showName = sessionStorage.getItem('userName');
+	$scope.verifyFlag = false;
+	$scope.sendEmailValue = '发送验证码';
+	$scope.ifCanSendAgain = true;
 }]);
 app.directive('indexDirective', ['$state', 'request', function ($state, request) {
 	return {
@@ -52,10 +58,75 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					scope.searchByName();
 				}
 			}
-			scope.signup = function () {
-				// if (scope.user.UserPswd && scope.user.UserName) {
-				// 	request.post('/usr/regist', )
-				// }
+			scope.signupOne = function () {
+				if (scope.user.UserName && scope.user.UserPswd) {
+					scope.verifyFlag = true;
+				} else {
+					request.pop_up('必须填写完整');
+				}
+			}
+			scope.signupTwo = function () {
+				if (scope.user.Verify && scope.user.Email) {
+					request.post('/usr/regist', {
+						user: {
+							userName: scope.user.UserName,
+							mail: scope.user.Email,
+							password: scope.user.UserPswd
+						}
+					}, function (res) {
+						if (res.code == 0) {
+							scope.sign = false;
+							scope.verifyFlag = false;
+							scope.ifCanSendAgain = true;
+							scope.verifyFlag = false;
+							scope.sendEmailValue = '发送验证码';
+							clearInterval(tiem_run);
+						} else {
+							request.pop_up(res.msg);
+						}
+					})
+				} else {
+					request.pop_up('邮箱和验证码必须填写完整');
+				}
+			}
+			scope.back = function () {
+				scope.ifCanSendAgain = true;
+				scope.verifyFlag = false;
+				scope.sendEmailValue = '发送验证码';
+				clearInterval(tiem_run);
+			}
+			var time = 60;
+			var tiem_run;
+			scope.sendEmail = function () {
+				if (scope.user.Email) {
+					if (scope.ifCanSendAgain) {
+						time = 60;
+						scope.ifCanSendAgain = false;
+						request.post('/usr/sendMail', {
+							receiveMail: scope.user.Email
+						}, function (res) {
+							if (res.code == 0) {
+								tiem_run = setInterval(function () {
+									if (time != 0) {
+										scope.sendEmailValue = time + 's';
+										time --;
+										scope.$apply();
+									} else {
+										scope.ifCanSendAgain = true;
+										scope.sendEmailValue = '发送验证码';
+										clearInterval(tiem_run);
+									}
+								}, 1000);
+							} else {
+								request.pop_up(res.msg);
+							}
+						})
+					} else {
+						return false;
+					}
+				} else {
+					request.pop_up('邮箱必须正确填写');
+				}
 			}
 			scope.signin = function () {
 				if(scope.user.UserName && scope.user.UserPswd) {
@@ -63,10 +134,19 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 						userName : scope.user.UserName,
 						password : scope.user.UserPswd
 					}, function (res) {
-						// if (res)
-						console.log(res)
+						if (res.code == 0) {
+							scope.showName = scope.user.UserName;
+							sessionStorage.setItem('userName', scope.showName);
+							scope.sign = false;
+						} else {
+							request.pop_up(res.msg);
+						}
 					})
 				}
+			}
+			scope.logout = function () {
+				sessionStorage.removeItem('userName');
+				scope.showName = null;
 			}
 		}
 	}
