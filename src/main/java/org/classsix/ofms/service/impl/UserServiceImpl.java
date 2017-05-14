@@ -37,6 +37,7 @@ public class UserServiceImpl implements UserService{
     public UserStatus addUser(User user){
         UserStatus status = UserStatus.ERROR;
         try {
+            user.setBalance(0);
             userRepository.save(user);
             status = UserStatus.SUCCESS;
         }catch (Exception e){

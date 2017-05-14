@@ -73,12 +73,11 @@ public class UserController {
             @ApiImplicitParam(name = "map", value = "{'user' : {'userName':'a','mail':'123@123.com','password':'123'},'verNum':'1234'}", required = true, dataType = "Json")
     })
     @RequestMapping("/usr/regist")
-    public ResponseMessage userRegist(@RequestBody Map map){
-        String s  = (String)map.get("verNum");
-        String re = stringRedisTemplate.opsForValue().get(s);
+    public ResponseMessage userRegist(@RequestBody User user){
+        String re = stringRedisTemplate.opsForValue().get(user.getVerNum());
         if (re == null || !re.equals("get"))
             return new ResponseMessage(UserStatus.ERROR,"验证码错误！");
-        UserStatus status = userService.addUser((User) map.get("user"));
+        UserStatus status = userService.addUser(user);
         return new ResponseMessage(status);
     }
 

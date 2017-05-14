@@ -26,7 +26,7 @@ public class User extends BasePerson{
     @NotNull(groups = {UserGroup.login.class})
     private String userName;
 
-    /** 手机号码 */
+    /** 邮箱地址 */
     @Column(name = "MAIl", length = 50, nullable = false)
     private String mail;
 
@@ -38,6 +38,17 @@ public class User extends BasePerson{
     /** 余额 */
     @Column(name = "BALANCE", length = 20, nullable = false)
     private Integer balance;
+
+    @Transient
+    private String verNum;
+
+    public String getVerNum() {
+        return verNum;
+    }
+
+    public void setVerNum(String verNum) {
+        this.verNum = verNum;
+    }
 
     public Integer getBalance() {
         return balance;
