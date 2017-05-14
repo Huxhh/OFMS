@@ -35,6 +35,18 @@ public class User extends BasePerson{
     @NotNull(groups = {UserGroup.login.class})
     private String password;
 
+    /** 余额 */
+    @Column(name = "BALANCE", length = 20, nullable = false)
+    private Integer balance;
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
     public Integer getId() {
         return id;
     }

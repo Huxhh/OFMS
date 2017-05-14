@@ -3,6 +3,7 @@ package org.classsix.ofms.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.BuyFilm;
 import org.classsix.ofms.domin.Film;
@@ -36,6 +37,7 @@ public class BuyFilmController {
             @ApiImplicitParam(name = "fid", value = "用户所要购买的电影的id", dataType = "Long"),
             @ApiImplicitParam(name = "map", value = "uid与fid构成的json:{'uid' : '1', 'fid' : '1'}", required = true, dataType = "Json")
     })
+
     @RequestMapping(value = "/user/buyfilm", method = RequestMethod.POST)
     public ResponseMessage BuyFilm(@RequestBody Map map) throws Exception{
         BuyFilmStatus buyFilmStatus;
