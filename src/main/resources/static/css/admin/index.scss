@@ -135,12 +135,18 @@ ul, li {
 // left start
 #left {
 	background: #2a303e;
-	width: 18%;
-	// position: fixed;
-	// top: 0;
-	// bottom: 0;
-	// left: 0;
+	width: 14%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
 	padding-top: 5%;
+	// position: relative;
+	transition: 2s linear;
+}
+#left.expand {
+	width: 4%;
+	transition: 2s linear;
 }
 #left ul li:hover,
 #left ul li:active,
@@ -154,13 +160,52 @@ ul, li {
 	width: 91%;
 	color: #fff;
 	padding: 3% 3% 3% 6%;
+	white-space: nowrap;
+}
+#left ul li a span {
+	display: inline-block;
+	transition: 2s linear;
+}
+#left ul li a i {
+	font-size: 18px;
+	transition: 2s linear;
+} 
+#left ul li a.txt2logo i {
+	font-size: 32px;
+	transition: 2s linear;
+}
+#left ul li a.txt2logo span {
+	display: none;
+	transition: 2s linear;
+}
+
+#left>span {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: block;
+	padding: 5px;
+	background: #6699ff;
+	text-align: center;
+	cursor: pointer;
+}
+#left>span i {
+	color: #fff;
 }
 // left end
 // right start
 #right {
 	padding: 2%;
-	width: 82%;
+	width: 86%;
 	min-height: 800px;
+	margin-left: 18%;
+	transition: 2s linear;
+}
+#right.expand {
+	width: 96%;
+	margin-left: 4%;
+	transition: 2s linear;
 }
 // right end
 // film start

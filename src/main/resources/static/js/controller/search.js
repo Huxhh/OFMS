@@ -61,18 +61,22 @@ app.directive('searchDirective', ['request', '$state', function (request, $state
                 }
                 if (scope.isActive != 0) {
                     scope.isActive--;
+                } else {
+                	return false;
                 }
                 scope.search_film(scope.isActive);
             }
             scope.next = function () {
-                if ((scope.page != (scope.page_num[final_page - 1]) + 1) &&
+                if ((scope.searchPage != (scope.page_num[final_page - 1]) + 1) &&
                  	(scope.isActive == scope.page_num[final_page - 1])) {
                     for (var i = 0; i < scope.page_num.length; ++i) {
                         scope.page_num[i]++;
                     }
                 }
-                if (scope.isActive != (scope.page - 1)) {
+                if (scope.isActive != (scope.searchPage - 1)) {
                     scope.isActive++;
+                } else {
+                	return false;
                 }
                 scope.search_film(scope.isActive);
             }

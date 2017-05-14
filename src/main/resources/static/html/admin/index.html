@@ -7,12 +7,27 @@
 	<link rel="stylesheet" href="../../css/admin/index.css" />
 </head>
 <body ng-class="{true: 'add_film'}[addFilmOverflowFlag]" ng-controller="indexController">
-	<div id="left" ng-class="{true: 'add_film'}[addFilmOverflowFlag]">
+	<div id="left" ng-class="{true: 'expand'}[ifExpand]">
 		<ul>
-			<li class="active"><a href="" ui-sref="film">电影管理</a></li>
+			<li class="active">
+				<a href="javascript:;" ui-sref="film" ng-class="{true: 'txt2logo'}[hideTxt]">
+					<i class="iconfont icon-rizhi"></i>
+					<span>电影管理</span>
+				</a>
+			</li>
 		</ul>
+		<span ng-click="expand(ifExpand)">
+			<span ng-show="!ifExpand">
+				<i class="iconfont icon-qiehuanqizuo"></i>
+				<i class="iconfont icon-qiehuanqizuo"></i>
+			</span>
+			<span ng-show="ifExpand">
+				<i class="iconfont icon-qiehuanqiyou"></i>
+				<i class="iconfont icon-qiehuanqiyou"></i>
+			</span>
+		</span>
 	</div>
-	<div id="right" ui-view="index"></div>
+	<div id="right" ui-view="index" ng-class="{true: 'expand'}[ifExpand]"></div>
 </body>
 <script src="../../js/lib/angular/angular.min.js"></script>
 <script src="../../js/lib/angular-ui-router/release/angular-ui-router.min.js"></script>

@@ -120,18 +120,22 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
                 }
                 if (scope.isActive != 0) {
                     scope.isActive--;
+                } else {
+                	return false;
                 }
                 scope.get_new(scope.isActive, 32);
             }
             scope.next = function () {
-                if ((scope.page != (scope.page_num[final_page - 1]) + 1) &&
+                if ((scope.newPage != (scope.page_num[final_page - 1]) + 1) &&
                  	(scope.isActive == scope.page_num[final_page - 1])) {
                     for (var i = 0; i < scope.page_num.length; ++i) {
                         scope.page_num[i]++;
                     }
                 }
-                if (scope.isActive != (scope.page - 1)) {
+                if (scope.isActive != (scope.newPage - 1)) {
                     scope.isActive++;
+                } else {
+                	return false;
                 }
                 scope.get_new(scope.isActive, 32);
             }
