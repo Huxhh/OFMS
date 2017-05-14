@@ -27,8 +27,8 @@ public class User extends BasePerson{
     private String userName;
 
     /** 手机号码 */
-    @Column(name = "TEL", length = 20, nullable = false)
-    private String tel;
+    @Column(name = "MAIl", length = 50, nullable = false)
+    private String mail;
 
     /** 密码 */
     @Column(name = "PASSWORD", length = 20, nullable = false)
@@ -63,12 +63,12 @@ public class User extends BasePerson{
         this.userName = userName;
     }
 
-    public String getTel() {
-        return tel;
+    public String getMail() {
+        return mail;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {
