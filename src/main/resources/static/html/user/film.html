@@ -1,7 +1,11 @@
 <div id="myfilm" user-film-directive>
-	<div>
-		
-	</div>
+	<ul>
+		<li>
+			<a href="" ng-click="getFilm(3)" ng-class="{true: 'active'}[chooseFilmFlag == 3]">所有电影</a>
+			<a href="" ng-click="getFilm(1)" ng-class="{true: 'active'}[chooseFilmFlag == 1]">已评价</a>
+			<a href="" ng-click="getFilm(2)" ng-class="{true: 'active'}[chooseFilmFlag == 2]">未评价</a>
+		</li>
+	</ul>
 	<div class="listinfo">
 		<div ng-repeat="item in userAbout">
 			<div class="cloumn1">
@@ -29,7 +33,7 @@
 				<p ng-show="item.buycount">
 				已购:{{item.buycount}}</p>
 			</div>
-			<div>已评分</div>
+			<!-- <div>已评分</div> -->
 		</div>
 	</div>
 </div>

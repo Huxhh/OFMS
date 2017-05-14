@@ -68,11 +68,10 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 			scope.signupTwo = function () {
 				if (scope.user.Verify && scope.user.Email) {
 					request.post('/usr/regist', {
-						user: {
 							userName: scope.user.UserName,
 							mail: scope.user.Email,
-							password: scope.user.UserPswd
-						}
+							password: scope.user.UserPswd,
+							verNum: scope.user.Verify
 					}, function (res) {
 						if (res.code == 0) {
 							scope.sign = false;
@@ -81,9 +80,8 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 							scope.verifyFlag = false;
 							scope.sendEmailValue = '发送验证码';
 							clearInterval(tiem_run);
-						} else {
-							request.pop_up(res.msg);
 						}
+						request.pop_up(res.msg);
 					})
 				} else {
 					request.pop_up('邮箱和验证码必须填写完整');

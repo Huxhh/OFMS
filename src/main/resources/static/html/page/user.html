@@ -2,9 +2,9 @@
 	<div class="left">
 		<span class="title">个人中心</span>
 		<ul>
-			<li class="active"><i class="iconfont icon-gouwuchekong"></i><a href="" ui-sref="user.myfilm">我的电影</a></li>
-			<li><i class="iconfont icon-zhanghu"></i><a href="" ui-sref="user.mycount">我的账户</a></li>
-			<li><i class="iconfont icon-renyuan"></i><a href="" ui-sref="user.myinfo">我的信息</a></li>
+			<li ng-class="{true: 'active'}[chooseFlag == '/user/film']"><i class="iconfont icon-gouwuchekong"></i><a href=""  ng-click="chooseFlag = '/usr/film'" ui-sref="user.myfilm">我的电影</a></li>
+			<li ng-class="{true: 'active'}[chooseFlag == '/user/count']"><i class="iconfont icon-zhanghu"></i><a href="" ng-click="chooseFlag = '/user/count'" ui-sref="user.mycount">我的账户</a></li>
+			<li ng-class="{true: 'active'}[chooseFlag == '/user/info']"><i class="iconfont icon-renyuan"></i><a href="" ng-click="chooseFlag = '/user/info'" ui-sref="user.myinfo">我的信息</a></li>
 		</ul>
 	</div>
 	<div class="right" ui-view="user"></div>
