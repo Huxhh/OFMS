@@ -115,6 +115,7 @@ public class UserController {
         try{
             User user = (User)request.getSession().getAttribute(CURRENT_USER);
             list = userService.findUserFilm(user.getId(),pageable);
+            userStatus = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
             list = null;
@@ -133,6 +134,7 @@ public class UserController {
         try{
             User user = (User)request.getSession().getAttribute("user");
             list = userService.findUserFilmJudged(user.getId(),pageable);
+            userStatus = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
             list = null;
@@ -154,6 +156,7 @@ public class UserController {
             List<MovieItem> sublist = sub.getContent();
             Page<MovieItem> full = userService.findUserFilm(user.getId(),pageable);
             fullist = full.getContent();
+            userStatus = UserStatus.SUCCESS;
             for (MovieItem nful:fullist)
                 for (MovieItem nsub : sublist){
                     if (Objects.equals(nsub.getName(), nful.getName())){
