@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,9 @@ public class UserController {
     UserService userService;
     @Autowired
     StringRedisTemplate stringRedisTemplate;
+
+    @Autowired
+    JavaMailSender mailSender;
 
     private final static String CURRENT_USER = "user";
 
@@ -215,12 +219,13 @@ public class UserController {
     @RequestMapping("/usr/sendMail")
     public ResponseMessage sendMail(@RequestBody Map map){
         UserStatus userStatus = UserStatus.ERROR;
-        Mail mail = new Mail();
+        Mail mail = new Mail(mailSender,stringRedisTemplate);
         try {
            mail.sendVerfMail((String)map.get("receiveMail"));
+            userStatus = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new ResponseMessage();
+        return new ResponseMessage(userStatus);
     }
 }
