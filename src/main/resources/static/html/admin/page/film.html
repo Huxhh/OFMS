@@ -1,10 +1,23 @@
 <div id="film" ng-controller="film" film-directive>
 	<div class="searchAadd">
-		<input type="button" value="添加电影" ng-click="add_film()" />
-		<div></div>
+		<div>
+			<input type="button" value="总览所有电影" ng-click="admin_film(0, true, false)" />
+			<input type="button" value="添加电影" ng-click="add_film()" />
+		</div>	
+		<div>
+			<label for="search_film">
+				<select ng-change="searchBy(value)" ng-model="value" ng-init="value = 'name'">
+					<option value="name">按照名称</option>
+					<option value="kind">按照种类</option>
+				</select>
+				<input type="text" name="search_film" id="search_film" placeholder="请输入关键字" ng-model="searchKey">
+				<i class="iconfont icon-sousuo-sousuo" ng-click="admin_film(0, true, true)"></i>
+			</label>
+		</div>
 	</div>	
 	<div class="list">
 		<div ng-repeat="item in filmList" class="listinfo">
+			<!-- -->
 			<div>
 				<img src="{{item.image}}" alt="暂无图片" />
 				<input ng-hide="editAble[$index]" type="text" placeholder="图片链接" class="image" ng-model="item.image"	/>
@@ -65,18 +78,19 @@
 					<input type="button" value="取消" ng-click="change_film($index, true)" class="cancle" />
 				</div>
 			</div>
+			<!-- -->
 		</div>
 		<div class="page">
 			<div>
-	            <span ng-click="prev()">&lt;</span>
-	            <span ng-class="{true: 'active'}[isActive == num]" ng-repeat="num in page_num track by $index" ng-click="admin_film(num)">{{num + 1}}</span>
-	            <span ng-click="next()">&gt;</span>
+	            <span ng-click="prev(ifSearch)">&lt;</span>
+	            <span ng-class="{true: 'active'}[isActive == num]" ng-repeat="num in page_num track by $index" ng-click="admin_film(num, false, ifSearch)">{{num + 1}}</span>
+	            <span ng-click="next(ifSearch)">&gt;</span>
 	        </div>
 	        <p>共计{{filmPage}}页
 		</div>
 		<div ng-if="addFilmFlag" class="add_film">
 			<div>
-				<input type="text" placeholder="请输入{{addFilmKeyZh[$index]}}{{item}}" ng-repeat="item in addFilmKey" ng-model="addFilm[item]">
+				<input type="text" placeholder="请输入{{addFilmKeyZh[$index]}}" ng-repeat="item in addFilmKey" ng-model="addFilm[item]">
 				<input type="date" placeholder="年代" ng-model="addFilm.date" />
 				<!-- <input type="file" placeholder="请上传图片" ng-model="addFilm.image" /> -->
 				<div class="add_opearte">
