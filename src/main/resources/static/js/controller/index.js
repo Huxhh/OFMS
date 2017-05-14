@@ -23,6 +23,15 @@ app.controller('index', ['$scope', function ($scope) {
 	$scope.verifyFlag = false;
 	$scope.sendEmailValue = '发送验证码';
 	$scope.ifCanSendAgain = true;
+	//忘记密码
+	$scope.forget = {
+		Email: null,
+		Verify: null,
+		NewPassword: null,
+		AgainPassword: null
+
+	}
+	$scope.forgetPassword = 0;
 }]);
 app.directive('indexDirective', ['$state', 'request', function ($state, request) {
 	return {
@@ -94,14 +103,24 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 				clearInterval(tiem_run);
 			}
 			var time = 60;
-			var tiem_run;
-			scope.sendEmail = function () {
-				if (scope.user.Email) {
+			var tiem_run, data;
+			scope.sendEmail = function (type) {
+				switch(type) {
+					case 0:
+						data = scope.forget.Email;
+						break;
+					case 1:
+						data = scope.user.Email;
+						break;
+					default:
+						return false;
+				}
+				if (data) {
 					if (scope.ifCanSendAgain) {
 						time = 60;
 						scope.ifCanSendAgain = false;
 						request.post('/usr/sendMail', {
-							receiveMail: scope.user.Email
+							receiveMail: data
 						}, function (res) {
 							if (res.code == 0) {
 								tiem_run = setInterval(function () {
@@ -142,9 +161,44 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					})
 				}
 			}
+			//忘记密码
+			scope.forgetPasswordOne = function () {
+				console.log(scope.forget)
+				if (scope.forget.Email && scope.forget.Verify) {
+					request.post('url', {
+						data: ''
+					}, function (res) {
+						if (res.code == 0) {
+							scope.forgetPassword = 2;
+						} else {
+							request.pop_up(res.msg);
+						}
+					})
+				} else {
+					request.pop_up('必须填写完整');
+				}
+			}
+			scope.forgetPasswordTwo = function () {
+				if (scope.forget.NewPassword && scope.forget.AgainPassword) {
+					request.post('url', {
+						data: ''
+					}, function (res) {
+						if (res.code == 0) {
+							scope.forgetPassword = 0;
+						} else {
+							request.pop_up(res.msg);
+						}
+					})
+				} else {
+					request.pop_up('必须填写完整');
+				}
+			}
 			scope.logout = function () {
 				sessionStorage.removeItem('userName');
 				scope.showName = null;
+			}
+			scope.aaa = function () {
+				console.log(scope.forget.Email)
 			}
 		}
 	}

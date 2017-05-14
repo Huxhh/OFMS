@@ -71,7 +71,7 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
                 page = go_page || 0;
 				page = page || 0;
 				size = size || 32;
-				request.get('/recommend/buycount/' + page + '/' + size,
+				request.get('/recentFilm//' + page + '/' + size,
 					function (res) {
 						if (res.code == 0) {
 							scope.newList = res.body.content;
