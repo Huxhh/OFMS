@@ -27,9 +27,4 @@ public interface MovieRepository extends JpaRepository<MovieItem,Long> {
 
 
 
-
-
-
-
-
 }

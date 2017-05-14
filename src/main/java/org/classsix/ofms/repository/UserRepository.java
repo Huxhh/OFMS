@@ -27,11 +27,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("update User u set u.balance=:balance where u.id=:id")
     int updateBalance(@Param("id")Integer id,@Param("balance") Integer balance);
 
-    @Query("select m from MoiveItem m where m.id in (select bf.fid from BuyFilm bf where bf.uid=:id)")
-    Page<MovieItem> findUserFilm(@Param("id") Integer userId, Pageable pageable);
-
-    @Query("select m from MoiveItem m where m.id in (select fs.fid from FilmScore fs where fs.uid=:id)")
-    Page<MovieItem> findUserFilmJudged(@Param("id") Integer userId, Pageable pageable);
 
 
 }

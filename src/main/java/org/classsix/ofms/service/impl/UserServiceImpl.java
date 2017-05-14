@@ -3,6 +3,7 @@ package org.classsix.ofms.service.impl;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.domin.User;
+import org.classsix.ofms.repository.MovieRepository;
 import org.classsix.ofms.repository.UserRepository;
 import org.classsix.ofms.service.UserService;
 import org.classsix.ofms.status.UserStatus;
@@ -22,6 +23,9 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    MovieRepository movieRepository;
 
     @Override
     public User confirmLogin(String userName, String password) throws Exception{
@@ -53,12 +57,14 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Page<MovieItem> findUserFilm(Integer userId,Pageable pageable) throws Exception{
-        return userRepository.findUserFilm(userId,pageable);
+//        return movieRepository.findUserFilm(userId,pageable);
+        return null;
     }
 
     @Override
     public Page<MovieItem> findUserFilmJudged(Integer userId,Pageable pageable) throws Exception{
-        return userRepository.findUserFilmJudged(userId,pageable);
+//        return movieRepository.findUserFilmJudged(userId,pageable);
+        return null;
     }
 
 
