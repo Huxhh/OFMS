@@ -179,14 +179,7 @@ app.directive('filmDirective', ['request', function (request) {
                 }
                 request.post('/admin/', [scope.addFilm], function (res) {
                     if (res.code == 0) {
-                        console.log(res);
-                        for (i in scope.addFilm) {
-                            scope.addFilm = null;
-                        }
-                        scope.addFilm['id'] = 0;
-                        scope.addFilm['score'] = 0;
-                        scope.addFilm['buyCount'] = 0;
-                        scope.addFilm['voteCount'] = 0;
+                        scope.add_cancle();
                     } else {
                         request.pop_up(res.msg);
                     }
@@ -196,7 +189,7 @@ app.directive('filmDirective', ['request', function (request) {
                 scope.$emit('addFilmOverflow', false);
                 scope.addFilmFlag = false;
                 for (i in scope.addFilm) {
-                    scope.addFilm = null;
+                    scope.addFilm[i] = null;
                 }
                 scope.addFilm['id'] = 0;
                 scope.addFilm['score'] = 0;
