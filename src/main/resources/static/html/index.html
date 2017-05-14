@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>主页</title>
 	<link rel="stylesheet" href="../css/font/iconfont.css" />
+	<link rel="stylesheet" href="../css/font_register/iconfont.css" />
 	<link rel="stylesheet" href="../css/index.css" />
 </head>
 <body ng-controller="index" index-directive>
@@ -14,10 +15,15 @@
 				<input type="text" placeholder="请输入关键字" name="search_film" id="search_film" ng-model="filmSearchName" ng-keyup="keyup($event)" />
 				<i class="iconfont icon-sousuo-sousuo" ng-click="searchByName()"></i>
 			</label>
-			<ul>
+			<ul ng-hide="showName">
 				<li><a href="javascript:;" ng-click="sign = true; trans = 'innow'">登录</a></li>
 				<li class="cut">|</li>
 				<li><a href="javascript:;" ng-click="sign = true; trans = 'upnow'">注册</a></li>	
+			</ul>
+			<ul ng-show="showName">
+				<li><a href="javascript:;" ui-sref="user">{{showName}}</a></li>
+				<li class="cut">|</li>
+				<li><a href="javascript:;" ng-click="logout()">退出</a></li>	
 			</ul>
 		</span>
 	</div>
@@ -59,18 +65,33 @@
 				</div>
 				<div class="up inup">
 					<span class="title">注册</span>
-					<label for="name">
-						<i class="iconfont icon-renyuan"></i>
-						<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
-					</label>
-					<label for="password">
-						<i class="iconfont icon-suo"></i>
-						<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
-					</label>
+					<span ng-hide="verifyFlag">
+						<label for="name">
+							<i class="iconfont icon-renyuan"></i>
+							<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+						</label>
+						<label for="password">
+							<i class="iconfont icon-suo"></i>
+							<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+						</label>
+					</span>
+					<span ng-show="verifyFlag">
+						<label for="mail">
+							<i class="iconfont icon-youxiang"></i>
+							<input type="email" placeholder="请输入邮箱" ng-model="user.Email" />
+							<input type="submit" value="{{sendEmailValue}}" ng-click="sendEmail()"/>
+						</label>
+						<label for="verify">
+							<i class="iconfont icon-yanzhengma"></i>
+							<input type="text" placeholder="请输入验证码" ng-model="user.Verify" />
+						</label>
+					</span>
 					<div class="another">
 						<a href="" ng-click="trans = 'innow'">登录</a>
+						<a ng-show="verifyFlag" href="" ng-click="back()">上一步</a>
 					</div>
-					<input type="button" value="注册" ng-click="signup()" />
+					<input ng-hide="verifyFlag" type="button" value="下一步" ng-click="signupOne()" />
+					<input ng-show="verifyFlag" type="button" value="注册" ng-click="signupTwo()" />
 				</div>
 			</div>
 		</div>

@@ -186,14 +186,20 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             		move_right();
             	}
             }
-            setInterval(function () {
+            var start_run;
+            scope.autoRun = function () {
             	if (scope.scrollerFlag) {
-	            	if (scope.autoRunFlag) {
-		            	scope.left();
-		            	scope.$apply();
-	            	}
-            	}
-            }, 8000);
+		            start_run = setInterval(function () {
+		            	if (scope.autoRunFlag) {
+			            	scope.left();
+			            	scope.$apply();
+		            	}
+		            }, 6000);
+		        } else {
+		        	clearInterval(start_run);
+		        }
+            }
+            scope.autoRun();
             window.onresize = function () {
 	    		goal = Math.floor(scrollerWidth / 4);//用于轮播
         		console.log(goal)

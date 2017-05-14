@@ -157,13 +157,15 @@ app.directive('filmDirective', ['request', function (request) {
                 })
             }
             scope.delete_film = function (id, index) {
-                for (i in scope.sendFilm) {
-                    scope.sendFilm[i] = scope.filmList[index][i];
-                }
-                request.post('/admin/delete', [scope.sendFilm], function (res) {
-                    if (res.code == 0) {
-                        scope.admin_film(0, true);
+                request.comfirm(function () {
+                    for (i in scope.sendFilm) {
+                        scope.sendFilm[i] = scope.filmList[index][i];
                     }
+                    request.post('/admin/delete', [scope.sendFilm], function (res) {
+                        if (res.code == 0) {
+                            scope.admin_film(0, true);
+                        }
+                    }, [id, index]);
                 })
             }
             scope.add_film = function () {

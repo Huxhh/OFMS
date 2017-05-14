@@ -1,5 +1,5 @@
 body, .page, .popup,
-#sign, #film .searchAadd,
+#sign, .popup > div.comfirm, #film .searchAadd,
 #film .list > div, #film .list .about > div, #film .list > div.page, #film .list .opereate, #film .add_film > div, #film .add_opearte {
   display: -webkit-box;
   display: -webkit-flex;
@@ -141,6 +141,25 @@ ul, li {
 .popup > div:last-child input[type=button]:hover {
   background: #336699; }
 
+.popup > div.comfirm input[type=button] {
+  width: 40%;
+  padding: 4px 0;
+  font-size: 15px; }
+
+.popup > div.comfirm {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+  height: auto; }
+
+.popup > div.comfirm input[type=button].cancle {
+  background: #ff5722; }
+
+.popup > div.comfirm input[type=button].cancle:hover {
+  background: #ab310a; }
+
 #left {
   background: #2a303e;
   width: 14%;
@@ -149,11 +168,11 @@ ul, li {
   bottom: 0;
   left: 0;
   padding-top: 5%;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #left.expand {
   width: 4%;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #left ul li:hover,
 #left ul li:active,
@@ -171,19 +190,19 @@ ul, li {
 
 #left ul li a span {
   display: inline-block;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #left ul li a i {
   font-size: 18px;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #left ul li a.txt2logo i {
   font-size: 32px;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #left ul li a.txt2logo span {
   display: none;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #left > span {
   position: absolute;
@@ -204,12 +223,12 @@ ul, li {
   width: 86%;
   min-height: 800px;
   margin-left: 18%;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #right.expand {
   width: 96%;
   margin-left: 4%;
-  transition: 2s linear; }
+  transition: 0.8s linear; }
 
 #film .searchAadd,
 #film .list > div {
@@ -393,7 +412,7 @@ ul, li {
   display: block;
   width: 98%;
   padding: 1%;
-  border: 1px solid #336699;
+  border-bottom: 1px solid #f2f2f2;
   margin: 1% 0%; }
 
 #film .add_opearte {
@@ -409,8 +428,7 @@ ul, li {
 
 #film .add_film input.submit:hover {
   background: #336699;
-  transition: 0.5s linear;
-  border: 1px solid #fff; }
+  transition: 0.5s linear; }
 
 #film .add_film input.cancle {
   background: #f44336;
@@ -419,7 +437,6 @@ ul, li {
 
 #film .add_film input.cancle:hover {
   background: red;
-  transition: 0.5s linear;
-  border: 1px solid #fff; }
+  transition: 0.5s linear; }
 
 /*# sourceMappingURL=index.css.map */

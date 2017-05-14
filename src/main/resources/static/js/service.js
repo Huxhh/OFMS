@@ -19,6 +19,25 @@ app.factory('request', ['$http', function ($http){
 			pop.remove('div.popup')
 		})
 	}
+	//确认
+	r.comfirm = function (callback, param) {
+		var htm = `<div class="popup">
+					<div class="bg bg_pop"></div>
+					<div class="comfirm">
+						<input type="button" value="确定" />
+						<input type="button" value="取消" class="cancle"/>
+					</div>
+				</div>`
+		var pop = angular.element(htm);
+		angular.element(document.getElementsByTagName('body')).append(pop);
+		pop.find('input').eq(1).on('click', function () {
+			pop.remove('div.popup')
+		})
+		pop.find('input').eq(0).on('click', function () {
+			pop.remove('div.popup');
+			callback.apply(null, param);
+		})
+	}
 	//get请求
 	r.get = function (url, callback1, callback2) {
 		$http({
@@ -45,7 +64,7 @@ app.factory('request', ['$http', function ($http){
 			if (callback2) {
 				callback2();
 			}
-			r.pop_up(url + ' post ailed');
+			r.pop_up(url + ' post failed');
 		})
 	}
 	//put请求
@@ -60,7 +79,7 @@ app.factory('request', ['$http', function ($http){
 			if (callback2) {
 				callback2();
 			}
-			r.pop_up(url + ' put ailed');
+			r.pop_up(url + ' put failed');
 		})
 	}
 	//delete请求
@@ -75,7 +94,7 @@ app.factory('request', ['$http', function ($http){
 			if (callback2) {
 				callback2();
 			}
-			r.pop_up(url + ' delete ailed');
+			r.pop_up(url + ' delete failed');
 		})
 	}
 	// r.make_page()
