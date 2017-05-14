@@ -38,6 +38,8 @@ public class UserController {
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 
+    private final static String CURRENT_USER = "user";
+
     @ApiOperation(value = "登录", notes = "用户登录")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String"),
@@ -51,7 +53,7 @@ public class UserController {
             User u = userService.confirmLogin((String) map.get("userName"),(String) map.get("password"));
             if (u == null)
                 return new ResponseMessage(status);
-            request.getSession().setAttribute("user",u);
+            request.getSession().setAttribute(CURRENT_USER,u);
             status = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
@@ -111,7 +113,7 @@ public class UserController {
         UserStatus userStatus = UserStatus.ERROR;
         Page<MovieItem> list = null;
         try{
-            User user = (User)request.getSession().getAttribute("user");
+            User user = (User)request.getSession().getAttribute(CURRENT_USER);
             list = userService.findUserFilm(user.getId(),pageable);
         }catch (Exception e){
             e.printStackTrace();
