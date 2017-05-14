@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public String findUser(String userName, String tel) throws Exception{
-        User user1 = userRepository.findByUserNameAndTel(userName,tel);
+    public String findUser(String userName, String mail) throws Exception{
+        User user1 = userRepository.findByUserNameAndMail(userName,mail);
         if (user1 == null)
-            return "";
+            throw new Exception();
         return user1.getPassword();
     }
 

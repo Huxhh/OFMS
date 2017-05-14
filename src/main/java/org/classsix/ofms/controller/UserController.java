@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.classsix.ofms.common.ResponseMessage;
+import org.classsix.ofms.common.api.Mail;
 import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.domin.User;
 import org.classsix.ofms.service.UserService;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +35,8 @@ import java.util.Objects;
 public class UserController {
     @Autowired
     UserService userService;
-
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
     @ApiOperation(value = "登录", notes = "用户登录")
     @ApiImplicitParams({
@@ -60,10 +63,15 @@ public class UserController {
     @ApiOperation(value = "注册", notes = "用户注册")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "user", value = "user对象", dataType = "Object"),
-            @ApiImplicitParam(name = "map", value = "{'user' : {'userName':'a','tel':'1231','password':'123'}}", required = true, dataType = "Json")
+            @ApiImplicitParam(name = "verNum", value = "验证码", dataType = "String"),
+            @ApiImplicitParam(name = "map", value = "{'user' : {'userName':'a','mail':'123@123.com','password':'123'},'verNum':'1234'}", required = true, dataType = "Json")
     })
     @RequestMapping("/usr/regist")
     public ResponseMessage userRegist(@RequestBody Map map){
+        String s  = (String)map.get("verNum");
+        String re = stringRedisTemplate.opsForValue().get(s);
+        if (re == null || !re.equals("get"))
+            return new ResponseMessage(UserStatus.ERROR,"验证码错误！");
         UserStatus status = userService.addUser((User) map.get("user"));
         return new ResponseMessage(status);
     }
@@ -72,12 +80,17 @@ public class UserController {
     @ApiOperation(value = "找回密码", notes = "用户找回密码")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String"),
-            @ApiImplicitParam(name = "tel", value = "电话号码", dataType = "String"),
+            @ApiImplicitParam(name = "mail", value = "邮件地址", dataType = "String"),
+            @ApiImplicitParam(name = "verNum", value = "验证码", dataType = "String"),
             @ApiImplicitParam(name = "map", value = "{'userName' : 'a','tel':'1232'}", required = true, dataType = "Json")
     })
     @RequestMapping("/usr/findpassword")
     public ResponseMessage userFindPsw(@RequestBody Map map){
         UserStatus userStatus = UserStatus.ERROR;
+        String se  = (String)map.get("verNum");
+        String re = stringRedisTemplate.opsForValue().get(se);
+        if (re == null || !re.equals("get"))
+            return new ResponseMessage(userStatus,"验证码错误！");
         try {
             String s = userService.findUser((String) map.get("userName"),(String) map.get("tel"));
             userStatus = UserStatus.SUCCESS;
@@ -187,6 +200,20 @@ public class UserController {
     }
 
 
-
-
+    @ApiOperation(value = "发送邮件", notes = "发送验证邮件")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "receiveMail", value = "收件地址", dataType = "String"),
+            @ApiImplicitParam(name = "map", value = "{'receiveMail' : 'jiang@123.com'}", required = true, dataType = "Json")
+    })
+    @RequestMapping("/usr/sendMail")
+    public ResponseMessage sendMail(@RequestBody Map map){
+        UserStatus userStatus = UserStatus.ERROR;
+        Mail mail = new Mail();
+        try {
+           mail.sendVerfMail((String)map.get("receiveMail"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage();
+    }
 }
