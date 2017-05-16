@@ -34,4 +34,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select m from MovieItem m where m.id in (select fs.fid from FilmScore fs where fs.uid=:id)")
     Page<MovieItem> findUserFilmJudged(@Param("id") Integer userId,Pageable pageable);
 
+    @Query("select fs.score from FilmScore fs where fs.uid=:id")
+    Page<MovieItem> findUserFilmScore(@Param("id") Integer userId,Pageable pageable);
+
 }

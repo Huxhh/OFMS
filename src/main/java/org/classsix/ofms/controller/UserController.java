@@ -144,6 +144,23 @@ public class UserController {
         return new ResponseMessage(userStatus,list);
     }
 
+    @RequestMapping("/usr/filmscore")
+    public ResponseMessage userFilmScore(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
+        UserStatus userStatus = UserStatus.ERROR;
+        Page<MovieItem> list;
+        try{
+            User user = (User)request.getSession().getAttribute("user");
+            list = userService.findUserFilmScore(user.getId(),pageable);
+            userStatus = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+            list = null;
+        }
+        return new ResponseMessage(userStatus,list);
+    }
+
+
+
     @ApiOperation(value = "获取用户未评价电影", notes = "获取未评价电影")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "null", value = "null", dataType = "null"),
