@@ -143,7 +143,10 @@ public class UserController {
         }
         return new ResponseMessage(userStatus,list);
     }
-
+    @ApiOperation(value = "获取用户已评价电影的评分", notes = "获取已评价电影评分")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "null", value = "null", dataType = "null"),
+    })
     @RequestMapping("/usr/filmscore")
     public ResponseMessage userFilmScore(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
         UserStatus userStatus = UserStatus.ERROR;
