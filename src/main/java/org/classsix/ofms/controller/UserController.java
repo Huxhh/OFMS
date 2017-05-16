@@ -3,7 +3,7 @@ package org.classsix.ofms.controller;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.common.api.Mail;
@@ -11,7 +11,6 @@ import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.domin.User;
 import org.classsix.ofms.service.UserService;
 import org.classsix.ofms.status.UserStatus;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +20,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -208,6 +207,25 @@ public class UserController {
         }
         return responseMessage;
     }
+
+    @ApiOperation(value = "查询用户信息", notes = "用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "null", value = "null", required = true, dataType = "Json")
+    })
+    @RequestMapping("/usr/getUserinfo")
+    public ResponseMessage userInfo(HttpServletRequest request){
+        UserStatus userStatus = UserStatus.ERROR;
+        Map<String,Object> map = new HashMap<>();
+        try {
+            User user = (User) request.getSession().getAttribute("user");
+            map.put("user",user);
+            userStatus = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage(userStatus,map);
+    }
+
 
 
     @ApiOperation(value = "发送邮件", notes = "发送验证邮件")
