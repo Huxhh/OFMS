@@ -201,7 +201,7 @@ public class UserController {
         ResponseMessage responseMessage = new ResponseMessage(UserStatus.ERROR);
         try {
             User user = (User) request.getSession().getAttribute("user");
-            responseMessage = userService.updateUserBalance(user.getId(),(Integer) map.get("balance"));
+            responseMessage = userService.updateUserBalance(user.getId(),Integer.parseInt((String) map.get("balance")));
         }catch (Exception e){
             e.printStackTrace();
         }
