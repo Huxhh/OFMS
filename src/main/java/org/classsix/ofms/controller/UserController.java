@@ -265,4 +265,21 @@ public class UserController {
         }
         return new ResponseMessage(userStatus);
     }
+
+
+    @ApiOperation(value = "用户退出", notes = "用户退出")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "null", value = "null", required = true, dataType = "Json")
+    })
+    @RequestMapping("/usr/uesrquit")
+    public ResponseMessage userQuit(HttpServletRequest request){
+        UserStatus status = UserStatus.ERROR;
+        try {
+            request.getSession().setAttribute(CURRENT_USER,null);
+            status = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage(status);
+    }
 }
