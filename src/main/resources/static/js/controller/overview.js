@@ -12,6 +12,16 @@ app.directive('overviewDirective', ['request', function (request) {
 				if (res.code == 0) {
 					scope.filmOverview = res.body;
 					tmp_star = res.body.star;
+					scope.filmOverview['filmtext'] = '暂无';
+					request.post('/film/filmtext', {
+						film: scope.filmOverview.name
+					}, function (res) {
+						if (res.code == 0) {
+							scope.filmOverview['filmtext'] = res.body;
+						} else {
+							request.pop_up(request.mes);
+						}
+					})
 					if (tmp_star) {
 						scope.filmOverview.star = tmp_star.slice(1, tmp_star.length - 1).split(',');
 					} else {
@@ -31,9 +41,9 @@ app.directive('overviewDirective', ['request', function (request) {
 					})
 				})
 			}
-			scope.save = function () {
-				// request.comfirm('/user/')
-			}
+			// scope.save = function () {
+			// 	// request.comfirm('/user/')
+			// }
 		}
 	}
 }])

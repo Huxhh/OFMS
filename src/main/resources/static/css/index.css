@@ -1,6 +1,6 @@
-#index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
-#sign, .popup > div.comfirm, #sign .another, #home .content, #home .right .table, #home .scroller_film, #home .scrollerLeft,
-#home .scrollerRight, #search .list_search, #overview, #overview .cloumn3 .rating, #overview .cloumn3 > p, #overview .buy, #user, #user #mycount,
+body, #index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
+#sign, .popup > div.comfirm, .rating, #sign .another, #home .content, #home .right .table, #home .scroller_film, #home .scrollerLeft,
+#home .scrollerRight, #search .list_search, #overview, #overview .cloumn3 > p, #overview .buy, #user, #user #mycount,
 #user #myinfo {
   display: -webkit-box;
   display: -webkit-flex;
@@ -17,7 +17,17 @@
 body {
   font-size: 16px;
   background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; }
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-content: space-between;
+  -moz-align-content: space-between;
+  -ms-flex-line-pack: space-between;
+  align-content: space-between; }
 
 a {
   text-decoration: none; }
@@ -386,6 +396,60 @@ head .search li {
 .popup > div.comfirm input[type=button].cancle:hover {
   background: #ab310a; }
 
+.rating {
+  padding: 5px 0;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between; }
+
+.rating i {
+  background: #fff;
+  font-size: 15px;
+  font-style: normal; }
+
+.rating-1 .star-1,
+.rating-2 .star-1,
+.rating-3 .star-1,
+.rating-4 .star-1,
+.rating-5 .star-1 {
+  color: #ff8900; }
+
+.rating-2 .star-2,
+.rating-3 .star-2,
+.rating-4 .star-2,
+.rating-5 .star-2 {
+  color: #ff8900; }
+
+.rating-3 .star-3,
+.rating-4 .star-3,
+.rating-5 .star-3 {
+  color: #ff8900; }
+
+.rating-4 .star-4,
+.rating-5 .star-4 {
+  color: #ff8900; }
+
+.rating-5 .star-5 {
+  color: #ff8900; }
+
+.button {
+  width: 64px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  float: left;
+  background: #336699;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s linear; }
+
+.button:hover {
+  background: #336699;
+  transition: 0.5s linear; }
+
 #sign .signbox {
   position: relative;
   width: 26%;
@@ -752,44 +816,6 @@ head .search li {
   width: 15%;
   padding-right: 5%; }
 
-#overview .cloumn3 .rating {
-  padding: 5px 0;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  -webkit-justify-content: space-between;
-  -moz-justify-content: space-between;
-  justify-content: space-between; }
-
-#overview .cloumn3 i {
-  background: #fff;
-  font-size: 15px;
-  font-style: normal; }
-
-#overview .cloumn3 .rating-1 .star-1,
-#overview .cloumn3 .rating-2 .star-1,
-#overview .cloumn3 .rating-3 .star-1,
-#overview .cloumn3 .rating-4 .star-1,
-#overview .cloumn3 .rating-5 .star-1 {
-  color: #ff8900; }
-
-#overview .cloumn3 .rating-2 .star-2,
-#overview .cloumn3 .rating-3 .star-2,
-#overview .cloumn3 .rating-4 .star-2,
-#overview .cloumn3 .rating-5 .star-2 {
-  color: #ff8900; }
-
-#overview .cloumn3 .rating-3 .star-3,
-#overview .cloumn3 .rating-4 .star-3,
-#overview .cloumn3 .rating-5 .star-3 {
-  color: #ff8900; }
-
-#overview .cloumn3 .rating-4 .star-4,
-#overview .cloumn3 .rating-5 .star-4 {
-  color: #ff8900; }
-
-#overview .cloumn3 .rating-5 .star-5 {
-  color: #ff8900; }
-
 #overview .cloumn3 > p {
   padding: 5px 5px 0 0;
   color: #ff8900;
@@ -834,6 +860,9 @@ head .search li {
 #overview .buy input:last-child:hover {
   background: #336699;
   transition: 0.5s linear; }
+
+#overview .para {
+  display: inline; }
 
 #user {
   margin-top: 30px;

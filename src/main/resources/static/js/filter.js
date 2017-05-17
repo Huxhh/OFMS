@@ -6,7 +6,7 @@ app.filter('catFilmName', function () {
 			return item;
 		}
 	}
-})
+});
 app.filter('catFilmDate', function () {
 	return function (item) {
 		if (item && item.length > 10) {
@@ -15,4 +15,9 @@ app.filter('catFilmDate', function () {
 			return item;
 		}
 	}
-})
+});
+app.filter('toHTML', ['$sce', function ($sce) {
+	return function (item) {
+		return $sce.trustAsHtml('简介: ' + item);
+	}
+}]);
