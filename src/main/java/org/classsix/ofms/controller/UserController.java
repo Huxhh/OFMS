@@ -221,7 +221,11 @@ public class UserController {
         ResponseMessage responseMessage = new ResponseMessage(UserStatus.ERROR);
         try {
             User user = (User) request.getSession().getAttribute("user");
-            responseMessage = userService.updateUserBalance(user.getId(),Integer.parseInt((String) map.get("balance")));
+            int banlance = Integer.parseInt((String) map.get("balance"));
+            responseMessage = userService.updateUserBalance(user.getId(),banlance);
+            user.setBalance(banlance);
+            request.getSession().setAttribute(CURRENT_USER,user);
+
         }catch (Exception e){
             e.printStackTrace();
         }
