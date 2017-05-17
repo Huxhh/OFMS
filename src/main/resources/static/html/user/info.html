@@ -1,14 +1,21 @@
 <div id="myinfo" user-info-directive>
 	<div>
 		<div>
-			<label for="change_name">
-				<input type="text" placeholder="请输入用户名" ng-model="name" />
+			<!-- <label for="change_name">
+				用户名: {{userInfo.userName}}
+				<input type="text" placeholder="请输入用户名" ng-model="" />
 				<input type="submit" value="修改" ng-click="changeName()" />
-			</label>
+			</label> -->
+			<div>
+				<span>用户名: {{userInfo.userName}}</span>
+			</div>
+			<div>
+				<span>邮箱: {{userInfo.mail}}</span>
+			</div>
 		</div>
 		<div>
 			<label for="change_password">
-				<input type="password" placeholder="请输入密码" ng-model="password" />
+				<input type="password" placeholder="请输入修改密码" ng-model="password" />
 				<input type="submit" value="修改" ng-click="changePassword()" />
 			</label>
 		</div>
