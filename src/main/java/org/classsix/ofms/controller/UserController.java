@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponse;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.common.api.Mail;
+import org.classsix.ofms.common.webmagic.BaikePageProcessor;
 import org.classsix.ofms.domin.MovieItem;
 import org.classsix.ofms.domin.User;
 import org.classsix.ofms.service.UserService;
@@ -222,7 +223,7 @@ public class UserController {
         try {
             User user = (User) request.getSession().getAttribute("user");
             int banlance = Integer.parseInt((String) map.get("balance"));
-            responseMessage = userService.updateUserBalance(user.getId(),banlance);
+            responseMessage = userService.updateUserBalance(user.getId(),user.getBalance()+banlance);
             user.setBalance(banlance);
             request.getSession().setAttribute(CURRENT_USER,user);
 
@@ -286,4 +287,23 @@ public class UserController {
         }
         return new ResponseMessage(status);
     }
+
+    @ApiOperation(value = "查询电影详情", notes = "查询电影详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "film", value = "速度与激情", required = true, dataType = "Json")
+    })
+    @RequestMapping("/film/filmtext")
+    public ResponseMessage filmText(@RequestBody Map map){
+        UserStatus userStatus = UserStatus.ERROR;
+        String s = "";
+        try {
+            BaikePageProcessor baikePageProcessor = new BaikePageProcessor();
+            s = baikePageProcessor.getText((String) map.get("film"));
+            userStatus = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage(userStatus,s);
+    }
+
 }
