@@ -295,10 +295,9 @@ public class UserController {
     @RequestMapping("/film/filmtext")
     public ResponseMessage filmText(@RequestBody Map map){
         UserStatus userStatus = UserStatus.ERROR;
-        String s = "";
+        String s = "abs";
         try {
-            BaikePageProcessor baikePageProcessor = new BaikePageProcessor();
-            s = baikePageProcessor.getText((String) map.get("film"));
+            s = BaikePageProcessor.getText((String) map.get("film"));
             userStatus = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
