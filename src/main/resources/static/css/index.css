@@ -954,11 +954,15 @@ head .search li {
   position: relative;
   top: -20px; }
 
-#user #mycount > div > div:first-child,
-#user #myinfo > div > div:first-child {
+#user #mycount > div > div,
+#user #myinfo > div > div > div {
   margin-bottom: 20px;
   font-size: 15px;
   overflow: hidden; }
+
+#user #mycount > div > div:last-child,
+#user #myinfo > div > div:last-child {
+  margin-bottom: 0; }
 
 #user #mycount > div input[type=text],
 #user #myinfo > div input[type=text],

@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User confirmLogin(String userName, String password) throws Exception{
-        User user = userRepository.findByUserName(userName);
+        User user = userRepository.findByUserNameAndPassword(userName,password);
         return user;
     }
 

@@ -29,7 +29,6 @@ app.controller('index', ['$scope', function ($scope) {
 		Verify: null,
 		NewPassword: null,
 		AgainPassword: null
-
 	}
 	$scope.forgetPassword = 0;
 }]);
@@ -194,8 +193,13 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 				}
 			}
 			scope.logout = function () {
-				sessionStorage.removeItem('userName');
-				scope.showName = null;
+				request.post('/usr/uesrquit', null, function (res) {
+					if (res.code == 0) {
+						sessionStorage.removeItem('userName');
+						scope.showName = null;
+					}
+					request.pop_up(res.msg);
+				})
 			}
 			scope.aaa = function () {
 				console.log(scope.forget.Email)

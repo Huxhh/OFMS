@@ -221,7 +221,11 @@ public class UserController {
         ResponseMessage responseMessage = new ResponseMessage(UserStatus.ERROR);
         try {
             User user = (User) request.getSession().getAttribute("user");
-            responseMessage = userService.updateUserBalance(user.getId(),Integer.parseInt((String) map.get("balance")));
+            int banlance = Integer.parseInt((String) map.get("balance"));
+            responseMessage = userService.updateUserBalance(user.getId(),banlance);
+            user.setBalance(banlance);
+            request.getSession().setAttribute(CURRENT_USER,user);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -264,5 +268,22 @@ public class UserController {
             e.printStackTrace();
         }
         return new ResponseMessage(userStatus);
+    }
+
+
+    @ApiOperation(value = "用户退出", notes = "用户退出")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "null", value = "null", required = true, dataType = "Json")
+    })
+    @RequestMapping("/usr/uesrquit")
+    public ResponseMessage userQuit(HttpServletRequest request){
+        UserStatus status = UserStatus.ERROR;
+        try {
+            request.getSession().setAttribute(CURRENT_USER,null);
+            status = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage(status);
     }
 }
