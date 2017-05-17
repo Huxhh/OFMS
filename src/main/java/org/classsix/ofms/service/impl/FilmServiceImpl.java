@@ -1,13 +1,7 @@
 package org.classsix.ofms.service.impl;
 
-import org.classsix.ofms.domin.BuyFilm;
-import org.classsix.ofms.domin.Film;
-import org.classsix.ofms.domin.FilmScore;
-import org.classsix.ofms.domin.MovieItem;
-import org.classsix.ofms.repository.BuyFilmRepository;
-import org.classsix.ofms.repository.FilmRepository;
-import org.classsix.ofms.repository.MovieRepository;
-import org.classsix.ofms.repository.ScoreFilmRepository;
+import org.classsix.ofms.domin.*;
+import org.classsix.ofms.repository.*;
 import org.classsix.ofms.service.FilmService;
 import org.classsix.ofms.status.BuyFilmStatus;
 import org.springframework.beans.factory.NamedBean;
@@ -39,6 +33,9 @@ public class FilmServiceImpl implements FilmService {
     @Autowired
     ScoreFilmRepository scoreFilmRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public BuyFilmStatus buyFilm(int uid, long fid) throws Exception {
         BuyFilmStatus buyFilmStatus = BuyFilmStatus.ERROR;
         BuyFilm buyFilm = new BuyFilm();
@@ -51,6 +48,9 @@ public class FilmServiceImpl implements FilmService {
             buyCount++;
             movieItem.setBuyCount(buyCount);
             movieRepository.save(movieItem);
+            User user = userRepository.findById(uid);
+            user.setBalance(user.getBalance() - 10);
+            userRepository.save(user);
             buyFilmStatus = BuyFilmStatus.SUCCESS;
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e);
