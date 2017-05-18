@@ -209,9 +209,9 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 				 scope.$broadcast('enter_user', 1);
 				 $state.go('user');
 			}
-			window.onresize = function () {
-				angular.element(document.getElementsByTagName('body')).css({'height': window.innerHeight + 'px'});
-			}
+			// window.onresize = function () {
+			// 	request.resize();
+			// }
 		}
 	}
 }])

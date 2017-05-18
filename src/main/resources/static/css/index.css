@@ -1,4 +1,5 @@
-body, #index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
+@charset "UTF-8";
+#index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
 #sign, .popup > div.comfirm, .rating, #sign .another, #home .content, #home .right .table, #home .scroller_film, #home .scrollerLeft,
 #home .scrollerRight, #search .list_search, #overview, #overview .cloumn3 > p, #overview .buy, #user, #user #mycount,
 #user #myinfo {
@@ -18,17 +19,41 @@ body {
   font-size: 16px;
   background: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  -webkit-box-direction: normal;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-content: space-between;
-  -moz-align-content: space-between;
-  -ms-flex-line-pack: space-between;
-  align-content: space-between; }
+  position: relative; }
 
+html, body, #wrap {
+  height: 100%; }
+
+body > #wrap {
+  height: auto;
+  min-height: 100%; }
+
+#content {
+  padding-bottom: 80px; }
+
+/* 必须使用和footer相同的高度 */
+#foot {
+  position: relative;
+  clear: both; }
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+
+.clearfix {
+  display: inline-block; }
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+  height: 1%; }
+
+.clearfix {
+  display: block; }
+
+/* End hide from IE-mac */
 a {
   text-decoration: none; }
 
@@ -40,8 +65,7 @@ ul, li {
   -ms-flex-pack: center;
   -webkit-justify-content: center;
   -moz-justify-content: center;
-  justify-content: center;
-  min-height: 500px; }
+  justify-content: center; }
 
 @keyframs showindex {
   from {
@@ -309,7 +333,7 @@ head .search li {
   color: #fff;
   padding: 20px 0;
   font-size: 14px;
-  margin-top: 20px; }
+  position: absolute; }
 
 .popup,
 #sign {
@@ -878,7 +902,8 @@ head .search li {
   background: #f2f2f2;
   padding: 1%;
   background: #262d40;
-  color: #fff; }
+  color: #fff;
+  min-height: 657px; }
 
 #user .right {
   width: 77%;

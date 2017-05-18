@@ -13,6 +13,7 @@ app.directive('overviewDirective', ['request', function (request) {
 					scope.filmOverview = res.body;
 					tmp_star = res.body.star;
 					scope.filmOverview['filmtext'] = '暂无';
+					request.resize();
 					request.post('/film/filmtext', {
 						film: scope.filmOverview.name
 					}, function (res) {

@@ -98,5 +98,15 @@ app.factory('request', ['$http', function ($http){
 		})
 	}
 	// r.make_page()
+	r.resize = function () {
+		// var clientHeight, scrollHeight;
+		// var body = angular.element(document.getElementsByTagName('body'));
+		// if ((clientHeight = top.document.body.clientHeight) < (scrollHeight = document.body.scrollHeight)) {
+		// 	body.css({'height': scrollHeight + 'px'})
+		// } else {
+		// 	body.css({'height': clientHeight + 'px'})
+		// }
+		// console.log(clientHeight, scrollHeight)
+	}
 	return r;
 }]);
