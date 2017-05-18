@@ -1,12 +1,14 @@
 app.controller('user', ['$scope', '$location', function ($scope, $location) {
 	//电影信息
 	$scope.userAbout = [];
+	//打分
+	$scope.userAboutScore = [];
 	//用户信息
 	$scope.userInfo = {};
 	//修改余额
 	$scope.rechargeNum = null;
 	//修改密码
-	$scope.password = null;
+	$scope.password = 123456;
 	//查看三种分类电影
 	$scope.chooseFilmFlag = 3;
 	$scope.$on('enter_user', function (event, data) {
@@ -17,10 +19,15 @@ app.controller('user', ['$scope', '$location', function ($scope, $location) {
 	//打分, 只用作初始值, 不做双向数据绑定
 	$scope.scoreNum = 0;
 }]);
-app.directive('userDirective', ['request', function (request) {
+app.directive('userDirective', ['request', '$state', function (request, $state) {
 	return {
 		restrict: 'AE',
 		link: function (scope, ele, attrs) {
+			if (!sessionStorage.getItem('userName')) {
+				request.pop_up('请登录');
+				$state.go('home');
+				return false;
+			}
 			scope.$emit('classify_change', false);
 			request.get('/usr/getUserinfo', function (res) {
 				if (res.code == 0) {
@@ -57,7 +64,9 @@ app.directive('userFilmDirective', ['request', function (request) {
 						if (type == 1) {
 							request.get('/usr/filmscore', function (res) {
 								if (res.code == 0) {
-									console.log(res)
+									scope.userAboutScore = res.body;
+								} else {
+									request.pop_up(res.msg);
 								}
 							})
 						}
