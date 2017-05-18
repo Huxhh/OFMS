@@ -81,7 +81,6 @@ public class UserController {
 
     @ApiOperation(value = "找回密码", notes = "用户找回密码")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String"),
             @ApiImplicitParam(name = "mail", value = "邮件地址", dataType = "String"),
             @ApiImplicitParam(name = "verNum", value = "验证码", dataType = "String"),
             @ApiImplicitParam(name = "password", value = "密码", dataType = "String"),
@@ -95,7 +94,7 @@ public class UserController {
         if (re == null || !re.equals("get"))
             return new ResponseMessage(userStatus,"验证码错误！");
         try {
-            User u = userService.findUser((String) map.get("userName"),(String) map.get("mail"));
+            User u = userService.findUser((String) map.get("mail"));
             userService.updateUser(u.getId(),(String) map.get("password"));
             userStatus = UserStatus.SUCCESS;
         }catch (Exception e){

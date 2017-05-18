@@ -20,7 +20,7 @@ import java.util.List;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUserNameAndPassword(String userName,String password);
-    User findByUserNameAndMail(String userName,String mail);
+    User findByMail(String mail);
     User findById(int uid);
 
 

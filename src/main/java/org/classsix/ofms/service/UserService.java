@@ -16,7 +16,7 @@ import java.util.List;
 public interface UserService {
     User confirmLogin(String userName, String password) throws Exception;
     UserStatus addUser(User user);
-    User findUser(String userName, String mail) throws Exception;
+    User findUser(String mail) throws Exception;
     List<MovieItem> findUserFilm(Integer userId) throws Exception;
     ResponseMessage updateUser(Integer id, String password);
     ResponseMessage updateUserBalance(Integer id,Integer balance);
