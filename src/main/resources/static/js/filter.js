@@ -16,6 +16,11 @@ app.filter('catFilmDate', function () {
 		}
 	}
 });
+app.filter('numCeil', function () {
+	return function (item) {
+		return Math.ceil(item);
+	}
+})
 app.filter('toHTML', ['$sce', function ($sce) {
 	return function (item) {
 		return $sce.trustAsHtml('简介: ' + item);

@@ -60,7 +60,7 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 				$state.go('search');
 				scope.$broadcast('search_click', null);
 			}
-			scope.keyup = function (e) {
+			scope.keyupSearch = function (e) {
 	            var keycode = window.event ? e.keyCode : e.which;
 				if (keycode == 13) {
 					scope.searchByName();
@@ -200,9 +200,6 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					}
 					request.pop_up(res.msg);
 				})
-			}
-			scope.aaa = function () {
-				console.log(scope.forget.Email)
 			}
 			//进入用户空间
 			scope.gotoUser = function () {

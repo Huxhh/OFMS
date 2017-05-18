@@ -962,7 +962,7 @@ head .search li {
   transition: 0.3s linear; }
 
 #user #myfilm .listinfo .cloumn1 {
-  width: 15%; }
+  width: 20%; }
 
 #user #myfilm .listinfo .cloumn1 img {
   width: 100%;
@@ -970,10 +970,14 @@ head .search li {
 
 #user #myfilm .listinfo .cloumn2 {
   width: 70%;
-  font-size: 15px; }
+  font-size: 15px;
+  padding-left: 5%; }
 
 #user #myfilm .listinfo .cloumn2 p {
   margin-bottom: 10px; }
+
+#user #myfilm .listinfo .cloumn3 {
+  width: 15%; }
 
 #user #mycount,
 #user #myinfo {
