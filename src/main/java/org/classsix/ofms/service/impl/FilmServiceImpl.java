@@ -114,7 +114,7 @@ public class FilmServiceImpl implements FilmService {
         for(int i = 0;i < 1000;i++) {
             int uid = (int) (Math.random() * 10) + 1;
             long fid = (long) (Math.random() * 10000) + 1;
-            float score = (float)((Math.random() * 5) % 5 + 1);
+            float score = (float)((Math.random() * 5) % 5);
             FilmScore filmScore = new FilmScore();
             filmScore.setUid(uid);
             filmScore.setFid(fid);

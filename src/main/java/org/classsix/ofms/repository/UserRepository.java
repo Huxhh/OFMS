@@ -11,6 +11,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by jiang on 2017/5/3.
  * 面向运气，面向心情，面向Bug。
@@ -34,10 +36,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 
     @Query("select m from MovieItem m where m.id in (select bf.fid from BuyFilm bf where bf.uid=:id)")
-    Page<MovieItem> findUserFilm( @Param("id") Integer userId,Pageable pageable);
+    List<MovieItem> findUserFilm( @Param("id") Integer userId);
 
     @Query("select m from MovieItem m where m.id in (select fs.fid from FilmScore fs where fs.uid=:id)")
-    Page<MovieItem> findUserFilmJudged(@Param("id") Integer userId,Pageable pageable);
+    List<MovieItem> findUserFilmJudged(@Param("id") Integer userId);
 
     @Query("select fs.score from FilmScore fs where fs.uid=:id")
     Page<MovieItem> findUserFilmScore(@Param("id") Integer userId,Pageable pageable);
