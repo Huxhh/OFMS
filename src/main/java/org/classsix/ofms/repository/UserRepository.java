@@ -42,6 +42,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     List<MovieItem> findUserFilmJudged(@Param("id") Integer userId);
 
     @Query("select fs.score from FilmScore fs where fs.uid=:id")
-    Page<MovieItem> findUserFilmScore(@Param("id") Integer userId,Pageable pageable);
+    List<Float> findUserFilmScore(@Param("id") Integer userId);
 
 }

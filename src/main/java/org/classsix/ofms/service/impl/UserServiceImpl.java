@@ -68,8 +68,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Page<MovieItem> findUserFilmScore(Integer userId,Pageable pageable) throws Exception{
-        return userRepository.findUserFilmScore(userId,pageable);
+    public List<Float> findUserFilmScore(Integer userId,Pageable pageable) throws Exception{
+        return userRepository.findUserFilmScore(userId);
     }
 
     @Override

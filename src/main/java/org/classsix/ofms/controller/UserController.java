@@ -148,7 +148,7 @@ public class UserController {
     @RequestMapping("/usr/filmscore")
     public ResponseMessage userFilmScore(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
         UserStatus userStatus = UserStatus.ERROR;
-        Page<MovieItem> list;
+        List<Float> list;
         try{
             User user = (User)request.getSession().getAttribute("user");
             list = userService.findUserFilmScore(user.getId(),pageable);
@@ -175,12 +175,15 @@ public class UserController {
             List<MovieItem> sub = userService.findUserFilmJudged(user.getId());
             fullist = userService.findUserFilm(user.getId());
             userStatus = UserStatus.SUCCESS;
+            List<MovieItem> delFilm  = new ArrayList<>();
             for (MovieItem nful:fullist)
                 for (MovieItem nsub : sub){
                     if (nsub.getId() == nful.getId()){
-                        fullist.remove(nful);
+                        delFilm.add(nful);
                     }
                 }
+
+            fullist.removeAll(delFilm);
         }catch (Exception e){
             e.printStackTrace();
             fullist = null;

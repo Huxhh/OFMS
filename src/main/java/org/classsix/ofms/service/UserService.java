@@ -21,5 +21,5 @@ public interface UserService {
     ResponseMessage updateUser(Integer id, String password);
     ResponseMessage updateUserBalance(Integer id,Integer balance);
     List<MovieItem> findUserFilmJudged(Integer userId) throws Exception;
-    Page<MovieItem> findUserFilmScore(Integer userId,Pageable pageable) throws Exception;
+    List<Float> findUserFilmScore(Integer userId,Pageable pageable) throws Exception;
 }
