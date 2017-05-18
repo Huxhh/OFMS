@@ -5,8 +5,11 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.MovieItem;
-import org.classsix.ofms.service.AdminFilmService;
-import org.springframework.beans.factory.annotation.Autowired;
+        import org.classsix.ofms.domin.User;
+        import org.classsix.ofms.service.AdminFilmService;
+        import org.classsix.ofms.service.UserService;
+        import org.classsix.ofms.status.UserStatus;
+        import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -15,7 +18,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+        import javax.servlet.http.HttpServletRequest;
+        import java.util.ArrayList;
+        import java.util.Map;
 
 /**
  * Created by clxy on 2017/5/1.
@@ -24,6 +29,30 @@ import java.util.ArrayList;
 public class AdminFilmController {
     @Autowired
     AdminFilmService adminFilmService;
+
+    @Autowired
+    UserService userService;
+
+    @ApiOperation(value = "登录", notes = "管理员登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String"),
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String"),
+            @ApiImplicitParam(name = "map", value = "{'userName' : 'fengshenai', 'password' : 'xiaohua'}", required = true, dataType = "Json")
+    })
+    @RequestMapping(value = "/admin/login", method = RequestMethod.POST)
+    ResponseMessage adminLogin(@RequestBody Map map, HttpServletRequest request) {
+        UserStatus status = UserStatus.ERROR;
+        try {
+            User u = userService.confirmLogin((String) map.get("userName"),(String) map.get("password"));
+            if (u == null)
+                return new ResponseMessage(status);
+            request.getSession().setAttribute("admin",u);
+            status = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage(status);
+    }
 
     @RequestMapping(value = "/admin/",method = RequestMethod.GET)
     @ApiImplicitParam(name = "page", value = "页数", required = false, dataType = "Integer")
