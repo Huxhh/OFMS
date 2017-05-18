@@ -43,7 +43,13 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					} else {
 						scope.isActive = sessionStorage.getItem('filmKindIndex');
 					}
-				})
+				});
+			request.get('/usr/ifLogin', function (res) {
+				if (code == 0) {
+					scope.showName = response.body.userName;
+					sessionStorage.setItem('userName', scope.showName);
+				}
+			})
 			scope.searchByName = function () {
 				if (scope.filmSearchName) {
 					sessionStorage.setItem('filmName', scope.filmSearchName);
@@ -197,17 +203,20 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 			scope.logout = function () {
 				request.post('/usr/uesrquit', null, function (res) {
 					if (res.code == 0) {
-						sessionStorage.removeItem('userName');
-						scope.showName = null;
-						$state.go('home');
+						scope.removeUser();
 					}
 					request.pop_up(res.msg);
 				})
 			}
+			scope.removeUser = function () {
+				sessionStorage.removeItem('userName');
+				scope.showName = null;
+				$state.go('home');
+			}
 			//进入用户空间
 			scope.gotoUser = function () {
-				 scope.$broadcast('enter_user', 1);
-				 $state.go('user');
+				scope.$broadcast('enter_user', 1);
+				$state.go('user');
 			}
 			// window.onresize = function () {
 			// 	request.resize();

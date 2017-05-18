@@ -29,11 +29,19 @@ app.directive('userDirective', ['request', '$state', function (request, $state) 
 				return false;
 			}
 			scope.$emit('classify_change', false);
-			request.get('/usr/getUserinfo', function (res) {
-				if (res.code == 0) {
-					scope.userInfo = res.body.user;
+			request.get('/usr/ifLogin', function (response) {
+				if (response.code == 0) {
+					request.get('/usr/getUserinfo', function (res) {
+						if (res.code == 0) {
+							scope.userInfo = res.body.user;
+						} else {
+							request.pop_up(res.msg);
+						}
+					})
 				} else {
-					request.pop_up(res.msg);
+					scope.removeUser();
+					request.remove_pop();
+					request.pop_up('请登录');
 				}
 			})
 		}
@@ -58,20 +66,28 @@ app.directive('userFilmDirective', ['request', function (request) {
 						getUrl = '/usr/film';
 						break;
 				}
-				request.get(getUrl, function (res) {
-					if (res.code == 0) {
-						scope.userAbout = res.body;
-						if (type == 1) {
-							request.get('/usr/filmscore', function (res) {
-								if (res.code == 0) {
-									scope.userAboutScore = res.body;
-								} else {
-									request.pop_up(res.msg);
+				request.get('/usr/ifLogin', function (response) {
+					if (response.code == 0) {
+						request.get(getUrl, function (res) {
+							if (res.code == 0) {
+								scope.userAbout = res.body;
+								if (type == 1) {
+									request.get('/usr/filmscore', function (ress) {
+										if (ress.code == 0) {
+											scope.userAboutScore = ress.body;
+										} else {
+											request.pop_up(ress.msg);
+										}
+									})
 								}
-							})
-						}
+							} else {
+								request.pop_up(res.msg);
+							}
+						})
 					} else {
-						request.pop_up(res.msg);
+						scope.removeUser();
+						request.remove_pop();
+						request.pop_up('请登录');
 					}
 				})
 			}
@@ -81,15 +97,23 @@ app.directive('userFilmDirective', ['request', function (request) {
 					request.pop_up('不能为0');
 					return false;
 				} else {
-					request.post('/user/scorefilm', {
-						uid: '1',
-						fid: scope.userAbout[index].id.toString(),
-						score: scoreNum.toString()
-					}, function (res) {
-						if (res.code == 0) {
-							scope.getFilm(2);
+					request.get('/ifLogin', function (response) {
+						if (response.code == 0) {
+							request.post('/usr/scorefilm', {
+								uid: response.body.id,
+								fid: scope.userAbout[index].id.toString(),
+								score: scoreNum.toString()
+							}, function (res) {
+								if (res.code == 0) {
+									scope.getFilm(2);
+								} else {
+									request.pop_up(res.msg);
+								}
+							})
 						} else {
-							request.pop_up(res.msg);
+							request.pop_up('请登录');
+							request.remove_pop();
+							scope.removeUser();
 						}
 					})
 				}
@@ -103,14 +127,24 @@ app.directive('userCountDirective', ['request', function (request) {
 		link: function (scope, ele, attrs) {
 			scope.recharge = function () {
 				if (scope.rechargeNum) {
-					request.post('/usr/updateBalance', {
-						balance: scope.rechargeNum.toString()
-					}, function (res) {
-						if (res.code == 0) {
-							scope.userInfo.balance = scope.rechargeNum;
+					request.get('/usr/ifLogin', function (response) {
+						if (response.code == 0) {
+							request.post('/usr/updateBalance', {
+								balance: scope.rechargeNum.toString()
+							}, function (res) {
+								if (res.code == 0) {
+									scope.userInfo.balance = scope.rechargeNum;
+								}
+								request.pop_up(res.msg);
+							})
+						} else {
+							request.pop_up('请登录');
+							request.remove_pop();
+							scope.removeUser();
 						}
-						request.pop_up(res.msg);
 					})
+				} else {
+					request.pop_up('不能为空');
 				}
 			}
 		}
@@ -122,13 +156,21 @@ app.directive('userInfoDirective', ['request', function (request) {
 		link: function (scope, ele, attrs) {
 			scope.changePassword = function () {
 				if (scope.password) {
-					request.post('/usr/updateProfile', {
-						password: scope.password
-					}, function (res) {
-						if (res.code == 0) {
-							scope.logout();
+					request.get('/usr/ifLogin', function (response) {
+						if (response.code == 0) {
+							request.post('/usr/updateProfile', {
+								password: scope.password
+							}, function (res) {
+								if (res.code == 0) {
+									scope.logout();
+								} else {
+									request.pop_up(res.msg);
+								}
+							})
 						} else {
-							request.pop_up(res.msg);
+							request.pop_up('请登录');
+							request.remove_pop();
+							scope.removeUser();
 						}
 					})
 				} else {

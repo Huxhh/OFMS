@@ -33,13 +33,20 @@ app.directive('overviewDirective', ['request', function (request) {
 				}
 			})
 			scope.buy = function () {
-				request.comfirm(function () {
-					request.post('/user/buyfilm', {
-						uid: '1',
-						fid: scope.filmOverview.id.toString()
-					}, function (res) {
-						request.pop_up(res.msg);
-					})
+				request.get('/usr/ifLogin', function (response) {
+					if (response.code == 0) {
+						request.comfirm(function () {
+							request.post('/user/buyfilm', {
+								uid: response.body.id,
+								fid: scope.filmOverview.id.toString()
+							}, function (res) {
+								request.pop_up(res.msg);
+							})
+						})
+					} else {
+						scope.removeUser();
+						request.pop_up('请登录');
+					}
 				})
 			}
 			// scope.save = function () {
