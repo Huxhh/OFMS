@@ -30,6 +30,9 @@ public class BaikePageProcessor implements PageProcessor {
     }
 
     public static String getText(String film){
+        if (film.contains(" ")){
+            film = film.split(" ")[0];
+        }
         Spider.create(new BaikePageProcessor())
                 //从"https://github.com/code4craft"开始抓
                 .addUrl("http://baike.baidu.com/item/"+film)
