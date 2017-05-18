@@ -107,7 +107,7 @@
 							注册
 							<i class="iconfont icon-icon" ng-click="sign = false"></i>
 						</span>
-						<span ng-if="!verifyFlag">
+						<span ng-hide="verifyFlag">
 							<label for="name">
 								<i class="iconfont icon-renyuan"></i>
 								<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName" />
@@ -117,7 +117,7 @@
 								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd" />
 							</label>
 						</span>
-						<span ng-if="verifyFlag">
+						<span ng-show="verifyFlag">
 							<label for="mail">
 								<i class="iconfont icon-youxiang1"></i>
 								<input type="text" placeholder="请输入邮箱" ng-model="user.Email" />
@@ -130,10 +130,10 @@
 						</span>
 						<div class="another">
 							<a href="" ng-click="trans = 'innow'">登录</a>
-							<a ng-if="verifyFlag" href="" ng-click="back()">上一步</a>
+							<a ng-show="verifyFlag" href="" ng-click="back()">上一步</a>
 						</div>
-						<input ng-if="!verifyFlag" type="button" value="下一步" ng-click="signupOne()" />
-						<input ng-if="verifyFlag" type="button" value="注册" ng-click="signupTwo()" />
+						<input ng-hide="verifyFlag" type="button" value="下一步" ng-click="signupOne()" />
+						<input ng-show="verifyFlag" type="button" value="注册" ng-click="signupTwo()" />
 					</div>
 				</div>
 			</div>

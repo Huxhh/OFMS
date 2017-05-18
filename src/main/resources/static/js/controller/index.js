@@ -162,31 +162,27 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 			}
 			//忘记密码
 			scope.forgetPasswordOne = function () {
-				console.log(scope.forget)
 				if (scope.forget.Email && scope.forget.Verify) {
-					request.post('url', {
-						data: ''
-					}, function (res) {
-						if (res.code == 0) {
-							scope.forgetPassword = 2;
-						} else {
-							request.pop_up(res.msg);
-						}
-					})
+					scope.forgetPassword = 2;
 				} else {
 					request.pop_up('必须填写完整');
 				}
 			}
 			scope.forgetPasswordTwo = function () {
+				if (scope.forget.NewPassword != scope.forget.AgainPassword) {
+					request.pop_up('两次密码不一致');
+					return false;
+				}
 				if (scope.forget.NewPassword && scope.forget.AgainPassword) {
-					request.post('url', {
-						data: ''
+					request.post('/usr/findpassword', {
+						password: scope.forget.NewPassword,
+						mail: scope.forget.Email,
+						verNum: scope.forget.Verify
 					}, function (res) {
 						if (res.code == 0) {
 							scope.forgetPassword = 0;
-						} else {
-							request.pop_up(res.msg);
 						}
+						request.pop_up(res.msg);
 					})
 				} else {
 					request.pop_up('必须填写完整');
