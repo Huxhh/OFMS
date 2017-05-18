@@ -27,7 +27,7 @@ public class User extends BasePerson{
     private String userName;
 
     /** 邮箱地址 */
-    @Column(name = "MAIl", length = 50, nullable = false)
+    @Column(name = "MAIl", length = 50, nullable = false,unique = true)
     private String mail;
 
     /** 密码 */
