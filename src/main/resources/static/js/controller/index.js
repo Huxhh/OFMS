@@ -193,6 +193,7 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					if (res.code == 0) {
 						sessionStorage.removeItem('userName');
 						scope.showName = null;
+						$state.go('home');
 					}
 					request.pop_up(res.msg);
 				})
