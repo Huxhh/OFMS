@@ -84,7 +84,8 @@ public class UserController {
             @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String"),
             @ApiImplicitParam(name = "mail", value = "邮件地址", dataType = "String"),
             @ApiImplicitParam(name = "verNum", value = "验证码", dataType = "String"),
-            @ApiImplicitParam(name = "map", value = "{'userName' : 'a','tel':'1232'}", required = true, dataType = "Json")
+            @ApiImplicitParam(name = "password", value = "密码", dataType = "String"),
+            @ApiImplicitParam(name = "map", value = "{'userName' : 'a','mail':'1232@qq.com','verNum':'1234','password':'123456'}", required = true, dataType = "Json")
     })
     @RequestMapping("/usr/findpassword")
     public ResponseMessage userFindPsw(@RequestBody Map map){
@@ -94,9 +95,9 @@ public class UserController {
         if (re == null || !re.equals("get"))
             return new ResponseMessage(userStatus,"验证码错误！");
         try {
-            String s = userService.findUser((String) map.get("userName"),(String) map.get("tel"));
+            User u = userService.findUser((String) map.get("userName"),(String) map.get("mail"));
+            userService.updateUser(u.getId(),(String) map.get("password"));
             userStatus = UserStatus.SUCCESS;
-            return new ResponseMessage(userStatus,s);
         }catch (Exception e){
             e.printStackTrace();
         }
