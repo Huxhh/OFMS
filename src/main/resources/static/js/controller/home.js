@@ -144,6 +144,8 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             var tmp;
             function move_left() {
 				setTimeout(function () {
+					scope.scrollerFlag = false;
+	            	left = 0;
 					if (left != -goal) {
 						left--;
             			scroller.css({'left': left + 'px'})
@@ -153,6 +155,7 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
 						scope.recommondList = scope.recommondList.slice(1)
 		        		scope.recommondList = scope.recommondList.concat(tmp);
 	            		scope.scrollerFlag = true;
+	            		scroller.css({'left': '0px'});
 					}
 				}, 1);
             }
@@ -169,10 +172,7 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             }
             scope.left = function () {
             	if (scope.scrollerFlag) {
-            		scope.scrollerFlag = false;
-	            	left = 0;
             		move_left();
-            		scroller.css({'left': '0px'});
             	}
             }
             scope.right = function () {
@@ -190,10 +190,7 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             scope.autoRun = function () {
             	if (scope.autoRunFlag) {
 		            start_run = setInterval(function () {
-		            	scope.scrollerFlag = false;
-		            	left = 0;
-	            		move_left();
-	            		scroller.css({'left': '0px'});
+		            	scope.right();
 		            	scope.$apply();
 		            }, 6000);
 		        } else {
