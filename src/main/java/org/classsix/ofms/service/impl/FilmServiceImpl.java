@@ -42,16 +42,20 @@ public class FilmServiceImpl implements FilmService {
         buyFilm.setUid(uid);
         buyFilm.setFid(fid);
         try {
-            MovieItem movieItem = movieRepository.findById(fid);
-            buyFilmRepository.save(buyFilm);
-            long buyCount = movieItem.getBuyCount();
-            buyCount++;
-            movieItem.setBuyCount(buyCount);
-            movieRepository.save(movieItem);
             User user = userRepository.findById(uid);
-            user.setBalance(user.getBalance() - 10);
-            userRepository.save(user);
-            buyFilmStatus = BuyFilmStatus.SUCCESS;
+            if(user.getBalance() >= 10) {
+                MovieItem movieItem = movieRepository.findById(fid);
+                buyFilmRepository.save(buyFilm);
+                long buyCount = movieItem.getBuyCount();
+                buyCount++;
+                movieItem.setBuyCount(buyCount);
+                movieRepository.save(movieItem);
+                user.setBalance(user.getBalance() - 10);
+                userRepository.save(user);
+                buyFilmStatus = BuyFilmStatus.SUCCESS;
+            } else {
+                buyFilmStatus = BuyFilmStatus.MONEY_NOT_ENOUGH;
+            }
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e);
         }

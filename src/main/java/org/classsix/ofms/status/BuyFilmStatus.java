@@ -7,7 +7,7 @@ import org.classsix.ofms.status.inter.StatusBase;
  */
 public enum BuyFilmStatus implements StatusBase {
     SUCCESS(0), ERROR(1), ARGUMENTS_ERROR(3), SHOWALLPAIDFILM_ERROR(4), SCOREFILM_ERROR(5),
-    GETFILMBYID_ERROR(6);
+    GETFILMBYID_ERROR(6), MONEY_NOT_ENOUGH(7);
 
     private int status;
 
