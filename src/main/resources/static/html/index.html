@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="../css/index.css" />
 </head>
 <body ng-controller="index" index-directive class="clearfix">
-	<div id="wrap">
+	<!-- <div id="wrap"> -->
 		<div id="head">
 			<a href="" ui-sref="home"><img src="../img/logo.png" alt="logo" /></a>
 			<span class="search">
@@ -43,102 +43,102 @@
 			</div>
 			<div ui-view="index" id="index"></div>
 		</div>
-	</div>
-	<div id="foot">
-		<p>Copyright © 2017 课程设计OFMS</p>
-	</div>
-	<div id="sign" ng-show="sign">
-		<div class="bg"></div>
-		<div class="signbox">
-			<div ng-class="trans">
-				<div class="in inup">
-					<span class="title">
-						登录
-						<i class="iconfont icon-icon" ng-click="sign = false"></i>
-					</span>
-					<span ng-show="forgetPassword == 0">
-						<label for="name">
-							<i class="iconfont icon-renyuan"></i>
-							<input type="text" placeholder="请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
-						</label>
-						<label for="password">
-							<i class="iconfont icon-suo"></i>
-							<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
-						</label>
-						<div class="another">
-							<a href="" ng-click="trans = 'upnow'">注册</a>
-							<a href="" ng-click="forgetPassword = 1">忘记密码</a>
-						</div>
-					</span>
-					<span ng-show="forgetPassword == 1">
-						<label for="forgetPasswordOne">
-							<i class="iconfont icon-youxiang1"></i>
-							<input type="text" placeholder="请输入邮箱" ng-model="forget.Email" ng-keydown="aaa()" />
-							<input type="submit" value="{{sendEmailValue}}" ng-click="sendEmail(0)"/>
-						</label>
-						<label for="verify">
-							<i class="iconfont icon-suo"></i>
-							<input type="text" placeholder="请输入验证码" ng-model="forget.Verify"  ng-keyup="keyup($event)" />
-						</label>
-						<div class="another">
-							<a href="" ng-click="trans = 'upnow'">注册</a>
-							<a href="" ng-click="forgetPasswordOneBack()">忘记密码</a>
-						</div>
-					</span>
-					<span ng-show="forgetPassword == 2">
-						<label for="forgetPasswordTwo">
-							<i class="iconfont icon-suo"></i>
-							<input type="password" placeholder="请输入新密码" ng-model="forget.NewPassword"  ng-keyup="keyup($event)" />
-						</label>
-						<label for="password">
-							<i class="iconfont icon-suo"></i>
-							<input type="password" placeholder="请重复新密码" ng-model="forget.AgainPassword"  ng-keyup="keyup($event)" />
-						</label>
-						<div class="another">
-							<a href="" ng-click="trans = 'upnow'">注册</a>
-							<a href="" ng-click="forgetPasswordTwoBack()">上一步</a>
-						</div>
-					</span>
-					<input ng-hide="forgetPassword != 0" type="button" value="登录" ng-click="signin()" />
-					<input ng-hide="forgetPassword != 1" type="button" value="下一步" ng-click="forgetPasswordOne()" />
-					<input ng-hide="forgetPassword != 2" type="button" value="确定" ng-click="forgetPasswordTwo()" />
-				</div>
-				<div class="up inup">
-					<span class="title">
-						注册
-						<i class="iconfont icon-icon" ng-click="sign = false"></i>
-					</span>
-					<span ng-hide="verifyFlag">
-						<label for="name">
-							<i class="iconfont icon-renyuan"></i>
-							<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
-						</label>
-						<label for="password">
-							<i class="iconfont icon-suo"></i>
-							<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
-						</label>
-					</span>
-					<span ng-show="verifyFlag">
-						<label for="mail">
-							<i class="iconfont icon-youxiang1"></i>
-							<input type="text" placeholder="请输入邮箱" ng-model="user.Email" />
-							<input type="submit" value="{{sendEmailValue}}" ng-click="sendEmail(1)"/>
-						</label>
-						<label for="verify">
-							<i class="iconfont icon-yanzhengma1"></i>
-							<input type="text" placeholder="请输入验证码" ng-model="user.Verify" />
-						</label>
-					</span>
-					<div class="another">
-						<a href="" ng-click="trans = 'innow'">登录</a>
-						<a ng-show="verifyFlag" href="" ng-click="back()">上一步</a>
+		<div id="foot">
+			<p>Copyright © 2017 课程设计OFMS</p>
+		</div>
+		<div id="sign" ng-show="sign">
+			<div class="bg"></div>
+			<div class="signbox">
+				<div ng-class="trans">
+					<div class="in inup">
+						<span class="title">
+							登录
+							<i class="iconfont icon-icon" ng-click="sign = false"></i>
+						</span>
+						<span ng-show="forgetPassword == 0">
+							<label for="name">
+								<i class="iconfont icon-renyuan"></i>
+								<input type="text" placeholder="请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+							</label>
+							<label for="password">
+								<i class="iconfont icon-suo"></i>
+								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+							</label>
+							<div class="another">
+								<a href="" ng-click="trans = 'upnow'">注册</a>
+								<a href="" ng-click="forgetPassword = 1">忘记密码</a>
+							</div>
+						</span>
+						<span ng-show="forgetPassword == 1">
+							<label for="forgetPasswordOne">
+								<i class="iconfont icon-youxiang1"></i>
+								<input type="text" placeholder="请输入邮箱" ng-model="forget.Email" ng-keydown="aaa()" />
+								<input type="submit" value="{{sendEmailValue}}" ng-click="sendEmail(0)"/>
+							</label>
+							<label for="verify">
+								<i class="iconfont icon-suo"></i>
+								<input type="text" placeholder="请输入验证码" ng-model="forget.Verify"  ng-keyup="keyup($event)" />
+							</label>
+							<div class="another">
+								<a href="" ng-click="trans = 'upnow'">注册</a>
+								<a href="" ng-click="forgetPasswordOneBack()">忘记密码</a>
+							</div>
+						</span>
+						<span ng-show="forgetPassword == 2">
+							<label for="forgetPasswordTwo">
+								<i class="iconfont icon-suo"></i>
+								<input type="password" placeholder="请输入新密码" ng-model="forget.NewPassword"  ng-keyup="keyup($event)" />
+							</label>
+							<label for="password">
+								<i class="iconfont icon-suo"></i>
+								<input type="password" placeholder="请重复新密码" ng-model="forget.AgainPassword"  ng-keyup="keyup($event)" />
+							</label>
+							<div class="another">
+								<a href="" ng-click="trans = 'upnow'">注册</a>
+								<a href="" ng-click="forgetPasswordTwoBack()">上一步</a>
+							</div>
+						</span>
+						<input ng-hide="forgetPassword != 0" type="button" value="登录" ng-click="signin()" />
+						<input ng-hide="forgetPassword != 1" type="button" value="下一步" ng-click="forgetPasswordOne()" />
+						<input ng-hide="forgetPassword != 2" type="button" value="确定" ng-click="forgetPasswordTwo()" />
 					</div>
-					<input ng-hide="verifyFlag" type="button" value="下一步" ng-click="signupOne()" />
-					<input ng-show="verifyFlag" type="button" value="注册" ng-click="signupTwo()" />
+					<div class="up inup">
+						<span class="title">
+							注册
+							<i class="iconfont icon-icon" ng-click="sign = false"></i>
+						</span>
+						<span ng-hide="verifyFlag">
+							<label for="name">
+								<i class="iconfont icon-renyuan"></i>
+								<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+							</label>
+							<label for="password">
+								<i class="iconfont icon-suo"></i>
+								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+							</label>
+						</span>
+						<span ng-show="verifyFlag">
+							<label for="mail">
+								<i class="iconfont icon-youxiang1"></i>
+								<input type="text" placeholder="请输入邮箱" ng-model="user.Email" />
+								<input type="submit" value="{{sendEmailValue}}" ng-click="sendEmail(1)"/>
+							</label>
+							<label for="verify">
+								<i class="iconfont icon-yanzhengma1"></i>
+								<input type="text" placeholder="请输入验证码" ng-model="user.Verify" />
+							</label>
+						</span>
+						<div class="another">
+							<a href="" ng-click="trans = 'innow'">登录</a>
+							<a ng-show="verifyFlag" href="" ng-click="back()">上一步</a>
+						</div>
+						<input ng-hide="verifyFlag" type="button" value="下一步" ng-click="signupOne()" />
+						<input ng-show="verifyFlag" type="button" value="注册" ng-click="signupTwo()" />
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	<!-- </div> -->
 </body>
 <script src="../js/lib/angular/angular.min.js"></script>
 <!-- <script src="../js/lib/ngAnimate/js/angular-animate.min.js"></script> -->

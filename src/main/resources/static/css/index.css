@@ -1,5 +1,4 @@
-@charset "UTF-8";
-#index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
+body, #index, .list, .listinfo > div, .page, #head, #classify, #classify .title, #foot, .popup,
 #sign, .popup > div.comfirm, .rating, #sign .another, #home .content, #home .right .table, #home .scroller_film, #home .scrollerLeft,
 #home .scrollerRight, #search .list_search, #overview, #overview .cloumn3 > p, #overview .buy, #user, #user #mycount,
 #user #myinfo {
@@ -19,41 +18,21 @@ body {
   font-size: 16px;
   background: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  position: relative; }
-
-html, body, #wrap {
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: relative;
   height: 100%; }
 
-body > #wrap {
-  height: auto;
-  min-height: 100%; }
+html, body {
+  height: 100%; }
 
 #content {
-  padding-bottom: 80px; }
+  flex: 1 0 auto; }
 
-/* 必须使用和footer相同的高度 */
-#foot {
-  position: relative;
-  clear: both; }
-
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden; }
-
-.clearfix {
-  display: inline-block; }
-
-/* Hides from IE-mac \*/
-* html .clearfix {
-  height: 1%; }
-
-.clearfix {
-  display: block; }
-
-/* End hide from IE-mac */
 a {
   text-decoration: none; }
 
@@ -216,7 +195,8 @@ ul, li {
   -webkit-justify-content: space-between;
   -moz-justify-content: space-between;
   justify-content: space-between;
-  transition: display 1s; }
+  transition: display 1s;
+  flex: 0 0 auto; }
 
 #head img {
   width: 120px;
@@ -333,7 +313,8 @@ head .search li {
   color: #fff;
   padding: 20px 0;
   font-size: 14px;
-  position: absolute; }
+  flex: 0 0 auto;
+  margin-top: 20px; }
 
 .popup,
 #sign {
