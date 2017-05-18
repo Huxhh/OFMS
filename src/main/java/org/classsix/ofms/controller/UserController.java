@@ -23,10 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by jiang on 2017/5/3.
@@ -114,10 +111,10 @@ public class UserController {
     @RequestMapping("/usr/film")
     public ResponseMessage userFilm(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
         UserStatus userStatus = UserStatus.ERROR;
-        Page<MovieItem> list;
+        List<MovieItem> list = new ArrayList<>();
         try{
             User user = (User)request.getSession().getAttribute(CURRENT_USER);
-            list = userService.findUserFilm(user.getId(),pageable);
+            list = userService.findUserFilm(user.getId());
             userStatus = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
@@ -131,12 +128,12 @@ public class UserController {
             @ApiImplicitParam(name = "null", value = "null", dataType = "null"),
     })
     @RequestMapping("/usr/filmjudged")
-    public ResponseMessage userFilmJudged(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
+    public ResponseMessage userFilmJudged(HttpServletRequest request){
         UserStatus userStatus = UserStatus.ERROR;
-        Page<MovieItem> list;
+        List<MovieItem> list;
         try{
             User user = (User)request.getSession().getAttribute("user");
-            list = userService.findUserFilmJudged(user.getId(),pageable);
+            list = userService.findUserFilmJudged(user.getId());
             userStatus = UserStatus.SUCCESS;
         }catch (Exception e){
             e.printStackTrace();
@@ -151,7 +148,7 @@ public class UserController {
     @RequestMapping("/usr/filmscore")
     public ResponseMessage userFilmScore(@PageableDefault(value = 15,sort = "id",direction = Sort.Direction.ASC)Pageable pageable, HttpServletRequest request){
         UserStatus userStatus = UserStatus.ERROR;
-        Page<MovieItem> list;
+        List<Float> list;
         try{
             User user = (User)request.getSession().getAttribute("user");
             list = userService.findUserFilmScore(user.getId(),pageable);
@@ -175,17 +172,18 @@ public class UserController {
         List<MovieItem> fullist;
         try{
             User user = (User)request.getSession().getAttribute("user");
-            Page<MovieItem> sub = userService.findUserFilmJudged(user.getId(),pageable);
-            List<MovieItem> sublist = sub.getContent();
-            Page<MovieItem> full = userService.findUserFilm(user.getId(),pageable);
-            fullist = full.getContent();
+            List<MovieItem> sub = userService.findUserFilmJudged(user.getId());
+            fullist = userService.findUserFilm(user.getId());
             userStatus = UserStatus.SUCCESS;
+            List<MovieItem> delFilm  = new ArrayList<>();
             for (MovieItem nful:fullist)
-                for (MovieItem nsub : sublist){
-                    if (Objects.equals(nsub.getName(), nful.getName())){
-                        fullist.remove(nful);
+                for (MovieItem nsub : sub){
+                    if (nsub.getId() == nful.getId()){
+                        delFilm.add(nful);
                     }
                 }
+
+            fullist.removeAll(delFilm);
         }catch (Exception e){
             e.printStackTrace();
             fullist = null;

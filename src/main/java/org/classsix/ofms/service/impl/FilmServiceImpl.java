@@ -42,16 +42,20 @@ public class FilmServiceImpl implements FilmService {
         buyFilm.setUid(uid);
         buyFilm.setFid(fid);
         try {
-            MovieItem movieItem = movieRepository.findById(fid);
-            buyFilmRepository.save(buyFilm);
-            long buyCount = movieItem.getBuyCount();
-            buyCount++;
-            movieItem.setBuyCount(buyCount);
-            movieRepository.save(movieItem);
             User user = userRepository.findById(uid);
-            user.setBalance(user.getBalance() - 10);
-            userRepository.save(user);
-            buyFilmStatus = BuyFilmStatus.SUCCESS;
+            if(user.getBalance() >= 10) {
+                MovieItem movieItem = movieRepository.findById(fid);
+                buyFilmRepository.save(buyFilm);
+                long buyCount = movieItem.getBuyCount();
+                buyCount++;
+                movieItem.setBuyCount(buyCount);
+                movieRepository.save(movieItem);
+                user.setBalance(user.getBalance() - 10);
+                userRepository.save(user);
+                buyFilmStatus = BuyFilmStatus.SUCCESS;
+            } else {
+                buyFilmStatus = BuyFilmStatus.MONEY_NOT_ENOUGH;
+            }
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e);
         }
@@ -114,7 +118,7 @@ public class FilmServiceImpl implements FilmService {
         for(int i = 0;i < 1000;i++) {
             int uid = (int) (Math.random() * 10) + 1;
             long fid = (long) (Math.random() * 10000) + 1;
-            float score = (float)((Math.random() * 5) % 5 + 1);
+            float score = (float)((Math.random() * 5) % 5);
             FilmScore filmScore = new FilmScore();
             filmScore.setUid(uid);
             filmScore.setFid(fid);

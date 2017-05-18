@@ -204,6 +204,14 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 			scope.aaa = function () {
 				console.log(scope.forget.Email)
 			}
+			//进入用户空间
+			scope.gotoUser = function () {
+				 scope.$broadcast('enter_user', 1);
+				 $state.go('user');
+			}
+			// window.onresize = function () {
+			// 	request.resize();
+			// }
 		}
 	}
 }])

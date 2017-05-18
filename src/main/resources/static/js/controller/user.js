@@ -9,8 +9,13 @@ app.controller('user', ['$scope', '$location', function ($scope, $location) {
 	$scope.password = null;
 	//查看三种分类电影
 	$scope.chooseFilmFlag = 3;
+	$scope.$on('enter_user', function (event, data) {
+		$scope.chooseFlag = '/user/film';
+	})
 	//左侧菜单选择
 	$scope.chooseFlag = $location.path();
+	//打分, 只用作初始值, 不做双向数据绑定
+	$scope.scoreNum = 0;
 }]);
 app.directive('userDirective', ['request', function (request) {
 	return {
@@ -20,6 +25,8 @@ app.directive('userDirective', ['request', function (request) {
 			request.get('/usr/getUserinfo', function (res) {
 				if (res.code == 0) {
 					scope.userInfo = res.body.user;
+				} else {
+					request.pop_up(res.msg);
 				}
 			})
 		}
@@ -46,10 +53,13 @@ app.directive('userFilmDirective', ['request', function (request) {
 				}
 				request.get(getUrl, function (res) {
 					if (res.code == 0) {
-						if (type == 2) {
-							scope.userAbout = res.body;
-						} else {
-							scope.userAbout = res.body.content;
+						scope.userAbout = res.body;
+						if (type == 1) {
+							request.get('/usr/filmscore', function (res) {
+								if (res.code == 0) {
+									console.log(res)
+								}
+							})
 						}
 					} else {
 						request.pop_up(res.msg);
@@ -57,6 +67,24 @@ app.directive('userFilmDirective', ['request', function (request) {
 				})
 			}
 			scope.getFilm(3);
+			scope.score = function (scoreNum, index) {
+				if (scoreNum == 0) {
+					request.pop_up('不能为0');
+					return false;
+				} else {
+					request.post('/user/scorefilm', {
+						uid: '1',
+						fid: scope.userAbout[index].id.toString(),
+						score: scoreNum.toString()
+					}, function (res) {
+						if (res.code == 0) {
+							scope.getFilm(2);
+						} else {
+							request.pop_up(res.msg);
+						}
+					})
+				}
+			}
 		}
 	}
 }]);

@@ -23,6 +23,8 @@
 		时长:{{filmOverview.length}}</p>
 		<p ng-show="filmOverview.buycount">
 		已购:{{filmOverview.buycount}}</p>
+		<p ng-bind-html="filmOverview.filmtext | toHTML">
+		</p>
 	</div>
 	<div class="cloumn3">
 	    <p>
@@ -42,8 +44,9 @@
 	      <span>{{item}}</span>
 	    </div>
 	    <div class="buy">
+		    <div>售价: 10¥</div>
 	    	<input type="button" value="购买" ng-click="buy()" />
-	    	<input type="button" value="购物车" ng-click="save()" />
+	    	<!-- <input type="button" value="购物车" ng-click="save()" /> -->
 	    </div>
 	</div>
 </div>

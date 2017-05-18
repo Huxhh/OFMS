@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -57,18 +58,18 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public Page<MovieItem> findUserFilm(Integer userId,Pageable pageable) throws Exception{
-        return userRepository.findUserFilm(userId,pageable);
+    public List<MovieItem> findUserFilm(Integer userId) throws Exception{
+        return userRepository.findUserFilm(userId);
     }
 
     @Override
-    public Page<MovieItem> findUserFilmJudged(Integer userId,Pageable pageable) throws Exception{
-        return userRepository.findUserFilmJudged(userId,pageable);
+    public List<MovieItem> findUserFilmJudged(Integer userId) throws Exception{
+        return userRepository.findUserFilmJudged(userId);
     }
 
     @Override
-    public Page<MovieItem> findUserFilmScore(Integer userId,Pageable pageable) throws Exception{
-        return userRepository.findUserFilmScore(userId,pageable);
+    public List<Float> findUserFilmScore(Integer userId,Pageable pageable) throws Exception{
+        return userRepository.findUserFilmScore(userId);
     }
 
     @Override
