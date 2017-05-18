@@ -186,7 +186,7 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             		move_right();
             	}
             }
-            var start_run;
+            var start_run, one_run;
             scope.autoRun = function () {
             	if (scope.scrollerFlag) {
 		            start_run = setInterval(function () {
