@@ -53,17 +53,13 @@ app.directive('userFilmDirective', ['request', function (request) {
 				}
 				request.get(getUrl, function (res) {
 					if (res.code == 0) {
-						if (type == 2) {
-							scope.userAbout = res.body;
-						} else {
-							scope.userAbout = res.body.content;
-							if (type == 1) {
-								request.get('/usr/filmscore', function (res) {
-									if (res.code == 0) {
-										console.log(res)
-									}
-								})
-							}
+						scope.userAbout = res.body;
+						if (type == 1) {
+							request.get('/usr/filmscore', function (res) {
+								if (res.code == 0) {
+									console.log(res)
+								}
+							})
 						}
 					} else {
 						request.pop_up(res.msg);
