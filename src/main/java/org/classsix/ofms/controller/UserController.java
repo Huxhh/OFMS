@@ -303,4 +303,24 @@ public class UserController {
         return new ResponseMessage(userStatus,s);
     }
 
+
+    @ApiOperation(value = "查询是否登录", notes = "是否登录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "respon", value = "{\"code\":1,\"msg\":\"ERROR\",\"body\":{'id':id,'userName': 'han'}}", required = true, dataType = "Json")
+    })
+    @RequestMapping("/usr/ifLogin")
+    public ResponseMessage ifLogin(HttpServletRequest request){
+        UserStatus userStatus = UserStatus.ERROR;
+        Map<String,Object> map = new HashMap<>();
+        try {
+            User user = (User) request.getSession().getAttribute(CURRENT_USER);
+            map.put("id",user.getId());
+            map.put("userName",user.getUserName());
+            userStatus = UserStatus.SUCCESS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseMessage(userStatus,map);
+    }
+
 }
