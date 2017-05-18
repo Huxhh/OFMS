@@ -20,8 +20,9 @@ import java.util.List;
 @Transactional
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUserNameAndPassword(String userName,String password);
-    User findByUserNameAndMail(String userName,String mail);
+    List<User> findByMail(String mail);
     User findById(int uid);
+    List<User> findByUserName(String userName);
 
 
 
@@ -33,6 +34,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("update User u set u.balance=:balance where u.id=:id")
     int updateBalance(@Param("id")Integer id,@Param("balance") Integer balance);
+
+
+
 
 
     @Query("select m from MovieItem m where m.id in (select bf.fid from BuyFilm bf where bf.uid=:id)")

@@ -13,7 +13,7 @@
 			<a href="" ui-sref="home"><img src="../img/logo.png" alt="logo" /></a>
 			<span class="search">
 				<label for="search_film">
-					<input type="text" placeholder="请输入关键字" name="search_film" id="search_film" ng-model="filmSearchName" ng-keyup="keyup($event)" />
+					<input type="text" placeholder="请输入关键字" name="search_film" id="search_film" ng-model="filmSearchName" ng-keyup="keyupSearch($event)" />
 					<i class="iconfont icon-sousuo-sousuo" ng-click="searchByName()"></i>
 				</label>
 				<ul ng-hide="showName">
@@ -58,11 +58,11 @@
 						<span ng-show="forgetPassword == 0">
 							<label for="name">
 								<i class="iconfont icon-renyuan"></i>
-								<input type="text" placeholder="请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+								<input type="text" placeholder="请输入用户名" ng-model="user.UserName" />
 							</label>
 							<label for="password">
 								<i class="iconfont icon-suo"></i>
-								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd" />
 							</label>
 							<div class="another">
 								<a href="" ng-click="trans = 'upnow'">注册</a>
@@ -72,12 +72,12 @@
 						<span ng-show="forgetPassword == 1">
 							<label for="forgetPasswordOne">
 								<i class="iconfont icon-youxiang1"></i>
-								<input type="text" placeholder="请输入邮箱" ng-model="forget.Email" ng-keydown="aaa()" />
+								<input type="text" placeholder="请输入邮箱" ng-model="forget.Email" />
 								<input type="submit" value="{{sendEmailValue}}" ng-click="sendEmail(0)"/>
 							</label>
 							<label for="verify">
 								<i class="iconfont icon-suo"></i>
-								<input type="text" placeholder="请输入验证码" ng-model="forget.Verify"  ng-keyup="keyup($event)" />
+								<input type="text" placeholder="请输入验证码" ng-model="forget.Verify" />
 							</label>
 							<div class="another">
 								<a href="" ng-click="trans = 'upnow'">注册</a>
@@ -87,11 +87,11 @@
 						<span ng-show="forgetPassword == 2">
 							<label for="forgetPasswordTwo">
 								<i class="iconfont icon-suo"></i>
-								<input type="password" placeholder="请输入新密码" ng-model="forget.NewPassword"  ng-keyup="keyup($event)" />
+								<input type="password" placeholder="请输入新密码" ng-model="forget.NewPassword" />
 							</label>
 							<label for="password">
 								<i class="iconfont icon-suo"></i>
-								<input type="password" placeholder="请重复新密码" ng-model="forget.AgainPassword"  ng-keyup="keyup($event)" />
+								<input type="password" placeholder="请重复新密码" ng-model="forget.AgainPassword" />
 							</label>
 							<div class="another">
 								<a href="" ng-click="trans = 'upnow'">注册</a>
@@ -110,11 +110,11 @@
 						<span ng-hide="verifyFlag">
 							<label for="name">
 								<i class="iconfont icon-renyuan"></i>
-								<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName"  ng-keyup="keyup($event)" />
+								<input type="text" placeholder=" 请输入用户名" ng-model="user.UserName" />
 							</label>
 							<label for="password">
 								<i class="iconfont icon-suo"></i>
-								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd"  ng-keyup="keyup($event)" />
+								<input type="password" placeholder="请输入密码" ng-model="user.UserPswd" />
 							</label>
 						</span>
 						<span ng-show="verifyFlag">

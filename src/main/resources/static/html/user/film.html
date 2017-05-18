@@ -34,17 +34,32 @@
 				已购:{{item.buycount}}</p>
 			</div>
 			<div class="cloumn3">
-				<span>评分</span>
-				<div class="rating rating-{{scoreNum}}">
-				  <span>
-				      <i class="star-1" ng-mouseover="scoreNum = '1'">★</i>
-				      <i class="star-2" ng-mouseover="scoreNum = '2'">★</i>
-				      <i class="star-3" ng-mouseover="scoreNum = '3'">★</i>
-				      <i class="star-4" ng-mouseover="scoreNum = '4'">★</i>
-				      <i class="star-5" ng-mouseover="scoreNum = '5'">★</i>
-				  </span>
-			    </div>
-			    <div><input type="button" value="确定" class="button" ng-click="score(scoreNum, $index)" /></div>
+				<div ng-if="chooseFilmFlag == 2">
+					<span>评分</span>
+					<div class="rating rating-{{scoreNum}}">
+					  <span>
+					      <i class="star-1" ng-mouseover="scoreNum = '1'">★</i>
+					      <i class="star-2" ng-mouseover="scoreNum = '2'">★</i>
+					      <i class="star-3" ng-mouseover="scoreNum = '3'">★</i>
+					      <i class="star-4" ng-mouseover="scoreNum = '4'">★</i>
+					      <i class="star-5" ng-mouseover="scoreNum = '5'">★</i>
+					  </span>
+				    </div>
+				    <div><input type="button" value="确定" class="button" ng-click="score(scoreNum, $index)" /></div>
+				</div>
+				<div ng-if="chooseFilmFlag == 1">
+					<span>评分</span>
+					<div class="rating rating-{{userAboutScore[$index] | numCeil}}">
+					  <span>
+					      <i class="star-1">★</i>
+					      <i class="star-2">★</i>
+					      <i class="star-3">★</i>
+					      <i class="star-4">★</i>
+					      <i class="star-5">★</i>
+					  </span>
+				    </div>
+				</div>
+				<div ng-if="chooseFilmFlag == 3"></div>
 			</div>
 		</div>
 	</div>

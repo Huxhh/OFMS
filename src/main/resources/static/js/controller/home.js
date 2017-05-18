@@ -144,6 +144,7 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             var tmp;
             function move_left() {
 				setTimeout(function () {
+					
 					if (left != -goal) {
 						left--;
             			scroller.css({'left': left + 'px'})
@@ -188,12 +189,10 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             }
             var start_run, one_run;
             scope.autoRun = function () {
-            	if (scope.scrollerFlag) {
+            	if (scope.autoRunFlag) {
 		            start_run = setInterval(function () {
-		            	if (scope.autoRunFlag) {
-			            	scope.left();
-			            	scope.$apply();
-		            	}
+		            	scope.right();
+		            	scope.$apply();
 		            }, 6000);
 		        } else {
 		        	clearInterval(start_run);

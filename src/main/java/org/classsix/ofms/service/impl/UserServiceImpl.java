@@ -2,6 +2,7 @@ package org.classsix.ofms.service.impl;
 
 import org.classsix.ofms.common.ResponseMessage;
 import org.classsix.ofms.domin.MovieItem;
+import org.classsix.ofms.domin.Role;
 import org.classsix.ofms.domin.User;
 import org.classsix.ofms.repository.MovieRepository;
 import org.classsix.ofms.repository.UserRepository;
@@ -10,9 +11,13 @@ import org.classsix.ofms.status.UserStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,6 +44,11 @@ public class UserServiceImpl implements UserService{
         UserStatus status = UserStatus.ERROR;
         try {
             user.setBalance(0);
+            List<Role> list  = new ArrayList<>();
+            Role role = new Role();
+            role.setId(1);
+            list.add(role);
+            user.setRoles(list);
             userRepository.save(user);
             status = UserStatus.SUCCESS;
         }catch (Exception e){
@@ -49,11 +59,11 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public String findUser(String userName, String mail) throws Exception{
-        User user1 = userRepository.findByUserNameAndMail(userName,mail);
+    public User findUser(String mail) throws Exception{
+        User user1 = userRepository.findByMail(mail).get(0);
         if (user1 == null)
             throw new Exception();
-        return user1.getPassword();
+        return user1;
     }
 
 
@@ -95,6 +105,13 @@ public class UserServiceImpl implements UserService{
         return new ResponseMessage(status);
     }
 
-
-
+//
+//    @Override
+//    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+//        User user = userRepository.findByUserName(s).get(0);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("用户名不存在");
+//        }
+//        return user;
+//    }
 }
