@@ -35,6 +35,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     int updateBalance(@Param("id")Integer id,@Param("balance") Integer balance);
 
 
+
+
+
     @Query("select m from MovieItem m where m.id in (select bf.fid from BuyFilm bf where bf.uid=:id)")
     List<MovieItem> findUserFilm( @Param("id") Integer userId);
 
