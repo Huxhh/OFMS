@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User findUser(String mail) throws Exception{
-        User user1 = userRepository.findByMail(mail);
+        User user1 = userRepository.findByMail(mail).get(0);
         if (user1 == null)
             throw new Exception();
         return user1;
