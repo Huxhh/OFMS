@@ -144,7 +144,6 @@ app.directive('homeDirective', ['request', '$state', function (request, $state) 
             var tmp;
             function move_left() {
 				setTimeout(function () {
-					
 					if (left != -goal) {
 						left--;
             			scroller.css({'left': left + 'px'})
