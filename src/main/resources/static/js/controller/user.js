@@ -29,11 +29,19 @@ app.directive('userDirective', ['request', '$state', function (request, $state) 
 				return false;
 			}
 			scope.$emit('classify_change', false);
-			request.get('/usr/getUserinfo', function (res) {
-				if (res.code == 0) {
-					scope.userInfo = res.body.user;
+			request.get('/usr/ifLogin', function (response) {
+				if (response.code == 0) {
+					request.get('/usr/getUserinfo', function (res) {
+						if (res.code == 0) {
+							scope.userInfo = res.body.user;
+						} else {
+							request.pop_up(res.msg);
+						}
+					})
 				} else {
-					request.pop_up(res.msg);
+					scope.removeUser();
+					request.remove_pop();
+					request.pop_up('请登录');
 				}
 			})
 		}
@@ -59,16 +67,16 @@ app.directive('userFilmDirective', ['request', function (request) {
 						break;
 				}
 				request.get('/usr/ifLogin', function (response) {
-					if (response.code != 0) {
+					if (response.code == 0) {
 						request.get(getUrl, function (res) {
 							if (res.code == 0) {
 								scope.userAbout = res.body;
 								if (type == 1) {
-									request.get('/usr/filmscore', function (res) {
-										if (res.code == 0) {
-											scope.userAboutScore = res.body;
+									request.get('/usr/filmscore', function (ress) {
+										if (ress.code == 0) {
+											scope.userAboutScore = ress.body;
 										} else {
-											request.pop_up(res.msg);
+											request.pop_up(ress.msg);
 										}
 									})
 								}
@@ -78,7 +86,8 @@ app.directive('userFilmDirective', ['request', function (request) {
 						})
 					} else {
 						scope.removeUser();
-						request.pop_up('请重新登录');
+						request.remove_pop();
+						request.pop_up('请登录');
 					}
 				})
 			}
@@ -102,7 +111,8 @@ app.directive('userFilmDirective', ['request', function (request) {
 								}
 							})
 						} else {
-							request.pop_up('请重新登录');
+							request.pop_up('请登录');
+							request.remove_pop();
 							scope.removeUser();
 						}
 					})
@@ -128,7 +138,8 @@ app.directive('userCountDirective', ['request', function (request) {
 								request.pop_up(res.msg);
 							})
 						} else {
-							request.pop_up('请重新登录');
+							request.pop_up('请登录');
+							request.remove_pop();
 							scope.removeUser();
 						}
 					})
@@ -157,7 +168,8 @@ app.directive('userInfoDirective', ['request', function (request) {
 								}
 							})
 						} else {
-							request.pop_up('请重新登录');
+							request.pop_up('请登录');
+							request.remove_pop();
 							scope.removeUser();
 						}
 					})

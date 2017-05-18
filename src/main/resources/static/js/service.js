@@ -1,10 +1,12 @@
 app.factory('request', ['$http', function ($http){
 	var r = {};
 	var count = 0;
+	var pop;
+	var htm;
 	//弹窗
 	r.pop_up = function (message) {
 		count ++;
-		var htm = `<div class="popup">
+		htm = `<div class="popup">
 					<div class="bg bg_pop"></div>
 					<div>
 						<span>` + count + `</span>
@@ -12,23 +14,32 @@ app.factory('request', ['$http', function ($http){
 						<input type="button" value="确定" />
 					</div>
 				</div>`
-		var pop = angular.element(htm);
+		pop = angular.element(htm);
 		angular.element(document.getElementsByTagName('body')).append(pop);
 		pop.find('input').on('click', function () {
 			count --;
 			pop.remove('div.popup')
 		})
 	}
+	r.remove_pop = function () {
+		pop = document.getElementsByTagName('body')[0].getElementsByTagName('div');
+		for (var i = 0; i < pop.length; ++i) {
+			if (pop[i].getAttribute('class') == 'popup') {
+				count --;
+				document.getElementsByTagName('body')[0].removeChild(pop[i]);
+			}
+		}
+	}
 	//确认
 	r.comfirm = function (callback, param) {
-		var htm = `<div class="popup">
+		htm = `<div class="popup">
 					<div class="bg bg_pop"></div>
 					<div class="comfirm">
 						<input type="button" value="确定" />
 						<input type="button" value="取消" class="cancle"/>
 					</div>
 				</div>`
-		var pop = angular.element(htm);
+		pop = angular.element(htm);
 		angular.element(document.getElementsByTagName('body')).append(pop);
 		pop.find('input').eq(1).on('click', function () {
 			pop.remove('div.popup')
