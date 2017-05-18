@@ -88,6 +88,9 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 							scope.verifyFlag = false;
 							scope.sendEmailValue = '发送验证码';
 							clearInterval(tiem_run);
+							for(i in scope.user) {
+								scope.user[i] = null;
+							}
 						}
 						request.pop_up(res.msg);
 					})
@@ -181,6 +184,9 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					}, function (res) {
 						if (res.code == 0) {
 							scope.forgetPassword = 0;
+							for (i in scope.forget) {
+								scope.forget[i] = null;
+							}
 						}
 						request.pop_up(res.msg);
 					})
