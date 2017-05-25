@@ -200,6 +200,12 @@ app.directive('indexDirective', ['$state', 'request', function ($state, request)
 					request.pop_up('必须填写完整');
 				}
 			}
+			scope.forgetPasswordOneBack = function () {
+				scope.forgetPassword = 0;
+			}
+			scope.forgetPasswordTwoBack = function () {
+				scope.forgetPassword = 2;
+			}
 			scope.logout = function () {
 				request.post('/usr/uesrquit', null, function (res) {
 					if (res.code == 0) {

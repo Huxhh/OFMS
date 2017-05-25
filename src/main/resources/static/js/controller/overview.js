@@ -37,7 +37,7 @@ app.directive('overviewDirective', ['request', function (request) {
 					if (response.code == 0) {
 						request.comfirm(function () {
 							request.post('/user/buyfilm', {
-								uid: response.body.id,
+								uid: response.body.id.toString(),
 								fid: scope.filmOverview.id.toString()
 							}, function (res) {
 								request.pop_up(res.msg);

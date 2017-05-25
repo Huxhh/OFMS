@@ -365,7 +365,7 @@ ul, li {
 
 #film .list .add_film {
   border: 0px;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
