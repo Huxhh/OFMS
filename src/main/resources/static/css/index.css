@@ -805,8 +805,7 @@ head .search li {
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   -moz-justify-content: flex-start;
-  justify-content: flex-start;
-  min-height: 657px; }
+  justify-content: flex-start; }
 
 #overview .cloumn1 {
   width: 20%; }
@@ -889,7 +888,7 @@ head .search li {
   padding: 1%;
   background: #262d40;
   color: #fff;
-  min-height: 657px; }
+  min-height: 500px; }
 
 #user .right {
   width: 77%;
