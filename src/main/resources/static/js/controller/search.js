@@ -1,11 +1,15 @@
 app.controller('search', ['$scope', function ($scope) {
 	$scope.filmList = [];
+	$scope.filmListBak = [];
 	// 页码总计
     $scope.searchPage = 0;
     // 页码列表
     $scope.page_num = [];
     // 当前页数
     $scope.isActive = 0;
+    //排序添加
+    $scope.sortFlag = false;
+    $scope.sortType = null;
 }]);
 app.directive('searchDirective', ['request', '$state', function (request, $state) {
 	return {
@@ -83,6 +87,14 @@ app.directive('searchDirective', ['request', '$state', function (request, $state
 			scope.$on('search_click', function (event, data) {
 				scope.search_film(0, true);
 			});
+			scope.sort = function () {
+				scope.sortFlag != scope.sortFlag;
+				if (scope.sortType) {
+					scope.sortType = null;
+				} else {
+					scope.sortType = 'score';
+				}
+			}
 		}
 	}
 }])

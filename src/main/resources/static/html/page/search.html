@@ -1,5 +1,8 @@
 <div id="search" ng-controller="search" search-directive>
-	<div class="list_search" ng-repeat="item in filmList">
+	<label class="sort">
+		<input type="checkbox" ng-change="sort()" ng-init="sortFlag" ng-model="sortFlag" />按评分排序
+	</label>
+	<div class="list_search" ng-repeat="item in filmList | orderBy:sortType:sortFlag">
 		<div>
 			<img src="{{item.image}}" alt="暂无图片" />
 		</div>
